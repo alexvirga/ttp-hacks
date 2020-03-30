@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  height: 100vh
 }
 
 .App-logo {
@@ -35,4 +36,90 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+/* Homepage */
+
+.Home {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.Landing-background {
+  display: flex;
+  flex: 2;
+  background-image: url("https://images.unsplash.com/photo-1550780291-44fe6096919e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1941&q=80");
+  background-size: cover;
+  background-attachment: inherit;
+  background-position: bottom;
+}
+
+.Landing-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh
+}
+
+.Auth-container {
+  align-items: center;
+  justify-content: center;
+  display: inline-flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 20px;
+  min-width: 400px;
+}
+
+.Auth {
+  width: 400px
+}
+
+/* navbar */
+
+.Navbar {
+  background-color: #f4f4f4;
+width: 100vw;
+height: 60px;
+display: flex
+}
+
+.Nav-links {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0px 30px 0px 30px;
+  width: -webkit-fill-available;
+
+}
+
+
+
+.Nav-spacer {
+  display: inline-flex;
+  width: 100%;
+}
+
+.Nav-container{
+  display: flex;
+  display: contents;
+}
+
+.Nav-logo {
+  width: 200px;
+  margin: 0px 15px 0px 15px;
+  align-items: center;
+  justify-content: center;
+  display: inline-flex;
+}
+
+@media (max-width: 580px) {
+
+
+   .Nav-logo {
+
+     display: none;
+   }
+ 
 }

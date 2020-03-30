@@ -5,6 +5,7 @@ import { Route, Link } from "react-router-dom";
 import Landing from "./Landing";
 import Dashboard from "./Dashboard";
 import firebaseConfig from "../firebaseConfig"
+import Navbar from "./Navbar"
 
 
 firebase.initializeApp(firebaseConfig);
@@ -27,6 +28,7 @@ class Home extends Component {
 
   componentWillMount() {
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
+     
       if (user) {
         this.setState({ loggedin: true, loading: false });
       } else {
@@ -40,11 +42,13 @@ class Home extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="Home">
         {this.state.loggedin ? (
-          <li onClick={this.singOutUser}>
-            <Link>Sign Out</Link>
-          </li>
+          <Navbar 
+          loading={this.state.loading}
+          loggedin={this.state.loggedin}
+          singOutUser = {this.singOutUser}
+          />
         ) : null}
         <Route
           path="/"

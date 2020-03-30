@@ -6,20 +6,25 @@ import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
   render() {
+      let user = firebase.auth().currentUser
+      console.log(user)
+
     return (
+        
+   
       <div>
         {this.props.loading ? (
           <p>Loading..</p>
         ) : !this.props.loggedin ? (
-          <React.Fragment>
             <Redirect to="/" />
-            <StyledFirebaseAuth
-              uiConfig={uiConfig}
-              firebaseAuth={firebase.auth()}
-            />
-          </React.Fragment>
         ) : (
-          <p>Private stuff here !</p>
+
+
+          <div>
+              <h1> {user.displayName} </h1>
+              <h3> {user.email} </h3>
+            <img src={user.photoURL}/>
+          </div>
         )}
       </div>
     );

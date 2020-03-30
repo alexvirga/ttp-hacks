@@ -6,12 +6,23 @@ import React, { Component } from "react";
 
 class Landing extends Component {
   render() {
-    return this.props.loading ? (
-      <p>Loading..</p>
-    ) : this.props.loggedin ? (
-      <Redirect to="dashboard" />
-    ) : (
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+    return (
+        <div className="Landing-container">
+        <div className="Landing-background">
+        </div>
+      <div className="Auth-container">
+        {this.props.loading ? (<p>Loading..</p>
+        ) : this.props.loggedin ? (
+        <Redirect to="dashboard" />
+        ) : (
+        <StyledFirebaseAuth
+        className="Auth"
+          uiConfig={uiConfig}
+          firebaseAuth={firebase.auth()}
+        />
+        )}
+      </div>
+      </div>
     );
   }
 }

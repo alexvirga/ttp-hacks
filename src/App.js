@@ -11,11 +11,11 @@ import { BrowserRouter } from "react-router-dom";
 class App extends Component {
   render() {
     return (
+      <div className="App">
       <BrowserRouter>
-        <div>
           <Home />
-        </div>
       </BrowserRouter>
+      </div>
     );
   }
 }
