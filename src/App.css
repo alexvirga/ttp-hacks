@@ -44,6 +44,8 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+
+  background: url("../public/masks.jpeg")
 }
 
 /*--------- Landing Page --------- */
@@ -51,7 +53,6 @@
 .Landing-background {
   display: flex;
   flex: 2;
-  background-image: url("https://images.unsplash.com/photo-1550780291-44fe6096919e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1941&q=80");
   background-size: cover;
   background-attachment: inherit;
   background-position: bottom;
