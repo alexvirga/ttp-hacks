@@ -45,12 +45,13 @@
   display: flex;
   flex-direction: column;
 
-  background: url("../public/masks.jpeg")
 }
 
 /*--------- Landing Page --------- */
 
 .Landing-background {
+  background: url("https://images.unsplash.com/photo-1516810714657-e654b97f1d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80");
+
   display: flex;
   flex: 2;
   background-size: cover;
