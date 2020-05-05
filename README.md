@@ -12,6 +12,9 @@
 - [React Router](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)
 - [React-firebaseui](https://github.com/firebase/firebaseui-web-react)
 
+
+<img width="1228" alt="Screen Shot 2020-03-30 at 4 55 23 PM" src="https://user-images.githubusercontent.com/49658469/77961155-67838980-72a7-11ea-89a7-4dc0a3c8a7f4.png">
+
 ## Getting Started
 
 ```bash
@@ -44,3 +47,5 @@ Run the app
 ```bash
 $ npm start
 ```
+
+
