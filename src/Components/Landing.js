@@ -3,6 +3,7 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { Redirect } from "react-router-dom";
 import uiConfig from "../Firebase/uiConfig";
 import React, { Component } from "react";
+import ttp_logo from '../ttp_logo.png'
 
 class Landing extends Component {
   render() {
@@ -15,6 +16,8 @@ class Landing extends Component {
       <div className="Landing-container">
         <div className="Landing-background" />
         <div className="Auth-container">
+          <img className="ttp-logo" src={ttp_logo} />
+          <h1 className="landing-title"> MINI HACKS</h1>
           <StyledFirebaseAuth
             className="Auth"
             uiConfig={uiConfig}

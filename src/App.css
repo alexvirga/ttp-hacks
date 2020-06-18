@@ -1,6 +1,8 @@
 .App {
   text-align: center;
   height: 100vh;
+  width: 100vw;
+
 }
 
 .App-logo {
@@ -41,7 +43,8 @@
 /*--------- Homepage --------- */
 
 .Home {
-  height: 100vh;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 
@@ -50,7 +53,7 @@
 /*--------- Landing Page --------- */
 
 .Landing-background {
-  background: url("https://images.unsplash.com/photo-1516810714657-e654b97f1d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80");
+  background: url("https://images.squarespace-cdn.com/content/v1/57e01ab38419c2abeec91156/1479245821759-BA5W6VFNN1BS7R1WN68K/ke17ZwdGBToddI8pDm48kDITAuO7WvGYe_HtkNx7UXUUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKccSshEJlWdTt0omCZRbgujVtY4VXZAEc5nErFE5qOWR3S1FgW-KjVULYQWGVDwFXf/squid_hands_mobile.jpg?format=2500w");
 
   display: flex;
   flex: 2;
@@ -62,21 +65,36 @@
 .Landing-container {
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
+  background-color: #000000c4;
+}
+
+.ttp-logo {
+  width: 50%;
+  align-self: center;
+}
+
+.landing-title {
+  color: white
 }
 
 .Auth-container {
-  align-items: center;
-  justify-content: center;
-  display: inline-flex;
-  flex: 1;
+
+
+  display: flex;
   flex-direction: column;
-  padding: 20px;
-  min-width: 400px;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  flex: 1
+
 }
 
 .Auth {
+  display: flex;
   width: 400px;
+  max-width: 100%;
 }
 
 /*---------- Navbar -----------*/
