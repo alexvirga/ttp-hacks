@@ -7,7 +7,7 @@ class Navbar extends Component {
     return (
       <div className="Navbar">
               <img className="ttp-logo-navbar" src={ttp_logo} />
-            <div className="Nav-logo"> MINI HACKS </div>
+            <div className="Nav-logo"> EXPO </div>
             <div className="Nav-spacer"> </div>
             <div className="Nav-links">
               

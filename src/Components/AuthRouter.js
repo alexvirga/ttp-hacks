@@ -6,13 +6,31 @@ import Dashboard from "./Dashboard";
 import firebaseConfig from "../Firebase/firebaseConfig";
 import Navbar from "./Navbar";
 import Homepage from "./Homepage";
+import Event from "./Event"
 
 firebase.initializeApp(firebaseConfig);
 
 class AuthRouter extends Component {
   state = {
     loggedin: null,
-    loading: true
+    loading: true,
+    events: []
+  };
+
+  getEvents = () => {
+    this.setState({ eventsLoading: true });
+    firebase
+      .firestore()
+      .collection("events")
+      .get()
+      .then((querySnapshot) => {
+        const data = [];
+        querySnapshot.docs.forEach((doc) => {
+          const eventData = doc.data();
+          data.push(eventData);
+        });
+        this.setState({ events: data, eventsLoading: false });
+      });
   };
 
   signOutUser = () => {
@@ -25,12 +43,20 @@ class AuthRouter extends Component {
       .catch(function(error) {});
   };
 
+  renderEvent = (routerProps) => {
+    console.log(routerProps)
+    let eventId = routerProps.match.params.id.replace("_", " ")
+    let foundEvent = this.state.events.find(eventObj => eventObj.title === eventId)
+  return (foundEvent ? <Event event={foundEvent} /> : null)
+  }
+
   componentWillMount() {
+    this.getEvents()
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.setState({ loggedin: true, loading: false }); // User signed in
+        this.setState({ loggedin: true, eventsLoading: false }); // User signed in
       } else {
-        this.setState({ loggedin: false, loading: false }); // User NOT signed in.
+        this.setState({ loggedin: false, eventsLoading: false }); // User NOT signed in.
       }
     });
   }
@@ -79,8 +105,20 @@ class AuthRouter extends Component {
               <Homepage
                 loading={this.state.loading}
                 loggedin={this.state.loggedin}
+                events={this.state.events}
               />
             )}
+          />
+
+<Route
+            path="/event/:id"
+            render= {routerProps => this.renderEvent(routerProps)
+
+              // <Event
+              //   loading={this.state.loading}
+              //   loggedin={this.state.loggedin}
+              // />
+            }
           />
 
           <Route
