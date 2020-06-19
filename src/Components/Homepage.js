@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import firebase from "firebase";
 import { Redirect } from "react-router-dom";
-import { Avatar, Button, Card, List} from "antd";
+import { Avatar, Button, Card, List, Spin} from "antd";
+import { LoadingOutlined } from '@ant-design/icons';
 import "antd/dist/antd.css";
 const { Meta } = Card;
 
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />
 class Homepage extends Component {
     state= {
-        events: []
+        events: [],
+        loading: false
     }
 
     componentDidMount(){
@@ -15,6 +18,7 @@ class Homepage extends Component {
     }
 
     getEvents = () => {
+        this.setState({loading: true})
         firebase.firestore()
         .collection("events")
         .get()
@@ -24,7 +28,7 @@ class Homepage extends Component {
                 const eventData = doc.data()
                 data.push(eventData)
             }) 
-            this.setState({events: data})
+            this.setState({events: data, loading: false})
                
             })
              
@@ -36,14 +40,14 @@ class Homepage extends Component {
 
     return (
       <div>
-        {this.props.loading ? (
-          <p>Loading..</p>
-        ) : !this.props.loggedin ? (
-          <Redirect to="/" />
-        ) : (
+          <h1 className="homepage-header"> What's Ahead.</h1>
+        {this.state.loading ? (
+        
+          <Spin indicator={antIcon} /> 
+        )  : (
           <div>
             <div>
-              <h1 className="homepage-header"> What's Ahead.</h1>
+              
 
 <List 
 className="event-list"
@@ -52,6 +56,7 @@ className="event-list"
     renderItem={event => (
       <List.Item>
                       <Card
+                      
                       
                 style={{ width: 300, margin: "20px" }}
                 cover={
