@@ -8,6 +8,16 @@ const uiConfig = {
     var isNewUser = authResult.additionalUserInfo.isNewUser;
     var providerId = authResult.additionalUserInfo.providerId;
     var operationType = authResult.operationType;
+    if (isNewUser) {
+    firebase.firestore().collection("users").doc(user.uid).set({
+      name: user.displayName,
+    
+    })}
+    // if (isNewUser) {
+    //   firebase.firestore().collection("users").doc("LA").set
+
+
+    // }
     // Do something with the returned AuthResult.
     // Return type determines whether we continue the redirect automatically
     // or whether we leave that to developer to handle.

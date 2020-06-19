@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import Home from "./Components/Home";
+import AuthRouter from "./Components/AuthRouter";
 import { BrowserRouter } from "react-router-dom";
 
 
@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div className="App">
       <BrowserRouter>
-          <Home />
+          <AuthRouter />
       </BrowserRouter>
       </div>
     );

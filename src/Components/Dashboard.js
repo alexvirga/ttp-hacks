@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import firebase from "firebase";
 import { Redirect } from "react-router-dom";
+import { Avatar, Button } from "antd";
+import "antd/dist/antd.css";
 
 class Dashboard extends Component {
   render() {
@@ -14,9 +16,14 @@ class Dashboard extends Component {
           <Redirect to="/" />
         ) : (
           <div>
+            <div className="profile-header">
+              <Avatar size={130} src={user.photoURL} alt="google.com" />
+            </div>
+            <div className="profile-user-info"> 
             <h1> {user.displayName} </h1>
             <h3> {user.email} </h3>
-            <img src={user.photoURL} />
+            </div>
+
           </div>
         )}
       </div>

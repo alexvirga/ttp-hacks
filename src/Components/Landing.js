@@ -10,7 +10,7 @@ class Landing extends Component {
     return this.props.loading ? (
       <div>Loading..</div>
     ) : this.props.loggedin ? (
-      <Redirect to="dashboard" />
+      <Redirect to="homepage" />
     ) : (
 
       <div className="Landing-container">

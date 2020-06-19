@@ -5,16 +5,17 @@ import Landing from "./Landing";
 import Dashboard from "./Dashboard";
 import firebaseConfig from "../Firebase/firebaseConfig";
 import Navbar from "./Navbar";
+import Homepage from "./Homepage";
 
 firebase.initializeApp(firebaseConfig);
 
-class Home extends Component {
+class AuthRouter extends Component {
   state = {
     loggedin: null,
     loading: true
   };
 
-  singOutUser = () => {
+  signOutUser = () => {
     firebase
       .auth()
       .signOut()
@@ -45,7 +46,7 @@ class Home extends Component {
           <Navbar
             loading={this.state.loading}
             loggedin={this.state.loggedin}
-            singOutUser={this.singOutUser}
+            signOutUser={this.signOutUser}
           />
         ) : null}
         <Switch>
@@ -71,11 +72,22 @@ class Home extends Component {
             )}
           />
 
+<Route
+            path="/homepage"
+            exact
+            render={() => (
+              <Homepage
+                loading={this.state.loading}
+                loggedin={this.state.loggedin}
+              />
+            )}
+          />
+
           <Route
             path="*"
             render={() => (
               this.state.loggedin ? (
-              <Redirect to="dashboard"
+              <Redirect to="homepage"
                 loading={this.state.loading}
                 loggedin={this.state.loggedin} 
               /> ) : 
@@ -88,4 +100,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default AuthRouter;
