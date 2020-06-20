@@ -32,6 +32,7 @@ class AuthRouter extends Component {
           const eventData = doc.data();
           data.push(eventData);
         });
+        
         this.setState({ events: data, eventsLoading: false });
       });
   };
