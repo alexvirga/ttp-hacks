@@ -171,3 +171,14 @@
   justify-content: center;
 }
 
+
+
+
+/* event */
+
+.event-form {
+  display: inline-flex;
+  flex-direction: column;
+  width: 70%;
+  margin: auto
+}

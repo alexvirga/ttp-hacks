@@ -9,7 +9,7 @@ const { Meta } = Card;
 const antIcon = <LoadingOutlined style={{ fontSize: 50 }} spin />;
 class Homepage extends Component {
   state = {
-    loading: false,
+   
   };
 
 
@@ -21,7 +21,7 @@ class Homepage extends Component {
     return (
       <div>
         <h1 className="homepage-header"> What's Ahead.</h1>
-        {this.state.loading ? (
+        {this.props.events.length <= 0 ? (
           <Spin indicator={antIcon} />
         ) : (
           <div>
@@ -29,10 +29,10 @@ class Homepage extends Component {
               <List
                 className="event-list"
                 grid={{ gutter: 16 }}
+                
                 dataSource={this.props.events}
                 renderItem={(event) => (
                   <List.Item>
-
                     <Card
 
                       style={{ width: 300, margin: "20px" }}
@@ -41,7 +41,7 @@ class Homepage extends Component {
                       }
 
                       actions={[
-                        <Link to={`/event/${event.title.replace(" ","_")}`} style={{ textDecoration: 'none', color:"white" }}>Events</Link>
+                        <Link to={`/event/${event.title.replace(" ","_")}`} style={{ textDecoration: 'none', color:"grey" }}>View Event</Link>
 
                       ]}
                     >
@@ -68,7 +68,7 @@ class Homepage extends Component {
           <Spin indicator={antIcon} />
         ) : (
           <div>
-              {this.state.pastEvents > 0 ? (
+              {this.state .pastEvents > 0 ? (
             <div>
                 
 

@@ -6,7 +6,7 @@ import "antd/dist/antd.css";
 
 class Dashboard extends Component {
   render() {
-    const user = firebase.auth().currentUser;
+    // const user = firebase.auth().currentUser;
 
     return (
       <div>
@@ -17,11 +17,11 @@ class Dashboard extends Component {
         ) : (
           <div>
             <div className="profile-header">
-              <Avatar size={130} src={user.photoURL} alt="google.com" />
+              <Avatar size={130} src={this.props.user.photoURL} alt="google.com" />
             </div>
             <div className="profile-user-info"> 
-            <h1> {user.displayName} </h1>
-            <h3> {user.email} </h3>
+            <h1> {this.props.user.displayName} </h1>
+            <h3> {this.props.user.email} </h3>
             </div>
 
           </div>

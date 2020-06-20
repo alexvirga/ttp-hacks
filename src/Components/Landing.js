@@ -17,7 +17,7 @@ class Landing extends Component {
         <div className="Landing-background" />
         <div className="Auth-container">
           <img className="ttp-logo" src={ttp_logo} />
-          <h1 className="landing-title"> MINI HACKS</h1>
+          <h1 className="landing-title"> EXPO</h1>
           <StyledFirebaseAuth
             className="Auth"
             uiConfig={uiConfig}

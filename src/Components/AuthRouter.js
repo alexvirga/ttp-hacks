@@ -10,11 +10,14 @@ import Event from "./Event"
 
 firebase.initializeApp(firebaseConfig);
 
+
 class AuthRouter extends Component {
   state = {
     loggedin: null,
     loading: true,
-    events: []
+    events: [],
+    eventsLoading: false,
+    user: {}
   };
 
   getEvents = () => {
@@ -33,6 +36,8 @@ class AuthRouter extends Component {
       });
   };
 
+
+
   signOutUser = () => {
     firebase
       .auth()
@@ -44,19 +49,21 @@ class AuthRouter extends Component {
   };
 
   renderEvent = (routerProps) => {
-    console.log(routerProps)
+    console.log("props", routerProps)
     let eventId = routerProps.match.params.id.replace("_", " ")
+console.log("events", this.state.events)
     let foundEvent = this.state.events.find(eventObj => eventObj.title === eventId)
-  return (foundEvent ? <Event event={foundEvent} /> : null)
+  return (foundEvent ? <Event event={foundEvent} user={this.state.user} /> : null)
   }
 
   componentWillMount() {
+    
     this.getEvents()
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.setState({ loggedin: true, eventsLoading: false }); // User signed in
+        this.setState({ loggedin: true, loading: false, user: user }); // User signed in
       } else {
-        this.setState({ loggedin: false, eventsLoading: false }); // User NOT signed in.
+        this.setState({ loggedin: false, loading: false }); // User NOT signed in.
       }
     });
   }
@@ -92,8 +99,9 @@ class AuthRouter extends Component {
             exact
             render={() => (
               <Dashboard
-                loading={this.state.loading}
+                loading={this.state.eventsLoading}
                 loggedin={this.state.loggedin}
+                user={this.state.user}
               />
             )}
           />
