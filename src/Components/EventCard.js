@@ -15,7 +15,7 @@ class EventCard extends Component {
       <div>
         <List.Item>
           <Card
-            style={{ width: 300, margin: "20px" }}
+            style={{ width: "320px", margin: "20px" }}
             cover={
               <img src={this.props.event.img} style={{ height: "150px" }} />
             }

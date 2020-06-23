@@ -16,6 +16,11 @@
   }
 }
 
+
+p {
+  font-size: larger;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -182,6 +187,8 @@
 .ant-row{
   justify-content: center;
 }
+
+
 
 
 

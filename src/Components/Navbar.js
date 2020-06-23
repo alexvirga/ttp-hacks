@@ -24,25 +24,25 @@ class Navbar extends Component {
               <Menu.Item >
                 <Link
                   to="/homepage"
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{ textDecoration: "none", color: "white", fontWeight:"800" }}
                 >
-                  Events
+                  Events 
                 </Link>
               </Menu.Item>
               <Menu.Item >
                 <Link
                   to={`/user/${this.props.user.uid}`}
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{ textDecoration: "none", color: "white", fontWeight:"800"  }}
                 >
-                  Profile
+                  Profile 
                 </Link>
               </Menu.Item>
               <Menu.Item >
                 <Link 
-                style={{ textDecoration: "none", color: "white" }} 
+                style={{ textDecoration: "none", color: "white", fontWeight:"800"  }} 
                 onClick={this.props.signOutUser}
                 >
-                  Sign Out
+                   Sign Out
                  
                 </Link>
               </Menu.Item>

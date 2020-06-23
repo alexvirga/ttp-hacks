@@ -74,12 +74,17 @@ class Event extends Component {
       <div>
         <div style={{height:"300px", backgroundImage: `url(${this.props.event.img})`, backgroundSize: "cover" }}> </div>
         <h1 className="homepage-header"> {this.props.event.title}</h1>
-        <h4> <b>Description: </b>{this.props.event.description} </h4>
-        <a href={this.props.event.link} target="_blank">
-              <h3 style={{ fontSize: '20px', color: '#1192d0', margin:"10px" }}> VIEW CHALLENGE </h3>
+        <h3 > <b>Description: </b>{this.props.event.description} </h3>
+
+
+               <hr style={{height:"2px", borderWidth:"0", color:"#c1c1c1",backgroundColor:"#cdcdcd", width: "20%", marginTop:"20px"}} />
+               <a href={this.props.event.link} target="_blank">
+              <h2 style={{ fontSize: '30px', color: '#1192d0', margin:"10px" }}> VIEW CHALLENGE </h2>
                </a>
+               <hr style={{height:"2px", borderWidth:"0", color:"#c1c1c1",backgroundColor:"#cdcdcd", width: "20%", marginBottom:"20px"}} />
+
+
         <div>
-          <hr style={{height:"2px", borderWidth:"0", color:"#c1c1c1",backgroundColor:"#cdcdcd", width: "20%", marginTop:"20px"}} />
           
         <h1 className="event-header-submissions"> Submissions </h1>
 

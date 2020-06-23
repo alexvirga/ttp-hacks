@@ -80,7 +80,7 @@ class Dashboard extends Component {
         ) : (
           <div>
             <div className="profile-header">
-              <Avatar size={130} src={this.state.user.photo} alt="google.com" />
+              <Avatar size={190} src={this.state.user.photo} alt="google.com" />
             </div>
             <div className="profile-user-info">
               <h1> {this.state.user.name} </h1>

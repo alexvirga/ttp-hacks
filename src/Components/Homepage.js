@@ -20,7 +20,8 @@ class Homepage extends Component {
           <Spin indicator={antIcon} />
         ) : (
           <div>
-            <div>
+            <h1 className="homepage-header"> What's Ahead.</h1>
+            <div style={{ display: "inline-block" }}>
               <List
                 className="event-list"
                 grid={{ gutter: 16 }}
@@ -28,14 +29,14 @@ class Homepage extends Component {
                 renderItem={(event) =>
                   event.status === "current" ? (
                     <div>
-                      <h1 className="homepage-header"> What's Ahead.</h1>
                       <EventCard event={event} />
                     </div>
                   ) : null
                 }
               />
-              </div>
-<div>
+            </div>
+            <div>
+              <h1 className="homepage-header"> Past Events.</h1>
               <List
                 className="event-list"
                 grid={{ gutter: 16 }}
@@ -43,7 +44,6 @@ class Homepage extends Component {
                 renderItem={(event) =>
                   event.status === "past" ? (
                     <div>
-                      <h1 className="homepage-header"> Past Events.</h1>
                       <EventCard event={event} />
                     </div>
                   ) : null
