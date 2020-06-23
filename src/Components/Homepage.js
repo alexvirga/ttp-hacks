@@ -3,6 +3,7 @@ import firebase from "firebase";
 import { Link } from "react-router-dom";
 import { Card, List, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import EventCard from "./EventCard";
 import "antd/dist/antd.css";
 const { Meta } = Card;
 
@@ -15,7 +16,6 @@ class Homepage extends Component {
 
     return (
       <div>
-        <h1 className="homepage-header"> What's Ahead.</h1>
         {this.props.events.length <= 0 ? (
           <Spin indicator={antIcon} />
         ) : (
@@ -25,65 +25,31 @@ class Homepage extends Component {
                 className="event-list"
                 grid={{ gutter: 16 }}
                 dataSource={this.props.events}
-                renderItem={(event) => (
-                  <List.Item>
-                    <Card
-                      style={{ width: 300, margin: "20px" }}
-                      cover={
-                        <img src={event.img} style={{ height: "150px" }} />
-                      }
-                      actions={[
-                        <Link
-                          to={`/event/${event.title.replace(" ", "_")}`}
-                          style={{ textDecoration: "none", color: "grey" }}
-                        >
-                          View Event
-                        </Link>,
-                      ]}
-                    >
-                      <Meta
-                        title={event.title}
-                        description={event.description}
-                      />
-                    </Card>
-                  </List.Item>
-                )}
+                renderItem={(event) =>
+                  event.status === "current" ? (
+                    <div>
+                      <h1 className="homepage-header"> What's Ahead.</h1>
+                      <EventCard event={event} />
+                    </div>
+                  ) : null
+                }
+              />
+              </div>
+<div>
+              <List
+                className="event-list"
+                grid={{ gutter: 16 }}
+                dataSource={this.props.events}
+                renderItem={(event) =>
+                  event.status === "past" ? (
+                    <div>
+                      <h1 className="homepage-header"> Past Events.</h1>
+                      <EventCard event={event} />
+                    </div>
+                  ) : null
+                }
               />
             </div>
-          </div>
-        )}
-
-        <h1 className="homepage-header"> Past Events.</h1>
-        {this.state.loading ? (
-          <Spin indicator={antIcon} />
-        ) : (
-          <div>
-            {this.state.pastEvents > 0 ? (
-              <div>
-                <List
-                  className="event-list"
-                  grid={{ gutter: 16 }}
-                  dataSource={this.props.pastEvents}
-                  renderItem={(event) => (
-                    <List.Item>
-                      <Card
-                        style={{ width: 300, margin: "20px" }}
-                        cover={
-                          <img src={event.img} style={{ height: "150px" }} />
-                        }
-                      >
-                        <Meta
-                          title={event.title}
-                          description={event.description}
-                        />
-                      </Card>
-                    </List.Item>
-                  )}
-                />
-              </div>
-            ) : (
-              <h3> There are no past events.</h3>
-            )}
           </div>
         )}
       </div>

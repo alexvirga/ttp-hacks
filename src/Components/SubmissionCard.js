@@ -137,7 +137,7 @@ class SubmissionCard extends Component {
 
              {this.state.deleting ? 
              <DeleteSubmission toggleDelete={this.toggleDelete} deleteUserSubmission={this.deleteUserSubmission} visible={this.state.deleting} subID={this.state.edit} submission={this.state.submission}/> : null }
-                        }
+                        
 
            
           </div>
