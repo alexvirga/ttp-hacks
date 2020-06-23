@@ -4,6 +4,7 @@ import {  Card, List,  } from "antd";
 import "antd/dist/antd.css";
 import { Link, } from "react-router-dom";
 import EditSubmissionForm from "./EditSubmissionForm"
+import DeleteSubmission from "./DeleteSubmission"
 import {
   EditOutlined,
 
@@ -14,16 +15,21 @@ class SubmissionCard extends Component {
   state = {
     editing: false,
     edit: "",
-    submission: []
+    submission: [],
+    deleting: false,
+    delete: ""
   };
 
   toggleEdit = (value) => {
     this.setState({editing: value})
   }
 
+  toggleDelete = (value) => {
+    this.setState({deleting: value})
+  }
+
   editUserSubmission = (values, file) => {
     let submission = this.state.submission
-    console.log(submission)
     firebase.firestore().collection("submissions").doc(submission.id).update({
       url: values.user.link,
       github: values.user.github,
@@ -32,6 +38,16 @@ class SubmissionCard extends Component {
 
     });
   };
+  
+
+  deleteUserSubmission = () => {
+    let submission = this.state.submission
+    firebase.firestore().collection("submissions").doc(submission.id).delete().then(function() {
+      console.log("Document successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
+    });
+  }
   
 
   render() {
@@ -59,7 +75,7 @@ class SubmissionCard extends Component {
                       }
                       actions={[
                         <EditOutlined key="edit" onClick={() => this.setState({editing: true, edit: submission.id, submission: submission }) }  />,
-                        <DeleteOutlined key="delete" />,
+                        <DeleteOutlined key="delete"onClick={() => this.setState({deleting: true, delete: submission.id, submission: submission }) } />,
                       ]}
                       style={{ width: 300, margin: "20px" }}
                     >
@@ -116,8 +132,13 @@ class SubmissionCard extends Component {
               )}
             />
             {this.state.editing ? 
-            <EditSubmissionForm toggleEdit={this.toggleEdit} editUserSubmission={this.editUserSubmission} visible={this.state.editing} subID={this.state.edit} submission={this.state.submission}/> : null }
-             
+            <EditSubmissionForm toggleEdit={this.toggleEdit} editUserSubmission={this.editUserSubmission} visible={this.state.editing} subID={this.state.edit} submission={this.state.submission}/>
+             : null }
+
+             {this.state.deleting ? 
+             <DeleteSubmission toggleDelete={this.toggleDelete} deleteUserSubmission={this.deleteUserSubmission} visible={this.state.deleting} subID={this.state.edit} submission={this.state.submission}/> : null }
+                        }
+
            
           </div>
         </div>

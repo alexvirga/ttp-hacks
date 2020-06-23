@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import ttp_logo from "../ttp_logo.png";
 import { Layout, Menu, Breadcrumb } from "antd";
 
 const { Header, Content, Footer } = Layout;
-class Navbar extends Component {
+class NavbarLoggedOut extends Component {
   
   render() {
     return (
@@ -20,8 +20,8 @@ class Navbar extends Component {
           <div className="logo"><img className="ttp-logo-navbar" src={ttp_logo} /> </div>
           <div className="Nav-links">
             <Menu style={{background: "rgba(255, 255, 255, 0)"}} mode="horizontal" defaultSelectedKeys={["1"]}>
-              
               <Menu.Item >
+                
                 <Link
                   to="/homepage"
                   style={{ textDecoration: "none", color: "white" }}
@@ -29,24 +29,15 @@ class Navbar extends Component {
                   Events
                 </Link>
               </Menu.Item>
+
               <Menu.Item >
-                <Link
-                  to={`/user/${this.props.user.uid}`}
+                <Link                   to="/"
                   style={{ textDecoration: "none", color: "white" }}
                 >
-                  Profile
+                  Login/Sign Up
+ 
                 </Link>
               </Menu.Item>
-              <Menu.Item >
-                <Link 
-                style={{ textDecoration: "none", color: "white" }} 
-                onClick={this.props.signOutUser}
-                >
-                  Sign Out
-                 
-                </Link>
-              </Menu.Item>
-              
             </Menu>
             </div>
           </Header>
@@ -56,4 +47,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+export default NavbarLoggedOut;

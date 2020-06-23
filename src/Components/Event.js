@@ -1,22 +1,9 @@
 import React, { Component } from "react";
 import firebase from "firebase";
-import { Redirect } from "react-router-dom";
-import {
-  Avatar,
-  Button,
-  Card,
-  List,
-  Spin,
-  Form,
-  Input,
-  InputNumber,
-  Modal,
-} from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import SubmitForm from "./SubmitForm";
 import SubmissionCard from "./SubmissionCard";
-import EditSubmissionForm from "./EditSubmissionForm"
+
 
 class Event extends Component {
   state = {
@@ -25,8 +12,8 @@ class Event extends Component {
 
   postUserSubmission = async (values) => {
     const files = values.user.image;
-    console.log(files);
-    console.log("values", values);
+   
+    
 
     const data = new FormData();
     data.append("file", files);
@@ -38,7 +25,7 @@ class Event extends Component {
     const file = await res.json();
     this.setState({ img: file.secure_url });
 
-    console.log(file);
+    
     this.postSubmissionFirebase(values, file);
   };
 
@@ -72,17 +59,17 @@ class Event extends Component {
       .then((querySnapshot) => {
         const data = [];
         querySnapshot.docs.forEach((doc) => {
-          console.log(doc.id)
+        
           const eventData = doc.data();
           data.push({id: doc.id, data: eventData});
         });
-        console.log("data", data);
+       
         this.setState({ submissions: data });
       });
   };
 
   render() {
-    console.log(this.props.event.img)
+    
     return (
       <div>
         <div style={{height:"300px", backgroundImage: `url(${this.props.event.img})`, backgroundSize: "cover" }}> </div>

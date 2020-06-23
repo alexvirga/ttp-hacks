@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import firebase from "firebase";
-import { Redirect, Link } from "react-router-dom";
-import { Avatar, Button, Card, List, Spin } from "antd";
+import { Link } from "react-router-dom";
+import { Card, List, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 const { Meta } = Card;

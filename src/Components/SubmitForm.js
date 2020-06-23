@@ -1,20 +1,14 @@
 import React, { Component } from "react";
-import firebase from "firebase";
-import { Redirect } from "react-router-dom";
+
 import {
-  Avatar,
   Button,
-  Card,
-  List,
-  Spin,
   Form,
   Input,
-  InputNumber,
   Modal,
   Upload,
 } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
-import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
+
+import { UploadOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 
 const layout = {
@@ -45,8 +39,8 @@ class SubmitForm extends Component {
   };
 
   normFile = (e) => {
-    // console.log('Upload event:', e);
-    console.log(e.file);
+    
+  
     this.setState({ image: e.file.originFileObj });
     return e.file.originFileObj;
   };
@@ -67,14 +61,14 @@ class SubmitForm extends Component {
   };
 
   handleCancel = (e) => {
-    console.log(e);
+ 
     this.setState({
       visible: false,
     });
   };
 
   onFinish = (values) => {
-    console.log("values", values);
+ 
     this.setState({ validated: true });
     this.props.postUserSubmission(values);
     this.handleOk();
@@ -86,7 +80,7 @@ class SubmitForm extends Component {
   };
 
   uploadImg = async (e) => {
-    console.log(e);
+    
     this.setState({ image: e });
   };
 

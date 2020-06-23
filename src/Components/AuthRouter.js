@@ -1,17 +1,20 @@
 import firebase from "firebase";
 import React, { Component } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import Landing from "./Landing";
 import firebaseConfig from "../Firebase/firebaseConfig";
 import Navbar from "./Navbar";
 import Homepage from "./Homepage";
 import Event from "./Event";
 import Dashboard from "./Dashboard";
+import NavbarLoggedOut from './NavbarLoggedOut'
 
 
 firebase.initializeApp(firebaseConfig);
 
+
 class AuthRouter extends Component {
+
   state = {
     loggedin: null,
     loading: true,
@@ -19,6 +22,8 @@ class AuthRouter extends Component {
     eventsLoading: false,
     user: {},
   };
+
+
 
   componentDidMount() {
     this.getEvents();
@@ -55,11 +60,14 @@ class AuthRouter extends Component {
   // }
 
   signOutUser = () => {
+    this.setState({loggedin: false})
     firebase
       .auth()
       .signOut()
       .then(() => {
         this.closeOverlay();
+        
+        useHistory.push("/")
       })
       .catch(function (error) {});
   };
@@ -91,7 +99,7 @@ class AuthRouter extends Component {
   render() {
     return (
       <div className="Home">
-        {/* Only display navbar if user is logged in */}
+     
         {this.state.loggedin ? (
           <Navbar
             loading={this.state.loading}
@@ -99,7 +107,9 @@ class AuthRouter extends Component {
             signOutUser={this.signOutUser}
             user={this.state.user}
           />
-        ) : null}
+        ) :           
+        <NavbarLoggedOut
+      />}
         <Switch>
           <Route
             path="/"

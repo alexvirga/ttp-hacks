@@ -1,15 +1,10 @@
 import React, { Component } from "react";
 import firebase from "firebase";
 import { Redirect } from "react-router-dom";
-import { Avatar, Button } from "antd";
+import { Avatar } from "antd";
 import SubmissionCard from "./SubmissionCard";
 import "antd/dist/antd.css";
-import {
-  GithubOutlined ,
-  LinkedinOutlined 
-  ,
-} from "@ant-design/icons";
-
+import { GithubOutlined, LinkedinOutlined } from "@ant-design/icons";
 
 class Dashboard extends Component {
   state = {
@@ -40,11 +35,8 @@ class Dashboard extends Component {
       .get()
       .then((querySnapshot) => {
         if (querySnapshot.docs.length < 1) {
-          console.log("not here");
           this.setState({ invalidProfile: true });
         } else {
-          console.log("here");
-          console.log(querySnapshot.docs);
           this.setState({
             invalidProfile: false,
             user: querySnapshot.docs[0].data(),
@@ -65,7 +57,7 @@ class Dashboard extends Component {
         const data = [];
         querySnapshot.docs.forEach((doc) => {
           const eventData = doc.data();
-          data.push({id: doc.id, data: eventData});
+          data.push({ id: doc.id, data: eventData });
         });
 
         this.setState({ submissions: data });
@@ -73,7 +65,6 @@ class Dashboard extends Component {
   };
 
   render() {
-    console.log(this.state.user)
     return (
       <div>
         {this.props.loading ? (
@@ -82,26 +73,33 @@ class Dashboard extends Component {
           <Redirect to="/" />
         ) : (
           <div>
-           
             <div className="profile-header">
               <Avatar size={130} src={this.state.user.photo} alt="google.com" />
             </div>
             <div className="profile-user-info">
               <h1> {this.state.user.name} </h1>
               <p> {this.state.user.bio} </p>
-              <div className="profile-socials"> 
-              <a href={this.state.user.linkedin} target="_blank">
-              <LinkedinOutlined style={{ fontSize: '30px', color: '#1192d0', margin:"10px" }}/>
-               </a>
+              <div className="profile-socials">
+                <a href={this.state.user.linkedin} target="_blank">
+                  <LinkedinOutlined
+                    style={{
+                      fontSize: "30px",
+                      color: "#1192d0",
+                      margin: "10px",
+                    }}
+                  />
+                </a>
 
-               <a href={this.state.user.github} target="_blank">
-              <GithubOutlined style={{ fontSize: '30px', color: 'black', margin:"10px"  }} />
-              </a>
-              <p> <b>{this.state.user.email} </b> </p>
-       
-              </div> 
-              
-              
+                <a href={this.state.user.github} target="_blank">
+                  <GithubOutlined
+                    style={{ fontSize: "30px", color: "black", margin: "10px" }}
+                  />
+                </a>
+                <p>
+                  {" "}
+                  <b>{this.state.user.email} </b>{" "}
+                </p>
+              </div>
             </div>
             <h1> Projects </h1>
 

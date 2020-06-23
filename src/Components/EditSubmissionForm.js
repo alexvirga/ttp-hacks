@@ -6,7 +6,7 @@ import {
   Modal,
   Upload,
 } from "antd";
-import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 
 const layout = {
@@ -37,8 +37,8 @@ class EditSubmissionForm extends Component {
   };
 
   normFile = (e) => {
-    // console.log('Upload event:', e);
-    console.log(e.file);
+ 
+   
     this.setState({ image: e.file.originFileObj });
     return e.file.originFileObj;
   };
@@ -64,7 +64,7 @@ class EditSubmissionForm extends Component {
   };
 
   onFinish = (values) => {
-    console.log("values", values);
+   
     this.setState({ validated: true });
     this.props.editUserSubmission(values, this.props.submission.id);
     this.handleOk();
@@ -76,7 +76,7 @@ class EditSubmissionForm extends Component {
   };
 
   uploadImg = async (e) => {
-    console.log(e);
+   
     this.setState({ image: e });
   };
 
