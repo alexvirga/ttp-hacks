@@ -4,6 +4,12 @@ import { Redirect } from "react-router-dom";
 import { Avatar, Button } from "antd";
 import SubmissionCard from "./SubmissionCard";
 import "antd/dist/antd.css";
+import {
+  GithubOutlined ,
+  LinkedinOutlined 
+  ,
+} from "@ant-design/icons";
+
 
 class Dashboard extends Component {
   state = {
@@ -67,6 +73,7 @@ class Dashboard extends Component {
   };
 
   render() {
+    console.log(this.state.user)
     return (
       <div>
         {this.props.loading ? (
@@ -75,13 +82,28 @@ class Dashboard extends Component {
           <Redirect to="/" />
         ) : (
           <div>
+           
             <div className="profile-header">
               <Avatar size={130} src={this.state.user.photo} alt="google.com" />
             </div>
             <div className="profile-user-info">
               <h1> {this.state.user.name} </h1>
-              <h3> {this.state.user.email} </h3>
+              <p> {this.state.user.bio} </p>
+              <div className="profile-socials"> 
+              <a href={this.state.user.linkedin} target="_blank">
+              <LinkedinOutlined style={{ fontSize: '30px', color: '#1192d0', margin:"10px" }}/>
+               </a>
+
+               <a href={this.state.user.github} target="_blank">
+              <GithubOutlined style={{ fontSize: '30px', color: 'black', margin:"10px"  }} />
+              </a>
+              <p> <b>{this.state.user.email} </b> </p>
+       
+              </div> 
+              
+              
             </div>
+            <h1> Projects </h1>
 
             <SubmissionCard
               data={this.state.submissions}

@@ -37,7 +37,7 @@ class SubmissionCard extends Component {
   render() {
     return (
       <div>
-        <h1> Submissions </h1>
+
 
         <div>
           <div>
@@ -71,13 +71,13 @@ class SubmissionCard extends Component {
                         </Link>
 
                         <a href={submission.data.url} target="_blank">
-                          View Project
+                          <p> View Project </p>
                         </a>
                         <a href={submission.data.github} target="_blank">
-                          Repository
+                         <p> Repository </p>
                         </a>
 
-                        <p> Comment: {submission.data.comment}</p>
+                        <p> <b> Description: </b> {submission.data.comment}</p>
                       </div>
                     </Card>
 
@@ -102,13 +102,13 @@ class SubmissionCard extends Component {
                           <p> {submission.data.name}</p>
                         </Link>
                         <a href={submission.data.url} target="_blank">
-                          View Project
+                          <p> View Project </p>
                         </a>
                         <a href={submission.data.github} target="_blank">
-                          Repository
+                         <p> Repository </p>
                         </a>
 
-                        <p> Comment: {submission.data.comment}</p>
+                        <p> <b> Description: </b> {submission.data.comment}</p>
                       </div>
                     </Card>
                   )}

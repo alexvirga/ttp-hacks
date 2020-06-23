@@ -152,7 +152,14 @@
 }
 
 .profile-user-info{
-  margin: 20px
+  max-width: 600px;
+  display: inline-block;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.profile-socials {
+  
 }
 
 
@@ -160,6 +167,11 @@
 
 .homepage-header {
   font-size: 50px;
+  font-weight: 800
+}
+
+.event-header-submissions {
+  font-size: 45px;
   font-weight: 800
 }
 
@@ -192,7 +204,7 @@
 
 .submit-img {
   background-color: lightgrey;
-  width: 300px;
+  width: 200px;
   height: 182px
 
 }
