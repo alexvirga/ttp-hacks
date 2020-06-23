@@ -2,14 +2,14 @@ import firebase from "firebase";
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Landing from "./Landing";
-import Dashboard from "./Dashboard";
 import firebaseConfig from "../Firebase/firebaseConfig";
 import Navbar from "./Navbar";
 import Homepage from "./Homepage";
-import Event from "./Event"
+import Event from "./Event";
+import Dashboard from "./Dashboard";
+
 
 firebase.initializeApp(firebaseConfig);
-
 
 class AuthRouter extends Component {
   state = {
@@ -17,8 +17,19 @@ class AuthRouter extends Component {
     loading: true,
     events: [],
     eventsLoading: false,
-    user: {}
+    user: {},
   };
+
+  componentDidMount() {
+    this.getEvents();
+    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ loggedin: true, loading: false, user: user }); // User signed in
+      } else {
+        this.setState({ loggedin: false, loading: false }); // User NOT signed in.
+      }
+    });
+  }
 
   getEvents = () => {
     this.setState({ eventsLoading: true });
@@ -32,12 +43,16 @@ class AuthRouter extends Component {
           const eventData = doc.data();
           data.push(eventData);
         });
-        
+
         this.setState({ events: data, eventsLoading: false });
       });
   };
 
-
+  // componentDidMount(){
+  //   const user = firebase.auth().currentUser;
+  //   this.setState({user: user})
+  //   console.log(user)
+  // }
 
   signOutUser = () => {
     firebase
@@ -46,32 +61,28 @@ class AuthRouter extends Component {
       .then(() => {
         this.closeOverlay();
       })
-      .catch(function(error) {});
+      .catch(function (error) {});
   };
 
   renderEvent = (routerProps) => {
-    console.log("props", routerProps)
-    let eventId = routerProps.match.params.id.replace("_", " ")
-console.log("events", this.state.events)
-    let foundEvent = this.state.events.find(eventObj => eventObj.title === eventId)
-  return (foundEvent ? <Event event={foundEvent} user={this.state.user} /> : null)
-  }
+    let eventId = routerProps.match.params.id.replace("_", " ");
+    let foundEvent = this.state.events.find(
+      (eventObj) => eventObj.title === eventId
+    );
+    return foundEvent ? (
+      <Event event={foundEvent} user={this.state.user} />
+    ) : null;
+  };
 
-  componentWillMount() {
-    
-    this.getEvents()
-    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.setState({ loggedin: true, loading: false, user: user }); // User signed in
-      } else {
-        this.setState({ loggedin: false, loading: false }); // User NOT signed in.
-      }
-    });
-  }
+  renderUser = (routerProps) => {
+    let uid = routerProps.match.params.id
+    let user = this.state.user
+    return <Dashboard uid={uid} user={user} loggedin={this.state.loggedin} loading={this.state.loading}/>;
+  };
 
-  componentWillUnmount() {
-    this.unregisterAuthObserver();
-  }
+  // componentWillUnmount() {
+  //   this.unregisterAuthObserver();
+  // }
   render() {
     return (
       <div className="Home">
@@ -81,6 +92,7 @@ console.log("events", this.state.events)
             loading={this.state.loading}
             loggedin={this.state.loggedin}
             signOutUser={this.signOutUser}
+            user={this.state.user}
           />
         ) : null}
         <Switch>
@@ -96,18 +108,6 @@ console.log("events", this.state.events)
           />
 
           <Route
-            path="/dashboard"
-            exact
-            render={() => (
-              <Dashboard
-                loading={this.state.eventsLoading}
-                loggedin={this.state.loggedin}
-                user={this.state.user}
-              />
-            )}
-          />
-
-<Route
             path="/homepage"
             exact
             render={() => (
@@ -120,8 +120,21 @@ console.log("events", this.state.events)
           />
 
 <Route
+            path="/user/:id"
+            render={
+              (routerProps) => this.renderUser(routerProps)
+
+              // <Event
+              //   loading={this.state.loading}
+              //   loggedin={this.state.loggedin}
+              // />
+            }
+          />
+
+          <Route
             path="/event/:id"
-            render= {routerProps => this.renderEvent(routerProps)
+            render={
+              (routerProps) => this.renderEvent(routerProps)
 
               // <Event
               //   loading={this.state.loading}
@@ -132,14 +145,17 @@ console.log("events", this.state.events)
 
           <Route
             path="*"
-            render={() => (
+            render={() =>
               this.state.loggedin ? (
-              <Redirect to="homepage"
-                loading={this.state.loading}
-                loggedin={this.state.loggedin} 
-              /> ) : 
-              <Redirect to="/" />
-            )}
+                <Redirect
+                  to="homepage"
+                  loading={this.state.loading}
+                  loggedin={this.state.loggedin}
+                />
+              ) : (
+                <Redirect to="/" />
+              )
+            }
           />
         </Switch>
       </div>

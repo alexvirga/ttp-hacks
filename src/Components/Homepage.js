@@ -8,12 +8,7 @@ const { Meta } = Card;
 
 const antIcon = <LoadingOutlined style={{ fontSize: 50 }} spin />;
 class Homepage extends Component {
-  state = {
-   
-  };
-
-
-
+  state = {};
 
   render() {
     const user = firebase.auth().currentUser;
@@ -29,73 +24,66 @@ class Homepage extends Component {
               <List
                 className="event-list"
                 grid={{ gutter: 16 }}
-                
                 dataSource={this.props.events}
                 renderItem={(event) => (
                   <List.Item>
                     <Card
-
                       style={{ width: 300, margin: "20px" }}
                       cover={
                         <img src={event.img} style={{ height: "150px" }} />
                       }
-
                       actions={[
-                        <Link to={`/event/${event.title.replace(" ","_")}`} style={{ textDecoration: 'none', color:"grey" }}>View Event</Link>
-
+                        <Link
+                          to={`/event/${event.title.replace(" ", "_")}`}
+                          style={{ textDecoration: "none", color: "grey" }}
+                        >
+                          View Event
+                        </Link>,
                       ]}
                     >
-                        
                       <Meta
                         title={event.title}
                         description={event.description}
                       />
                     </Card>
-                   
                   </List.Item>
-               
                 )}
               />
             </div>
           </div>
         )}
-        
-
-
 
         <h1 className="homepage-header"> Past Events.</h1>
         {this.state.loading ? (
           <Spin indicator={antIcon} />
         ) : (
           <div>
-              {this.state .pastEvents > 0 ? (
-            <div>
-                
-
-                    
-                
-              <List
-                className="event-list"
-                grid={{ gutter: 16 }}
-                dataSource={this.props.pastEvents}
-                renderItem={(event) => (
-                  <List.Item>
-                    <Card
-                      style={{ width: 300, margin: "20px" }}
-                      cover={
-                        <img src={event.img} style={{ height: "150px" }} />
-                      }
-                    >
-                      <Meta
-                        title={event.title}
-                        description={event.description}
-                      />
-                    </Card>
-                  </List.Item>
-                )}
-              />
-            </div> )
-            : <h3> There are no past events.</h3>}
+            {this.state.pastEvents > 0 ? (
+              <div>
+                <List
+                  className="event-list"
+                  grid={{ gutter: 16 }}
+                  dataSource={this.props.pastEvents}
+                  renderItem={(event) => (
+                    <List.Item>
+                      <Card
+                        style={{ width: 300, margin: "20px" }}
+                        cover={
+                          <img src={event.img} style={{ height: "150px" }} />
+                        }
+                      >
+                        <Meta
+                          title={event.title}
+                          description={event.description}
+                        />
+                      </Card>
+                    </List.Item>
+                  )}
+                />
+              </div>
+            ) : (
+              <h3> There are no past events.</h3>
+            )}
           </div>
         )}
       </div>

@@ -15,69 +15,76 @@ import {
 import { LoadingOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import SubmitForm from "./SubmitForm";
-import SubmissionCard from "./SubmissionCard"
+import SubmissionCard from "./SubmissionCard";
 
 class Event extends Component {
+  state = {
+    submissions: [],
+  };
 
-    state = {
-        submissions: []
-    }
-  postUserSubmission = (values) => {
+  postUserSubmission = async (values) => {
+    const files = values.user.image;
+    console.log(files);
+    console.log("values", values);
+
+    const data = new FormData();
+    data.append("file", files);
+    data.append("upload_preset", "project_img");
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/alexvirga/image/upload",
+      { method: "POST", body: data }
+    );
+    const file = await res.json();
+    this.setState({ img: file.secure_url });
+
+    console.log(file);
+    this.postSubmissionFirebase(values, file);
+  };
+
+  postSubmissionFirebase = (values, file) => {
+    firebase.firestore().collection("submissions").doc().set({
+      name: this.props.user.displayName,
+      uid: this.props.user.uid,
+      event: this.props.event.title,
+      url: values.user.link,
+      github: values.user.github,
+      title: values.user.title,
+      comment: values.user.comment,
+      img: file.secure_url,
+    });
+  };
+
+  componentDidMount() {
+    this.getAllSubmissions();
+  }
+
+  getAllSubmissions = () => {
     firebase
       .firestore()
-      .collection("events")
-      .doc(this.props.event.title)
       .collection("submissions")
-      .doc(this.props.user.uid)
-      .set({
-        name: this.props.user.displayName,
-        uid: this.props.user.uid, 
-        url: values.user.link,
-        github: values.user.github,
-        title: values.user.title,
-        comment: values.user.comment,
-        submitted: true
+      .where("event", "==", this.props.event.title)
+      .get()
+      .then((querySnapshot) => {
+        const data = [];
+        querySnapshot.docs.forEach((doc) => {
+          const eventData = doc.data();
+          data.push(eventData);
+        });
+        console.log("data", data);
+        this.setState({ submissions: data });
       });
   };
 
-  componentDidMount(){
-    this.getAllSubmissions()
-  }
-
-getAllSubmissions = () => {
-    firebase
-    .firestore()
-    .collection("events")
-    .doc(this.props.event.title)
-    .collection("submissions")
-    .get()
-    .then((querySnapshot) => {
-      const data = [];
-      querySnapshot.docs.forEach((doc) => {
-        const eventData = doc.data();
-        data.push(eventData);
-      });
-     this.setState({submissions: data})
-    
-    });
-};
-       
-   
-
-
-
-
-
   render() {
-  
     return (
       <div>
         <h1 className="homepage-header"> {this.props.event.title}</h1>
         <div>
-        <SubmitForm postUserSubmission={this.postUserSubmission} />
-            <SubmissionCard data={this.state.submissions}/>
-        
-         
+          <SubmitForm postUserSubmission={this.postUserSubmission} />
+          <SubmissionCard
+            data={this.state.submissions}
+            currentUID={this.props.user.uid}
+          />
         </div>
       </div>
     );

@@ -10,7 +10,12 @@ const uiConfig = {
     var operationType = authResult.operationType;
     if (isNewUser) {
     firebase.firestore().collection("users").doc(user.uid).set({
+      uid: user.uid,
       name: user.displayName,
+      email: user.email,
+      photo: user.photoURL
+
+
     
     })}
     // if (isNewUser) {

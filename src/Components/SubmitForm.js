@@ -11,8 +11,10 @@ import {
   Input,
   InputNumber,
   Modal,
+  Upload,
 } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 
 const layout = {
@@ -39,6 +41,14 @@ class SubmitForm extends Component {
     visible: false,
     loading: false,
     validated: false,
+    image: {},
+  };
+
+  normFile = (e) => {
+    // console.log('Upload event:', e);
+    console.log(e.file);
+    this.setState({ image: e.file.originFileObj });
+    return e.file.originFileObj;
   };
 
   showModal = () => {
@@ -64,6 +74,7 @@ class SubmitForm extends Component {
   };
 
   onFinish = (values) => {
+    console.log("values", values);
     this.setState({ validated: true });
     this.props.postUserSubmission(values);
     this.handleOk();
@@ -72,6 +83,11 @@ class SubmitForm extends Component {
   onFinishFailed = (errorInfo) => {
     this.setState({ validated: false });
     console.log("Failed:", errorInfo);
+  };
+
+  uploadImg = async (e) => {
+    console.log(e);
+    this.setState({ image: e });
   };
 
   render() {
@@ -152,6 +168,24 @@ class SubmitForm extends Component {
               <Form.Item
                 wrapperCol={{ ...layout.wrapperCol, offset: 8 }}
               ></Form.Item>
+
+              <Form.Item
+                name={["user", "image"]}
+                valuePropName="picture"
+                label="Image"
+                getValueFromEvent={this.normFile}
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Upload name="logo" action={this.uploadImg}>
+                  <Button>
+                    <UploadOutlined /> Click to upload
+                  </Button>
+                </Upload>
+              </Form.Item>
             </Form>
           </Modal>
         </div>
