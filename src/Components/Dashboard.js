@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import firebase from "firebase";
 import { Redirect } from "react-router-dom";
-import { Avatar } from "antd";
+import { Card, List, Spin, Avatar } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 import SubmissionCard from "./SubmissionCard";
 import "antd/dist/antd.css";
 import { GithubOutlined, LinkedinOutlined } from "@ant-design/icons";
+const antIcon = <LoadingOutlined style={{ fontSize: 50}} spin />;
+
 
 class Dashboard extends Component {
   state = {
     submissions: [],
     user: {},
     invalidProfile: false,
+    loading: false
   };
 
   componentDidMount() {
@@ -27,6 +31,7 @@ class Dashboard extends Component {
 
   getUser = () => {
     let uid = this.props.uid;
+    this.setState({loading: true})
 
     firebase
       .firestore()
@@ -39,6 +44,7 @@ class Dashboard extends Component {
         } else {
           this.setState({
             invalidProfile: false,
+            loading: false,
             user: querySnapshot.docs[0].data(),
           });
         }
@@ -67,8 +73,8 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        {this.props.loading ? (
-          <p>Loading..</p>
+        {this.state.loading ? (
+          <Spin indicator={antIcon}/>
         ) : this.state.invalidProfile ? (
           <Redirect to="/" />
         ) : (

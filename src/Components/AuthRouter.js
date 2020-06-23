@@ -86,7 +86,7 @@ class AuthRouter extends Component {
    
     let uid = routerProps.match.params.id
     let user = this.state.user
-    return <Dashboard uid={uid} user={user} loggedin={this.state.loggedin} loading={this.state.loading}/>;
+    return <Dashboard uid={uid} user={user} loggedin={this.state.loggedin} />;
   };
 
 
