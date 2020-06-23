@@ -16,6 +16,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import SubmitForm from "./SubmitForm";
 import SubmissionCard from "./SubmissionCard";
+import EditSubmissionForm from "./EditSubmissionForm"
 
 class Event extends Component {
   state = {
@@ -54,6 +55,10 @@ class Event extends Component {
     });
   };
 
+
+
+
+
   componentDidMount() {
     this.getAllSubmissions();
   }
@@ -67,8 +72,9 @@ class Event extends Component {
       .then((querySnapshot) => {
         const data = [];
         querySnapshot.docs.forEach((doc) => {
+          console.log(doc.id)
           const eventData = doc.data();
-          data.push(eventData);
+          data.push({id: doc.id, data: eventData});
         });
         console.log("data", data);
         this.setState({ submissions: data });
@@ -81,9 +87,11 @@ class Event extends Component {
         <h1 className="homepage-header"> {this.props.event.title}</h1>
         <div>
           <SubmitForm postUserSubmission={this.postUserSubmission} />
+          
           <SubmissionCard
             data={this.state.submissions}
             currentUID={this.props.user.uid}
+           
           />
         </div>
       </div>
