@@ -75,11 +75,16 @@ class AuthRouter extends Component {
   };
 
   renderUser = (routerProps) => {
+    console.log("firing")
     let uid = routerProps.match.params.id
     let user = this.state.user
     return <Dashboard uid={uid} user={user} loggedin={this.state.loggedin} loading={this.state.loading}/>;
   };
 
+
+
+
+    
   // componentWillUnmount() {
   //   this.unregisterAuthObserver();
   // }
@@ -121,6 +126,7 @@ class AuthRouter extends Component {
 
 <Route
             path="/user/:id"
+            
             render={
               (routerProps) => this.renderUser(routerProps)
 

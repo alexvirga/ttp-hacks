@@ -16,10 +16,19 @@ class Dashboard extends Component {
   componentDidMount(){
     this.getProjects()
     this.getUser()
+ 
   }
+
+  componentDidUpdate(prevProps, prevState){
+    if( prevProps !== this.props) {
+      this.getUser()
+      this.getProjects()
+    } }
+ 
 
   getUser = () => {
       let uid = this.props.uid
+      console.log(uid)
       firebase
           .firestore()
           .collection("users")
@@ -30,9 +39,7 @@ class Dashboard extends Component {
             console.log()
           })
           console.log("userObj", uid);
-          
-           
-         
+
       };
   
 
