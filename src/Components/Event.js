@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import firebase from "firebase";
+import { Link, Redirect } from "react-router-dom";
+
 import "antd/dist/antd.css";
+import { Button } from "antd";
 import SubmitForm from "./SubmitForm";
 import SubmissionCard from "./SubmissionCard";
-
 
 class Event extends Component {
   state = {
@@ -12,8 +14,6 @@ class Event extends Component {
 
   postUserSubmission = async (values) => {
     const files = values.user.image;
-   
-    
 
     const data = new FormData();
     data.append("file", files);
@@ -25,7 +25,6 @@ class Event extends Component {
     const file = await res.json();
     this.setState({ img: file.secure_url });
 
-    
     this.postSubmissionFirebase(values, file);
   };
 
@@ -42,10 +41,6 @@ class Event extends Component {
     });
   };
 
-
-
-
-
   componentDidMount() {
     this.getAllSubmissions();
   }
@@ -59,44 +54,74 @@ class Event extends Component {
       .then((querySnapshot) => {
         const data = [];
         querySnapshot.docs.forEach((doc) => {
-        
           const eventData = doc.data();
-          data.push({id: doc.id, data: eventData});
+          data.push({ id: doc.id, data: eventData });
         });
-       
+
         this.setState({ submissions: data });
       });
   };
 
   render() {
-    
     return (
       <div>
-        <div style={{height:"300px", backgroundImage: `url(${this.props.event.img})`, backgroundSize: "cover" }}> </div>
+        <div
+          style={{
+            height: "300px",
+            backgroundImage: `url(${this.props.event.img})`,
+            backgroundSize: "cover",
+          }}
+        >
+          {" "}
+        </div>
         <h1 className="homepage-header"> {this.props.event.title}</h1>
-        <h3 > <b>Description: </b>{this.props.event.description} </h3>
+        <h3>
+          {" "}
+          <b>Description: </b>
+          {this.props.event.description}{" "}
+        </h3>
 
-
-               <hr style={{height:"2px", borderWidth:"0", color:"#c1c1c1",backgroundColor:"#cdcdcd", width: "20%", marginTop:"20px"}} />
-               <a href={this.props.event.link} target="_blank">
-              <h2 style={{ fontSize: '30px', color: '#1192d0', margin:"10px" }}> VIEW CHALLENGE </h2>
-               </a>
-               <hr style={{height:"2px", borderWidth:"0", color:"#c1c1c1",backgroundColor:"#cdcdcd", width: "20%", marginBottom:"20px"}} />
-
+        <hr
+          style={{
+            height: "2px",
+            borderWidth: "0",
+            color: "#c1c1c1",
+            backgroundColor: "#cdcdcd",
+            width: "20%",
+            marginTop: "20px",
+          }}
+        />
+        <a href={this.props.event.link} target="_blank">
+          <h2 style={{ fontSize: "30px", color: "#1192d0", margin: "10px" }}>
+            {" "}
+            VIEW CHALLENGE{" "}
+          </h2>
+        </a>
+        <hr
+          style={{
+            height: "2px",
+            borderWidth: "0",
+            color: "#c1c1c1",
+            backgroundColor: "#cdcdcd",
+            width: "20%",
+            marginBottom: "20px",
+          }}
+        />
 
         <div>
-          
-        <h1 className="event-header-submissions"> Submissions </h1>
+          <h1 className="event-header-submissions"> Submissions </h1>
 
+          {this.props.loggedin ? (
+            <SubmitForm postUserSubmission={this.postUserSubmission} />
+          ) : (
+            <Button type="primary">
+              <Link to={`/`}>Log in to Submit</Link>
+            </Button>
+          )}
 
-
-
-          <SubmitForm postUserSubmission={this.postUserSubmission} />
-        
           <SubmissionCard
             data={this.state.submissions}
             currentUID={this.props.user.uid}
-           
           />
         </div>
       </div>

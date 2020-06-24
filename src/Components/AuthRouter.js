@@ -78,7 +78,7 @@ class AuthRouter extends Component {
       (eventObj) => eventObj.title === eventId
     );
     return foundEvent ? (
-      <Event event={foundEvent} user={this.state.user} />
+      <Event event={foundEvent} user={this.state.user}  loggedin={this.state.loggedin}/>
     ) : null;
   };
 

@@ -12,7 +12,7 @@ class Homepage extends Component {
   state = {};
 
   render() {
-    const user = firebase.auth().currentUser;
+    
 
     return (
       <div>
