@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import firebase from "firebase";
 import {  Card, List,  } from "antd";
-import "antd/dist/antd.css";
 import { Link, } from "react-router-dom";
 import EditSubmissionForm from "./EditSubmissionForm"
 import DeleteSubmission from "./DeleteSubmission"
 import {
   EditOutlined,
-
   DeleteOutlined,
 } from "@ant-design/icons";
 
@@ -71,7 +69,7 @@ class SubmissionCard extends Component {
                     <Card
                     
                       cover={
-                        <img className="submit-img" src={submission.data.img} />
+                        <img className="submit-img" src={submission.data.img} alt="" />
                       }
                       actions={[
                         <EditOutlined key="edit" onClick={() => this.setState({editing: true, edit: submission.id, submission: submission }) }  />,
@@ -86,10 +84,10 @@ class SubmissionCard extends Component {
                           <p> {submission.data.name}</p>
                         </Link>
 
-                        <a href={submission.data.url} target="_blank">
+                        <a href={submission.data.url} target="_blank" rel="noopener noreferrer">
                           <p> View Project </p>
                         </a>
-                        <a href={submission.data.github} target="_blank">
+                        <a href={submission.data.github} target="_blank" rel="noopener noreferrer">
                          <p> Repository </p>
                         </a>
 
@@ -107,7 +105,7 @@ class SubmissionCard extends Component {
                       cover={
                        
                       
-                          <img className="submit-img" src={submission.data.img} />
+                          <img className="submit-img" src={submission.data.img} alt="" />
                        
                       }
                     >
@@ -117,10 +115,10 @@ class SubmissionCard extends Component {
                         <Link to={`/user/${submission.data.uid}`}>
                           <p> {submission.data.name}</p>
                         </Link>
-                        <a href={submission.data.url} target="_blank">
+                        <a href={submission.data.url} target="_blank" rel="noopener noreferrer">
                           <p> View Project </p>
                         </a>
-                        <a href={submission.data.github} target="_blank">
+                        <a href={submission.data.github} target="_blank" rel="noopener noreferrer">
                          <p> Repository </p>
                         </a>
 

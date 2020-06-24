@@ -1,26 +1,6 @@
 import React, { Component } from "react";
-import { Button, Form, Input, Modal, Upload } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
-import "antd/dist/antd.css";
+import { Button, Modal } from "antd";
 
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-const validateMessages = {
-  required: "${label} is required!",
-  types: {
-    email: "${label} is not validate email!",
-    number: "${label} is not a validate number!",
-  },
-  number: {
-    range: "${label} must be between ${min} and ${max}",
-  },
-};
 
 class DeleteSubmission extends Component {
   handleOk = (e) => {

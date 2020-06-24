@@ -1,18 +1,22 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import ttp_logo from "../ttp_logo.png";
-import { Layout, Menu, Breadcrumb } from "antd";
-
-const { Header, Content, Footer } = Layout;
+import { Layout, Menu } from "antd";
+const { Header } = Layout;
 class Navbar extends Component {
   
   render() {
     return (
       <div className="Navbar">
+{/*      
+        <div className="Nav-logo"> EXPO </div>
+        <div className="Nav-spacer"> </div>
+        <div className="Nav-links"> */}
+       
 
         <Layout  className="layout">
           <Header style={{background:"black"}}>
-          <div className="logo"><img className="ttp-logo-navbar" src={ttp_logo} /> </div>
+          <div className="logo"><img className="ttp-logo-navbar" src={ttp_logo}  alt=""/> </div>
           <div className="Nav-links">
             <Menu style={{background: "rgba(255, 255, 255, 0)"}} mode="horizontal" defaultSelectedKeys={["1"]}>
               

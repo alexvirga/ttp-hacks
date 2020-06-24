@@ -1,11 +1,7 @@
 import React, { Component } from "react";
-import firebase from "firebase";
-import { Link } from "react-router-dom";
-import { Card, List, Spin } from "antd";
+import {List, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import EventCard from "./EventCard";
-import "antd/dist/antd.css";
-const { Meta } = Card;
 
 const antIcon = <LoadingOutlined style={{ fontSize: 50 }} spin />;
 class Homepage extends Component {

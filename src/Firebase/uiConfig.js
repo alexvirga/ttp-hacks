@@ -4,10 +4,10 @@ const uiConfig = {
     callbacks: {
     signInSuccessWithAuthResult: function(authResult, redirectUrl) {
     var user = authResult.user;
-    var credential = authResult.credential;
+    // var credential = authResult.credential;
     var isNewUser = authResult.additionalUserInfo.isNewUser;
-    var providerId = authResult.additionalUserInfo.providerId;
-    var operationType = authResult.operationType;
+    // var providerId = authResult.additionalUserInfo.providerId;
+    // var operationType = authResult.operationType;
     if (isNewUser) {
     firebase.firestore().collection("users").doc(user.uid).set({
       uid: user.uid,

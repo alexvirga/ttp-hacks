@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import firebase from "firebase";
 import { Redirect } from "react-router-dom";
-import { Card, List, Spin, Avatar } from "antd";
+import { Spin, Avatar } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import SubmissionCard from "./SubmissionCard";
-import "antd/dist/antd.css";
 import { GithubOutlined, LinkedinOutlined } from "@ant-design/icons";
 const antIcon = <LoadingOutlined style={{ fontSize: 50}} spin />;
 
@@ -86,7 +85,7 @@ class Dashboard extends Component {
               <h1> {this.state.user.name} </h1>
               <p> {this.state.user.bio} </p>
               <div className="profile-socials">
-                <a href={this.state.user.linkedin} target="_blank">
+                <a href={this.state.user.linkedin} target="_blank" rel="noopener noreferrer" >
                   <LinkedinOutlined
                     style={{
                       fontSize: "30px",
@@ -96,7 +95,7 @@ class Dashboard extends Component {
                   />
                 </a>
 
-                <a href={this.state.user.github} target="_blank">
+                <a href={this.state.user.github} target="_blank" rel="noopener noreferrer" >
                   <GithubOutlined
                     style={{ fontSize: "30px", color: "black", margin: "10px" }}
                   />

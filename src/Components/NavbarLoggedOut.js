@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ttp_logo from "../ttp_logo.png";
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout, Menu } from "antd";
 
-const { Header, Content, Footer } = Layout;
+const { Header } = Layout;
 class NavbarLoggedOut extends Component {
   
   render() {
@@ -14,7 +14,7 @@ class NavbarLoggedOut extends Component {
 
         <Layout  className="layout">
           <Header style={{background:"black"}}>
-          <div className="logo"><img className="ttp-logo-navbar" src={ttp_logo} /> </div>
+          <div className="logo"><img className="ttp-logo-navbar" src={ttp_logo} alt=""/> </div>
           <div className="Nav-links">
             <Menu style={{background: "rgba(255, 255, 255, 0)"}} mode="horizontal" defaultSelectedKeys={["1"]}>
               <Menu.Item >

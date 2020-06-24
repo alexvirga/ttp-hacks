@@ -1,12 +1,8 @@
 import React, { Component } from "react";
-import firebase from "firebase";
 import { Link } from "react-router-dom";
-import { Card, List, Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
-import "antd/dist/antd.css";
+import { Card, List } from "antd";
 const { Meta } = Card;
 
-const antIcon = <LoadingOutlined style={{ fontSize: 50 }} spin />;
 class EventCard extends Component {
   state = {};
 
@@ -17,7 +13,7 @@ class EventCard extends Component {
           <Card
             style={{ width: "320px", margin: "20px" }}
             cover={
-              <img src={this.props.event.img} style={{ height: "150px" }} />
+              <img src={this.props.event.img} alt="No img" style={{ height: "150px" }} />
             }
             actions={[
               <Link

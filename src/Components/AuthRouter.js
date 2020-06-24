@@ -8,6 +8,7 @@ import Homepage from "./Homepage";
 import Event from "./Event";
 import Dashboard from "./Dashboard";
 import NavbarLoggedOut from './NavbarLoggedOut'
+import "antd/dist/antd.css";
 
 
 firebase.initializeApp(firebaseConfig);

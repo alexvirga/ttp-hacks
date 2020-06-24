@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import firebase from "firebase";
-import { Link, Redirect } from "react-router-dom";
-
-import "antd/dist/antd.css";
+import { Link } from "react-router-dom";
 import { Button } from "antd";
 import SubmitForm from "./SubmitForm";
 import SubmissionCard from "./SubmissionCard";
@@ -91,7 +89,7 @@ class Event extends Component {
             marginTop: "20px",
           }}
         />
-        <a href={this.props.event.link} target="_blank">
+        <a href={this.props.event.link} target="_blank" rel="noopener noreferrer" >
           <h2 style={{ fontSize: "30px", color: "#1192d0", margin: "10px" }}>
             {" "}
             VIEW CHALLENGE{" "}
