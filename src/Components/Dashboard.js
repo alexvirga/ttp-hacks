@@ -107,12 +107,14 @@ class Dashboard extends Component {
                 </p>
               </div>
             </div>
-            <h1> Projects </h1>
-
+            <h1 className="event-header-submissions"> Projects </h1>
+                    {this.state.submissions.length > 0 ? 
             <SubmissionCard
-              data={this.state.submissions}
-              currentUID={this.props.user.uid}
-            />
+            data={this.state.submissions}
+            currentUID={this.props.user.uid}
+          /> : <h3> No Submissions :(</h3>
+                    }
+
           </div>
         )}
       </div>

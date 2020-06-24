@@ -9,10 +9,7 @@ class NavbarLoggedOut extends Component {
   render() {
     return (
       <div className="Navbar">
-{/*      
-        <div className="Nav-logo"> EXPO </div>
-        <div className="Nav-spacer"> </div>
-        <div className="Nav-links"> */}
+
        
 
         <Layout  className="layout">
@@ -24,7 +21,7 @@ class NavbarLoggedOut extends Component {
                 
                 <Link
                   to="/homepage"
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{ textDecoration: "none", color: "white", fontWeight:"800" }}
                 >
                   Events
                 </Link>
@@ -32,7 +29,7 @@ class NavbarLoggedOut extends Component {
 
               <Menu.Item >
                 <Link                   to="/"
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{ textDecoration: "none", color: "white", fontWeight:"800"  }}
                 >
                   Login/Sign Up
  

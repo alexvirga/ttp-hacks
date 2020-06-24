@@ -9,11 +9,6 @@ class Navbar extends Component {
   render() {
     return (
       <div className="Navbar">
-{/*      
-        <div className="Nav-logo"> EXPO </div>
-        <div className="Nav-spacer"> </div>
-        <div className="Nav-links"> */}
-       
 
         <Layout  className="layout">
           <Header style={{background:"black"}}>
