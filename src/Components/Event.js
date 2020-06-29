@@ -8,9 +8,12 @@ import SubmissionCard from "./SubmissionCard";
 class Event extends Component {
   state = {
     submissions: [],
+    uploading: false
+  
   };
 
   postUserSubmission = async (values) => {
+    this.setState({uploading: true})
     const files = values.user.image;
 
     const data = new FormData();
@@ -21,7 +24,7 @@ class Event extends Component {
       { method: "POST", body: data }
     );
     const file = await res.json();
-    this.setState({ img: file.secure_url });
+    this.setState({img: file.secure_url });
 
     this.postSubmissionFirebase(values, file);
   };
@@ -36,7 +39,9 @@ class Event extends Component {
       title: values.user.title,
       comment: values.user.comment,
       img: file.secure_url,
-    });
+    })
+    .then(() => this.setState({uploading: false}))
+    
   };
 
   componentDidMount() {
@@ -110,7 +115,7 @@ class Event extends Component {
           <h1 className="event-header-submissions"> Submissions </h1>
 
           {this.props.loggedin ? (
-            <SubmitForm postUserSubmission={this.postUserSubmission} />
+            <SubmitForm postUserSubmission={this.postUserSubmission} uploading={this.state.uploading} />
           ) : (
             <Button type="primary">
               <Link to={`/`}>Log in to Submit</Link>

@@ -6,8 +6,10 @@ import {
   Input,
   Modal,
   Upload,
+  message
 } from "antd";
 
+import { PoweroffOutlined } from '@ant-design/icons';
 import { UploadOutlined } from "@ant-design/icons";
 
 
@@ -29,14 +31,24 @@ const validateMessages = {
 class SubmitForm extends Component {
   state = {
     visible: false,
-    loading: false,
     validated: false,
     image: {},
   };
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.uploading !== this.props.uploading) {
+      this.updateLoading();
+    }
+  }
+
+  updateLoading = () => {
+    if (!this.props.uploading) {
+      this.setState({
+        visible: false})
+    }
+  }
+
   normFile = (e) => {
-    
-  
     this.setState({ image: e.file.originFileObj });
     return e.file.originFileObj;
   };
@@ -50,8 +62,8 @@ class SubmitForm extends Component {
   handleOk = (e) => {
     if (this.state.validated) {
       this.setState({
-        visible: false,
         validated: false,
+        visible: false
       });
     }
   };
@@ -67,7 +79,7 @@ class SubmitForm extends Component {
  
     this.setState({ validated: true });
     this.props.postUserSubmission(values);
-    this.handleOk();
+
   };
 
   onFinishFailed = (errorInfo) => {
@@ -80,7 +92,20 @@ class SubmitForm extends Component {
     this.setState({ image: e });
   };
 
+  handleChange(info) {
+    if (info.file) {
+      console.log(info.file);}
+    // }
+    // if (info.file.status === 'done') {
+    //   message.success(`${info.file.name} file uploaded successfully`);
+    // } else if (info.file.status === 'error') {
+    //   message.error(`${info.file.name} file upload failed.`);
+    // }
+  }
+
+
   render() {
+    
     return (
       <div>
         <div>
@@ -100,7 +125,7 @@ class SubmitForm extends Component {
                 key="submit"
                 type="primary"
                 htmlType="submit"
-                loading={this.state.loading}
+                loading={this.props.uploading}
                 onClick={this.handleOk}
               >
                 Submit
@@ -163,6 +188,7 @@ class SubmitForm extends Component {
                 name={["user", "image"]}
                 valuePropName="picture"
                 label="Image"
+                multiple="false"
                 getValueFromEvent={this.normFile}
                 rules={[
                   {
@@ -170,7 +196,7 @@ class SubmitForm extends Component {
                   },
                 ]}
               >
-                <Upload name="logo" action={this.uploadImg}>
+                <Upload  accept=".jpg, .png"name="logo" onChange={this.handleChange} action={this.uploadImg}>
                   <Button>
                     <UploadOutlined /> Click to upload
                   </Button>
