@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import firebase from "firebase";
 import { Redirect } from "react-router-dom";
-import { Spin, Avatar } from "antd";
+import { Spin, Avatar, Button } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import SubmissionCard from "./SubmissionCard";
-import { GithubOutlined, LinkedinOutlined } from "@ant-design/icons";
+import EditProfileModal from "./EditProfileModal"
+import { GithubOutlined, LinkedinOutlined, EditOutlined  } from "@ant-design/icons";
 const antIcon = <LoadingOutlined style={{ fontSize: 50}} spin />;
 
 
@@ -69,6 +70,41 @@ class Dashboard extends Component {
       });
   };
 
+
+
+  editUserProfile = async (values) => {
+    this.setState({uploading: true})
+    const files = values.user.photo;
+    console.log(values.user)
+
+    const data = new FormData();
+    data.append("file", files);
+    data.append("upload_preset", "project_img");
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/alexvirga/image/upload",
+      { method: "POST", body: data }
+    );
+    const file = await res.json();
+    this.setState({img: file.secure_url });
+    this.updateUserFirebase(values, file);
+ 
+  };
+
+  updateUserFirebase = (values, file) => {
+      firebase.firestore().collection("users").doc(this.props.user.uid).update({
+        bio: values.user.bio,
+        email: values.user.email,
+        github: values.user.github,
+        linkedin: values.user.linkedin,
+        name: values.user.name,
+        photo: this.state.img,
+        uid: this.props.user.uid
+    
+    })
+    .then(() => this.setState({uploading: false}))
+    
+  };
+
   render() {
     return (
       <div>
@@ -81,7 +117,12 @@ class Dashboard extends Component {
             <div className="profile-header">
               <Avatar size={190} src={this.state.user.photo} alt="google.com" />
             </div>
+<div>
+{this.props.user.uid === this.props.uid ? 
+<EditProfileModal  user={this.state.user} editUserProfile={this.editUserProfile} uploading={this.state.uploading} /> : null} </div>
+
             <div className="profile-user-info">
+              
               <h1> {this.state.user.name} </h1>
               <p> {this.state.user.bio} </p>
               <div className="profile-socials">

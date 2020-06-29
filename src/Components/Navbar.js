@@ -37,13 +37,13 @@ class Navbar extends Component {
                 </Link>
               </Menu.Item>
               <Menu.Item >
-                <Link 
+                <span
                 style={{ textDecoration: "none", color: "white", fontWeight:"800"  }} 
                 onClick={this.props.signOutUser}
                 >
                    Sign Out
                  
-                </Link>
+                </span>
               </Menu.Item>
               
             </Menu>
