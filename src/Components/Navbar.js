@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import ttp_logo from "../ttp_logo.png";
 import { Layout, Menu } from "antd";
+import exem from '../exem.png'
+
 const { Header } = Layout;
 class Navbar extends Component {
   
@@ -16,8 +18,11 @@ class Navbar extends Component {
 
         <Layout  className="layout">
           <Header style={{background:"black"}}>
-          <div className="logo"><img className="ttp-logo-navbar" src={ttp_logo}  alt=""/> </div>
+          <div className="logo"> 
+          <img className="logo-navbar" src={exem} alt="" />
+          </div>
           <div className="Nav-links">
+            
             <Menu style={{background: "rgba(255, 255, 255, 0)"}} mode="horizontal" defaultSelectedKeys={["1"]}>
               
               <Menu.Item >

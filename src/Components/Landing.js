@@ -3,7 +3,7 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { Redirect } from "react-router-dom";
 import uiConfig from "../Firebase/uiConfig";
 import React, { Component } from "react";
-import ttp_logo from '../ttp_logo.png'
+import exem from '../exem.png'
 
 class Landing extends Component {
   render() {
@@ -16,8 +16,8 @@ class Landing extends Component {
       <div className="Landing-container">
         <div className="Landing-background" />
         <div className="Auth-container">
-          <img className="ttp-logo" src={ttp_logo} alt="" />
-          <h1 className="landing-title"> EXPO</h1>
+          <img className="ttp-logo" src={exem} alt="" />
+ 
           <StyledFirebaseAuth
             className="Auth"
             uiConfig={uiConfig}
