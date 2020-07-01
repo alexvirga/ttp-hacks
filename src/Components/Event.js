@@ -117,7 +117,8 @@ class Event extends Component {
           {this.props.loggedin ? (
             <SubmitForm postUserSubmission={this.postUserSubmission} uploading={this.state.uploading} />
           ) : (
-            <Button type="primary">
+            <Button type="primary" style={{marginBottom: "20px",background: "black", color: "white",
+            borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}}>
               <Link to={`/`}>Log in to Submit</Link>
             </Button>
           )}
