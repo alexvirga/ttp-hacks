@@ -81,7 +81,7 @@ class EditSubmissionForm extends Component {
     return (
       <div>
         <div>
-          <Button type="primary" onClick={this.showModal}>
+          <Button type="primary" onClick={this.showModal} >
             Submit
           </Button>
           <Modal
@@ -89,7 +89,9 @@ class EditSubmissionForm extends Component {
             visible={this.props.visible}
             onCancel={this.handleCancel}
             footer={[
-              <Button key="back" onClick={this.handleCancel}>
+              <Button key="back" onClick={this.handleCancel}
+              style={{ background: "white", color: "black",
+              borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}}>
                 Return
               </Button>,
               <Button
@@ -99,6 +101,8 @@ class EditSubmissionForm extends Component {
                 htmlType="submit"
                 loading={this.state.loading}
                 onClick={this.handleOk}
+                style={{ background: "black", color: "white",
+                borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}}
               >
                 Submit
               </Button>,

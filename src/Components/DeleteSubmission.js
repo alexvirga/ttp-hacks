@@ -28,7 +28,9 @@ class DeleteSubmission extends Component {
             visible={this.props.visible}
             onCancel={this.handleCancel}
             footer={[
-              <Button key="back" onClick={this.handleCancel}>
+              <Button key="back" onClick={this.handleCancel}
+              style={{ background: "white", color: "black",
+              borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}}>
                 Return
               </Button>,
               <Button
@@ -37,6 +39,8 @@ class DeleteSubmission extends Component {
                 type="primary"
                 htmlType="submit"
                 onClick={this.handleOk}
+                style={{ background: "black", color: "white",
+                borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}}
               >
                 Delete Project
               </Button>,

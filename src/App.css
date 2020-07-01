@@ -59,13 +59,14 @@ p {
 /*--------- Landing Page --------- */
 
 .Landing-background {
-  background: url("https://images.squarespace-cdn.com/content/v1/57e01ab38419c2abeec91156/1479245821759-BA5W6VFNN1BS7R1WN68K/ke17ZwdGBToddI8pDm48kDITAuO7WvGYe_HtkNx7UXUUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKccSshEJlWdTt0omCZRbgujVtY4VXZAEc5nErFE5qOWR3S1FgW-KjVULYQWGVDwFXf/squid_hands_mobile.jpg?format=2500w");
-
+  background: url(landing-img.png);
+  background-repeat: no-repeat;
   display: flex;
   flex: 2;
-  background-size: cover;
-  background-attachment: inherit;
+  background-size: 500px;
   background-position: bottom;
+  background-attachment: inherit;
+
 }
 
 .Landing-container {
@@ -73,7 +74,13 @@ p {
   flex-direction: row;
   height: 100%;
   width: 100%;
-  background-color: #000000c4;
+  background-color: white;
+}
+
+.exempla-text {
+  color: #000000b0;
+  font-size: 50px;
+  font-weight: 200;
 }
 
 .ttp-logo {
@@ -85,6 +92,13 @@ p {
   color: white
 }
 
+
+.exempla-logo {
+  vertical-align: middle;
+  border-style: none;
+  height: 40px;
+
+}
 .Auth-container {
 
 
@@ -134,10 +148,10 @@ p {
   height: 100%;
   width: auto;
   margin: auto;
-  margin-left: 10px
+  margin-left: 10px;
+  padding: 15px
   
 }
-
 
 
 
@@ -148,7 +162,7 @@ p {
 
 .profile-header {
   margin-top: 20px;
-  background: linear-gradient(to bottom,#45d7ff 60%, white 0%); 
+  background: linear-gradient(to bottom,#8835fe 60%, white 0%); 
 }
 
 .profile-user-info{
@@ -171,7 +185,7 @@ p {
 
   height: 100%;
   float: left;
-  padding: 15px;
+
 }
 
 
@@ -195,8 +209,23 @@ p {
   justify-content: center;
 }
 
+.ant-layout {
 
 
+}
+
+.layout {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  padding-bottom: 4px 
+}
+
+
+/* buttons */
+
+.ant-btn .ant-btn-primary {
+  background: #000000;
+  border-color: #242729;
+  }
 
 
 
@@ -238,3 +267,4 @@ p {
     display: none
   }
 }
+

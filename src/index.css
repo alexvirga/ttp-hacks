@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+.ant-btn .ant-btn-primary {
+  background: #000000;
+  border-color: #242729;
+  }
+
 
 
 

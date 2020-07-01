@@ -100,8 +100,9 @@ class EditProfileModal extends Component {
     return (
       <div>
         <div>
-          <Button style={{marginTop: "20px"}}type="primary" onClick={this.showModal}>
-            Edit Profile
+          <Button style={{ marginTop: "20px", background: "black", color: "white",
+                borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}} onClick={this.showModal}>
+            EDIT PROFILE
           </Button>
           <Modal
             title="Edit Profile"
@@ -118,6 +119,8 @@ class EditProfileModal extends Component {
                 htmlType="submit"
                 loading={this.props.uploading}
                 onClick={this.handleOk}
+                style={{background: "black", color: "white",
+                borderColor: "#413f3f"}}
               >
                 Submit
               </Button>,
