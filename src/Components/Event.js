@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "antd";
 import SubmitForm from "./SubmitForm";
 import SubmissionCard from "./SubmissionCard";
+import AdminEventForm from "./AdminEventForm"
 
 class Event extends Component {
   state = {
@@ -41,6 +42,7 @@ class Event extends Component {
       img: file.secure_url,
     })
     .then(() => this.setState({uploading: false}))
+    .then(() => this.getAllSubmissions())
     
   };
 
@@ -126,6 +128,7 @@ class Event extends Component {
           <SubmissionCard
             data={this.state.submissions}
             currentUID={this.props.user.uid}
+            getAllSubmissions={this.getAllSubmissions}
           />
         </div>
       </div>

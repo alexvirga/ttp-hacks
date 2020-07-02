@@ -23,9 +23,41 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Exempla</title>
+
+    <style>
+.full-page-loader {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.full-page-loader > img {
+  animation: .9s infinite heartbeat;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(.1); }
+
+  50% { transform: scale(1.5); }
+
+  100% { transform: scale(0); }
+}
+    </style>
+
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="full-page-loader">
+      
+        <img width="100" src="/loading-dot.png" alt="" />
+      </div>
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

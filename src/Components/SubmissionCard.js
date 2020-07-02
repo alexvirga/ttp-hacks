@@ -15,7 +15,8 @@ class SubmissionCard extends Component {
     edit: "",
     submission: [],
     deleting: false,
-    delete: ""
+    delete: "",
+    loading: false
   };
 
   toggleEdit = (value) => {
@@ -24,9 +25,11 @@ class SubmissionCard extends Component {
 
   toggleDelete = (value) => {
     this.setState({deleting: value})
+    
   }
 
   editUserSubmission = (values, file) => {
+    this.setState({loading: true})
     let submission = this.state.submission
     firebase.firestore().collection("submissions").doc(submission.id).update({
       url: values.user.link,
@@ -34,15 +37,15 @@ class SubmissionCard extends Component {
       title: values.user.title,
       comment: values.user.comment,
 
-    });
+    })
+    .then(() => this.setState({loading: false}))
+    .then(() => this.props.getAllSubmissions())
   };
   
 
   deleteUserSubmission = () => {
     let submission = this.state.submission
-    firebase.firestore().collection("submissions").doc(submission.id).delete().then(function() {
-      console.log("Document successfully deleted!");
-    }).catch(function(error) {
+    firebase.firestore().collection("submissions").doc(submission.id).delete().then(() => this.props.getAllSubmissions()).catch(function(error) {
         console.error("Error removing document: ", error);
     });
   }
@@ -130,7 +133,7 @@ class SubmissionCard extends Component {
               )}
             />
             {this.state.editing ? 
-            <EditSubmissionForm toggleEdit={this.toggleEdit} editUserSubmission={this.editUserSubmission} visible={this.state.editing} subID={this.state.edit} submission={this.state.submission}/>
+            <EditSubmissionForm toggleEdit={this.toggleEdit} editUserSubmission={this.editUserSubmission} visible={this.state.editing} subID={this.state.edit} submission={this.state.submission} loading={this.state.loading}/>
              : null }
 
              {this.state.deleting ? 

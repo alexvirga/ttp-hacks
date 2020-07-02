@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import ttp_logo from "../ttp_logo.png";
 import { Layout, Menu } from "antd";
 import exem from '../exempla-logo-3.png'
 

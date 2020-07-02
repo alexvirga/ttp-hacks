@@ -7,15 +7,12 @@ import Navbar from "./Navbar";
 import Homepage from "./Homepage";
 import Event from "./Event";
 import Dashboard from "./Dashboard";
-import NavbarLoggedOut from './NavbarLoggedOut'
+import NavbarLoggedOut from "./NavbarLoggedOut";
 import "antd/dist/antd.css";
-
 
 firebase.initializeApp(firebaseConfig);
 
-
 class AuthRouter extends Component {
-
   state = {
     loggedin: null,
     loading: true,
@@ -23,8 +20,6 @@ class AuthRouter extends Component {
     eventsLoading: false,
     user: {},
   };
-
-
 
   componentDidMount() {
     this.getEvents();
@@ -54,21 +49,15 @@ class AuthRouter extends Component {
       });
   };
 
-  // componentDidMount(){
-  //   const user = firebase.auth().currentUser;
-  //   this.setState({user: user})
-  //   console.log(user)
-  // }
-
   signOutUser = () => {
-    this.setState({loggedin: false})
+    this.setState({ loggedin: false });
     firebase
       .auth()
       .signOut()
       .then(() => {
         this.closeOverlay();
-        
-        useHistory.push("/")
+
+        useHistory.push("/");
       })
       .catch(function (error) {});
   };
@@ -79,28 +68,23 @@ class AuthRouter extends Component {
       (eventObj) => eventObj.title === eventId
     );
     return foundEvent ? (
-      <Event event={foundEvent} user={this.state.user}  loggedin={this.state.loggedin}/>
+      <Event
+        event={foundEvent}
+        user={this.state.user}
+        loggedin={this.state.loggedin}
+      />
     ) : null;
   };
 
   renderUser = (routerProps) => {
-   
-    let uid = routerProps.match.params.id
-    let user = this.state.user
+    let uid = routerProps.match.params.id;
+    let user = this.state.user;
     return <Dashboard uid={uid} user={user} loggedin={this.state.loggedin} />;
   };
 
-
-
-
-    
-  // componentWillUnmount() {
-  //   this.unregisterAuthObserver();
-  // }
   render() {
     return (
       <div className="Home">
-     
         {this.state.loggedin ? (
           <Navbar
             loading={this.state.loading}
@@ -108,9 +92,9 @@ class AuthRouter extends Component {
             signOutUser={this.signOutUser}
             user={this.state.user}
           />
-        ) :           
-        <NavbarLoggedOut
-      />}
+        ) : (
+          <NavbarLoggedOut />
+        )}
         <Switch>
           <Route
             path="/"
@@ -135,7 +119,7 @@ class AuthRouter extends Component {
             )}
           />
 
-<Route
+          <Route
             path="/user/:id"
             exact
             render={

@@ -8,7 +8,7 @@ import exem from '../exempla-logo-3.png'
 class Landing extends Component {
   render() {
     return this.props.loading ? (
-      <div>Loading..</div>
+      null
     ) : this.props.loggedin ? (
       <Redirect to="homepage" />
     ) : (

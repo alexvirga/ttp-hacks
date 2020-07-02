@@ -27,7 +27,7 @@ const validateMessages = {
 class EditSubmissionForm extends Component {
   state = {
     visible: false,
-    loading: false,
+   
     validated: false,
     image: {},
   };
@@ -50,9 +50,22 @@ class EditSubmissionForm extends Component {
       this.setState({
         validated: false,
       });
-      this.props.toggleEdit(false)
+      
     }
   };
+
+  updateLoading = () => {
+    if (!this.props.loading) {
+      this.props.toggleEdit(
+        false)
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.loading !== this.props.loading) {
+      this.updateLoading();
+    }
+  }
 
   handleCancel = (e) => {
     console.log(e);
@@ -99,7 +112,7 @@ class EditSubmissionForm extends Component {
                 key="submit"
                 type="primary"
                 htmlType="submit"
-                loading={this.state.loading}
+                loading={this.props.loading}
                 onClick={this.handleOk}
                 style={{ background: "black", color: "white",
                 borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}}
