@@ -17,7 +17,11 @@ class NavbarLoggedOut extends Component {
         <Layout  className="layout" style={{background: "white"}}>
           <Header style={{background:"white"}}>
           <div className="logo"> 
+          
           <img className="logo-navbar" src={exem} alt="" />
+<p> exempla</p>
+           
+          
           </div>
        
           <div className="Nav-links">

@@ -17,9 +17,10 @@ class LandingTwo extends Component {
       <div className="landing-container-main">
           <div className="gradient-background">
         <div className="landing-header">
-          <h1>Build.</h1>
-          <h1 style={{ color: "#FFFF" }}>Showcase.</h1>
-          <h1>Get Hired.</h1>
+          <h1 className="build">Build.</h1>
+          <h1 className="showcase" style={{ color: "#FFFF" }}>Showcase.</h1>
+          <h1 className="hired">Get Hired.</h1>
+          
         </div>
         </div>
         <div className="subtitles-container">
@@ -35,7 +36,7 @@ class LandingTwo extends Component {
     <img className="candidate-img"src={candidate} alt=""/>
     <div className="candidate-info">
     <h1 className="candidate-info-header"> Job Seekers</h1>
-    <div >
+    <div className="list-animation">
     <h3> - Participate in coding challenges hosted by actively-hiring companies.</h3>
     <h3> - Flex your coding skills with our weekly portfolio-building challenges.</h3>
     <h3> - Receive updates on the status of your submission. No more follow-ups with recruiters.</h3>

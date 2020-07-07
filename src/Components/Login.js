@@ -13,8 +13,8 @@ class Login extends Component {
       <Redirect to="homepage" />
     ) : (
 
-      <div className="Landing-container">
-        <div className="Landing-background" />
+      <div className="login-container">
+        <div className="login-background" />
         <div className="Auth-container">
           <img className="exempla-logo" src={exem} alt="" />
           <h1 className="exempla-text"> exempla </h1>

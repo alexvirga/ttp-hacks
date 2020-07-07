@@ -20,6 +20,7 @@ class Navbar extends Component {
           <Header style={{background:"white"}}>
           <div className="logo"> 
           <img className="logo-navbar" src={exem} alt="" />
+          
           </div>
           <div className="Nav-links">
             
