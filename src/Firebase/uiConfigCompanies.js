@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-const uiConfig = {
+const uiConfigCompanies = {
     callbacks: {
     signInSuccessWithAuthResult: function(authResult, redirectUrl) {
     var user = authResult.user;
@@ -14,10 +14,21 @@ const uiConfig = {
       name: user.displayName,
       email: user.email,
       photo: user.photoURL,
-      role: "user"
-    })}
+      role: "company"
+    })
+    firebase.firestore().collection("companies").doc(user.uid).set({
+      uid: user.uid,
+      name: user.displayName,
+      email: user.email,
+      photo: user.photoURL,
+      website: "",
+      linkedin: "",
+    })
+  }
+
+
   
-    return true;
+    return true
     },
     signInFailure: function(error) {
     // Some unrecoverable error occurred during sign-in.
@@ -39,4 +50,4 @@ const uiConfig = {
     credentialHelper: 'none'
     }
 
-  export default uiConfig 
+  export default uiConfigCompanies

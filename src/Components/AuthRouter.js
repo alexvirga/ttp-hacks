@@ -2,15 +2,27 @@ import firebase from "firebase";
 import React, { Component } from "react";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import Login from "./Login";
+import EmployerLogin from "./Employer/EmployerLogin";
+import EmployerDashboard from "./Employer/EmployerDashboard";
+
+
 import LandingTwo from "./LandingTwo";
 
 import firebaseConfig from "../Firebase/firebaseConfig";
-import Navbar from "./Navbar";
+
 import Homepage from "./Homepage";
 import Event from "./Event";
-import Dashboard from "./Dashboard";
-import NavbarLoggedOut from "./NavbarLoggedOut";
+
+
 import "antd/dist/antd.css";
+import NavigationBar from "./NavigationBar";
+import UserProfile from "./UserProfile";
+
+import {List, Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+
+const antIcon = <LoadingOutlined style={{ fontSize: 50 }} spin />;
+
 
 firebase.initializeApp(firebaseConfig);
 
@@ -21,20 +33,39 @@ class AuthRouter extends Component {
     events: [],
     eventsLoading: false,
     user: {},
+    role: "",
+    userLoaded: false,
   };
 
   componentDidMount() {
     this.getEvents();
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.setState({ loggedin: true, loading: false, user: user }); // User signed in
+        
+        // this.setState({loggedin: true})
+        firebase
+          .firestore()
+          .collection("users")
+          .where("uid", "==", user.uid)
+          .get()
+          .then((querySnapshot) => {
+            this.setState({
+              userLoaded: true,
+              role: querySnapshot.docs[0].data().role,
+              loggedin: true,
+              loading: false,
+              user: querySnapshot.docs[0].data(),
+            });
+          });
       } else {
-        this.setState({ loggedin: false, loading: false }); // User NOT signed in.
+        this.setState({ userLoaded: true, loggedin: false, loading: false }); // User NOT signed in.
       }
     });
+    
   }
 
   getEvents = () => {
+  
     this.setState({ eventsLoading: true });
     firebase
       .firestore()
@@ -48,7 +79,7 @@ class AuthRouter extends Component {
         });
 
         this.setState({ events: data, eventsLoading: false });
-      });
+      })
   };
 
   signOutUser = () => {
@@ -81,35 +112,30 @@ class AuthRouter extends Component {
   renderUser = (routerProps) => {
     let uid = routerProps.match.params.id;
     let user = this.state.user;
-    return <Dashboard uid={uid} user={user} loggedin={this.state.loggedin} />;
+    return <UserProfile uid={uid} user={user} loggedin={this.state.loggedin} />;
   };
 
   render() {
     return (
+      this.state.userLoaded ?  
       <div className="Home">
-        {this.state.loggedin ? (
-          <Navbar
-            loading={this.state.loading}
-            loggedin={this.state.loggedin}
-            signOutUser={this.signOutUser}
-            user={this.state.user}
-          />
-        ) : (
-          <NavbarLoggedOut />
-        )}
+        {this.state.role === "company" ? null :
+<NavigationBar signOutUser={this.signOutUser} userLoaded={this.state.userLoaded} loggedin={this.state.loggedin} role={this.state.role} user={this.state.user} />}
+
         <Switch>
           <Route
             path="/"
             exact
             render={() => (
               <LandingTwo
+              userLoaded={this.state.userLoaded}
                 loading={this.state.loading}
                 loggedin={this.state.loggedin}
               />
             )}
           />
 
-<Route
+          <Route
             path="/login"
             exact
             render={() => (
@@ -117,6 +143,50 @@ class AuthRouter extends Component {
                 loading={this.state.loading}
                 loggedin={this.state.loggedin}
               />
+            )}
+          />
+
+          <Route
+            path="/employer/login"
+            exact
+            render={() => (
+              <EmployerLogin
+                loading={this.state.loading}
+                loggedin={this.state.loggedin}
+              />
+            )}
+          />
+
+          {/* <Route
+            path="/employer/"
+            exact
+            render={() => (
+              <EmployerDashboard
+                loading={this.state.loading}
+                loggedin={this.state.loggedin}
+                
+                user={this.state.user}
+              />
+            )}
+          /> */}
+
+          <Route
+            path="/dashboard"
+            exact
+            render={() => (
+              this.state.userLoaded ? 
+              this.state.role === "company" ? 
+              <EmployerDashboard
+                loading={this.state.loading}
+                loggedin={this.state.loggedin}
+                userLoaded={this.state.userLoaded}
+                user={this.state.user}
+              /> : 
+                <Redirect
+                    to="/homepage"
+                    loading={this.state.loading}
+                    loggedin={this.state.loggedin}
+                  /> : null
             )}
           />
 
@@ -135,34 +205,43 @@ class AuthRouter extends Component {
           <Route
             path="/user/:id"
             exact
-            render={
-              (routerProps) => this.renderUser(routerProps)
-            }
+            render={(routerProps) => this.renderUser(routerProps)}
           />
 
           <Route
             path="/event/:id"
-            render={
-              (routerProps) => this.renderEvent(routerProps)
-            }
+            render={(routerProps) => this.renderEvent(routerProps)}
           />
 
           <Route
             path="*"
             render={() =>
               this.state.loggedin ? (
+                this.state.role === "company" ? (
+                  <Redirect
+                    to="/dashboard"
+                    loading={this.state.loading}
+                    loggedin={this.state.loggedin}
+                  />
+                ) : (
+                  <Redirect
+                    to="/homepage"
+                    loading={this.state.loading}
+                    loggedin={this.state.loggedin}
+                  />
+                )
+              ) : (
                 <Redirect
-                  to="homepage"
+                  to="/"
                   loading={this.state.loading}
                   loggedin={this.state.loggedin}
                 />
-              ) : (
-                <Redirect to="/" />
               )
             }
           />
         </Switch>
-      </div>
+      </div> :           <Spin indicator={antIcon} />
+
     );
   }
 }

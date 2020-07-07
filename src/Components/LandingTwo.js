@@ -11,8 +11,8 @@ import company from '../company.jpeg'
 class LandingTwo extends Component {
 
   render() {
-    return this.props.loading ? null : this.props.loggedin ? (
-      <Redirect to="homepage" />
+    return !this.props.userLoaded ? null : this.props.loggedin ? (
+      <Redirect to="/dashboard" />
     ) : (
       <div className="landing-container-main">
           <div className="gradient-background">

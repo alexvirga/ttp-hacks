@@ -1,0 +1,143 @@
+import React, { Component } from "react";
+import { Layout, Menu } from 'antd';
+import { Redirect } from "react-router-dom";
+import { Spin, Avatar, Button } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+import SubmissionCard from "../SubmissionCard";
+import EditProfileModal from "../EditProfileModal";
+import EditEmployerProfile from './EditEmployerProfile'
+import { GithubOutlined, LinkedinOutlined } from "@ant-design/icons";
+import firebase from "firebase";
+
+
+const antIcon = <LoadingOutlined style={{ fontSize: 50 }} spin />;
+
+const { Header, Content, Footer, Sider } = Layout;
+
+
+
+class EmployerProfile extends Component {
+  state = {
+    visible: false,
+    validated: false,
+    image: {},
+  };
+
+  editCompanyProfile = async (values) => {
+    this.setState({ uploading: true });
+    const files = values.user.photo;
+    const data = new FormData();
+    data.append("file", files);
+    data.append("upload_preset", "project_img");
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/alexvirga/image/upload",
+      { method: "POST", body: data }
+    );
+    const file = await res.json();
+    this.setState({ img: file.secure_url });
+    this.updateCompanyFirebase(values, file);
+  };
+
+  updateCompanyFirebase = (values, file) => {
+    firebase
+      .firestore()
+      .collection("companies")
+      .doc(this.props.user.uid)
+      .update({
+        bio: values.user.bio,
+        email: values.user.email,
+        website: values.user.website,
+        linkedin: values.user.linkedin,
+        name: values.user.name,
+        photo: this.state.img,
+        uid: this.props.user.uid,
+      })
+      .then(() => this.setState({ uploading: false }));
+  };
+
+
+  render() {
+    return (
+        <div>
+          {this.props.userLoaded ? 
+             <div>
+             {this.props.loading ? (
+               <Spin indicator={antIcon} />
+             ) : 
+              (
+               <div>
+                 <div className="profile-header">
+                   <Avatar size={190} src={this.props.user.photo} alt="google.com" />
+                 </div>
+                 <div>
+                     <EditEmployerProfile
+                       user={this.props.user}
+                       editCompanyProfile={this.editCompanyProfile}
+                       uploading={this.props.uploading}
+                     />
+                   
+                 </div>
+     
+                 <div className="profile-user-info">
+                   <h1> {this.props.user.name} </h1>
+                   <h1> Bio: </h1>
+                   <p> {this.props.user.bio} </p>
+                   <div className="profile-socials">
+                     <a
+                       href={this.props.user.linkedin}
+                       target="_blank"
+                       rel="noopener noreferrer"
+                     >
+                       <LinkedinOutlined
+                         style={{
+                           fontSize: "30px",
+                           color: "#1192d0",
+                           margin: "10px",
+                         }}
+                       />
+                     </a>
+     
+                     <a
+                       href={this.props.user.github}
+                       target="_blank"
+                       rel="noopener noreferrer"
+                     >
+                       <GithubOutlined
+                         style={{ fontSize: "30px", color: "black", margin: "10px" }}
+                       />
+                     </a>
+                     <p>
+                   
+                       <b>{this.props.user.email} </b>{" "}
+                     </p>
+                   </div>
+                 </div>
+                 <h1 className="event-header-submissions">  </h1>
+               <br/> 
+               <span > hi </span>
+               <br/> 
+               <span > hi </span>
+               <br/> 
+               <span > hi </span>
+               <br/> 
+               <span > hi </span>
+               <br/> 
+               <span > hi </span>
+               <br/> 
+               <span > hi </span>
+               <br/> 
+               <span > hi </span>
+               <br/> 
+               <span > hi </span>
+               <br/> 
+               <span > hi </span>
+               <br/> 
+               <span > hi </span>
+               </div>
+             )}
+           </div>
+ : null }
+  </div>
+    )} }
+
+export default EmployerProfile;

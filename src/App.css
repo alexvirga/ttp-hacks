@@ -67,10 +67,21 @@ p {
   background: url(landing-img.png);
   background-repeat: no-repeat;
   display: flex;
-  flex: 2;
+  flex: 1;
   background-size: 500px;
   background-position: bottom;
   background-attachment: inherit;
+}
+
+.login-background-employer {
+  background: url(employerlogin.jpeg);
+  background-repeat: no-repeat;
+  display: flex;
+  flex: 1;
+ background-size: cover;
+  background-position: bottom;
+  background-attachment: inherit;
+      border-radius: 20px 300px;
 }
 
 .login-container {

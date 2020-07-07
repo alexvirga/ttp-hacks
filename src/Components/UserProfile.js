@@ -8,7 +8,7 @@ import EditProfileModal from "./EditProfileModal";
 import { GithubOutlined, LinkedinOutlined } from "@ant-design/icons";
 const antIcon = <LoadingOutlined style={{ fontSize: 50 }} spin />;
 
-class Dashboard extends Component {
+class UserProfile extends Component {
   state = {
     submissions: [],
     user: {},
@@ -172,4 +172,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default UserProfile;
