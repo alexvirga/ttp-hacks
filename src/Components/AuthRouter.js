@@ -1,7 +1,9 @@
 import firebase from "firebase";
 import React, { Component } from "react";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
-import Landing from "./Landing";
+import Login from "./Login";
+import LandingTwo from "./LandingTwo";
+
 import firebaseConfig from "../Firebase/firebaseConfig";
 import Navbar from "./Navbar";
 import Homepage from "./Homepage";
@@ -100,7 +102,18 @@ class AuthRouter extends Component {
             path="/"
             exact
             render={() => (
-              <Landing
+              <LandingTwo
+                loading={this.state.loading}
+                loggedin={this.state.loggedin}
+              />
+            )}
+          />
+
+<Route
+            path="/login"
+            exact
+            render={() => (
+              <Login
                 loading={this.state.loading}
                 loggedin={this.state.loggedin}
               />
@@ -124,11 +137,6 @@ class AuthRouter extends Component {
             exact
             render={
               (routerProps) => this.renderUser(routerProps)
-
-              // <Event
-              //   loading={this.state.loading}
-              //   loggedin={this.state.loggedin}
-              // />
             }
           />
 
@@ -136,11 +144,6 @@ class AuthRouter extends Component {
             path="/event/:id"
             render={
               (routerProps) => this.renderEvent(routerProps)
-
-              // <Event
-              //   loading={this.state.loading}
-              //   loggedin={this.state.loggedin}
-              // />
             }
           />
 

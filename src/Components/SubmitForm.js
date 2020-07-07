@@ -95,12 +95,6 @@ class SubmitForm extends Component {
   handleChange(info) {
     if (info.file) {
       console.log(info.file);}
-    // }
-    // if (info.file.status === 'done') {
-    //   message.success(`${info.file.name} file uploaded successfully`);
-    // } else if (info.file.status === 'error') {
-    //   message.error(`${info.file.name} file upload failed.`);
-    // }
   }
 
 
@@ -109,7 +103,8 @@ class SubmitForm extends Component {
     return (
       <div>
         <div>
-          <Button type="primary" onClick={this.showModal}>
+          <Button type="primary" onClick={this.showModal} style={{ background: "black", color: "white",
+                borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}}>
             Submit
           </Button>
           <Modal
@@ -117,7 +112,8 @@ class SubmitForm extends Component {
             visible={this.state.visible}
             onCancel={this.handleCancel}
             footer={[
-              <Button key="back" onClick={this.handleCancel}>
+              <Button key="back" onClick={this.handleCancel} style={{ marginTop: "20px", background: "white", color: "black",
+              borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}}>
                 Return
               </Button>,
               <Button
@@ -127,6 +123,8 @@ class SubmitForm extends Component {
                 htmlType="submit"
                 loading={this.props.uploading}
                 onClick={this.handleOk}
+                style={{ marginTop: "20px", background: "black", color: "white",
+                borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}}
               >
                 Submit
               </Button>,

@@ -22,18 +22,18 @@ class NavbarLoggedOut extends Component {
        
           <div className="Nav-links">
             <Menu style={{background: "white"}} mode="horizontal" defaultSelectedKeys={["1"]}>
-              <Menu.Item >
-                
-                <Link
-                  to="/homepage"
-                  style={{ textDecoration: "none", color: "black", fontWeight:"800" }}
+            <Menu.Item >
+                <Link                   to="/"
+                  style={{ textDecoration: "none", color: "black", fontWeight:"800"  }}
                 >
-                  Events
+                  Home
+ 
                 </Link>
               </Menu.Item>
 
+
               <Menu.Item >
-                <Link                   to="/"
+                <Link                   to="/login"
                   style={{ textDecoration: "none", color: "black", fontWeight:"800"  }}
                 >
                   Login/Sign Up

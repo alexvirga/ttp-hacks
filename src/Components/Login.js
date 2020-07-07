@@ -5,7 +5,7 @@ import uiConfig from "../Firebase/uiConfig";
 import React, { Component } from "react";
 import exem from '../exempla-logo-3.png'
 
-class Landing extends Component {
+class Login extends Component {
   render() {
     return this.props.loading ? (
       null
@@ -26,9 +26,10 @@ class Landing extends Component {
           />
         </div>
       </div>
+
       
     );
   }
 }
 
-export default Landing;
+export default Login;

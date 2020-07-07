@@ -18,14 +18,7 @@ const uiConfig = {
 
     
     })}
-    // if (isNewUser) {
-    //   firebase.firestore().collection("users").doc("LA").set
-
-
-    // }
-    // Do something with the returned AuthResult.
-    // Return type determines whether we continue the redirect automatically
-    // or whether we leave that to developer to handle.
+  
     return true;
     },
     signInFailure: function(error) {

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Button } from "antd";
 import SubmitForm from "./SubmitForm";
 import SubmissionCard from "./SubmissionCard";
-import AdminEventForm from "./AdminEventForm"
 
 class Event extends Component {
   state = {

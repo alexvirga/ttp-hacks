@@ -43,7 +43,13 @@ p {
   }
 }
 
-
+.line-break {
+  background-color: #f4f4f4;
+  border-color: #f4f4f4;
+  height: 3;
+  width: 100%;
+  margin: 30px 0px 0px 0px
+}
 
 
 /*--------- Homepage --------- */
@@ -111,6 +117,143 @@ p {
   max-width: 100%;
 }
 
+/*--------- Landing Page Two --------- */
+
+.landing-header {
+  text-align: left;
+  margin: 50px;
+}
+
+.landing-subtitle {
+  margin: 20px;
+  font-size: 35px;
+  font-weight: 700;
+ 
+ 
+}
+
+.landing-subtitle-subtext {
+  max-width: 600px;
+  font-size: 20px;
+  font-weight: 500;
+
+  
+}
+
+.subtitles-container {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: #fffefe;
+
+}
+.gradient-background {
+  background: linear-gradient(-45deg, #8835fe, #dd6def, #5e14e7, #b586f7);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 25%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.landing-header > h1 {
+  margin-bottom: 0px;
+  line-height: normal;
+  font-weight: 800;
+  font-size: 70px;
+}
+
+.landing-container-main {
+  display: inline-flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.landing-login-buttons {
+  margin: 20px;
+  width: fit-content;
+}
+
+.landing-candidate-info{
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+
+  
+}
+
+.candidate-img{
+max-width: 30%;
+max-height: 30vw;
+
+  border-radius: 0px 0px 100px 10px;
+  align-self: flex-start;
+}
+
+.candidate-info {
+  width: 70%;
+  padding: 0px 50px 0px 50px;
+  text-align: left;
+  
+
+}
+
+.candidate-info > h3 {
+font-size: 20px;
+}
+
+.candidate-info-header{
+  font-size: 30px;
+  font-weight: 700;
+}
+
+
+  /* ---------- Company  Landing ------- */
+  
+  .landing-company-info{
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+  
+  }
+  
+  .company-img{
+  max-width: 30%;
+  max-height: 30vw;
+  
+    border-radius: 0px 0px 10px 100px;
+    align-self: flex-start;
+  }
+  
+  .company-info {
+    width: 70%;
+    padding: 0px 50px 0px 50px;
+    text-align: left;
+    
+  
+  }
+  
+  .company-info > h3 {
+  font-size: 20px;
+  }
+  
+  .company-info-header{
+    font-size: 30px;
+    font-weight: 700;
+}
 /*---------- Navbar -----------*/
 
 .Nav-links {
@@ -154,9 +297,6 @@ p {
   display: inline-block;
   flex-direction: column;
   margin: 20px;
-}
-
-.profile-socials {
 }
 
 .edit-profile-button {
