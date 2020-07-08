@@ -11,7 +11,7 @@ import company from '../company.jpeg'
 class LandingTwo extends Component {
 
   render() {
-    return !this.props.userLoaded ? null : this.props.loggedin ? (
+    return  this.props.loggedin ? (
       <Redirect to="/dashboard" />
     ) : (
       <div className="landing-container-main">

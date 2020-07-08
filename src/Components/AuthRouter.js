@@ -83,7 +83,7 @@ class AuthRouter extends Component {
   };
 
   signOutUser = () => {
-    this.setState({ loggedin: false });
+    this.setState({ loggedin: false, role: null });
     firebase
       .auth()
       .signOut()
@@ -174,6 +174,7 @@ class AuthRouter extends Component {
             path="/dashboard"
             exact
             render={() => (
+          
               this.state.userLoaded ? 
               this.state.role === "company" ? 
               <EmployerDashboard
@@ -181,9 +182,10 @@ class AuthRouter extends Component {
                 loggedin={this.state.loggedin}
                 userLoaded={this.state.userLoaded}
                 user={this.state.user}
+                signOutUser={this.signOutUser}
               /> : 
                 <Redirect
-                    to="/homepage"
+                    to="/landing"
                     loading={this.state.loading}
                     loggedin={this.state.loggedin}
                   /> : null

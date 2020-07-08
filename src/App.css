@@ -412,6 +412,80 @@ font-size: 20px;
   height: 182px;
 }
 
+
+
+/* Company Profile */
+
+
+.company-profile-header {
+  margin-top: 20px;
+  background: linear-gradient(to bottom, #8835fe 60%, #eff2f5 0%);
+}
+
+.company-profile-info {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 800px;
+  display: inline-block;
+  flex-direction: column;
+  
+
+}
+
+.profile-socials-company{
+  background: white;
+  border: 1px solid #f3f3f3;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(154,160,185,.05), 0 5px 10px rgba(166,173,201,.2);
+  text-align: left;
+  padding: 10px 50px 0px 50px;
+  margin-top: 20px;
+
+}
+
+.company-profile-info > h1 {
+ font-size: 40px;
+
+}
+
+.company-bio-container{
+  width: 100%;
+  background-color: white;
+border: 1px solid #f3f3f3;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(154,160,185,.05), 0 5px 10px rgba(166,173,201,.2);
+  text-align: left;
+  padding: 10px 50px 0px 50px;
+}
+
+.profile-socials-company > h2{
+  font-size: 30px;
+ }
+
+.company-bio-container > h2{
+  font-size: 30px;
+ }
+
+.edit-profile-button {
+  margin-top: 20px;
+
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  float: left;
+
+}
+
+.logo > p {
+  font-weight: 300;
+    font-size: 25px;
+    margin-left: 20px;
+    letter-spacing: 3px; }
+
+
 @media only screen and (max-width: 600px) {
   .logo {
     display: none;

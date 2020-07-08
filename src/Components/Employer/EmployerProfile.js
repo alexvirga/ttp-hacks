@@ -66,7 +66,7 @@ class EmployerProfile extends Component {
              ) : 
               (
                <div>
-                 <div className="profile-header">
+                 <div className="company-profile-header">
                    <Avatar size={190} src={this.props.user.photo} alt="google.com" />
                  </div>
                  <div>
@@ -78,34 +78,27 @@ class EmployerProfile extends Component {
                    
                  </div>
      
-                 <div className="profile-user-info">
+                 <div className="company-profile-info">
                    <h1> {this.props.user.name} </h1>
-                   <h1> Bio: </h1>
+                   <div className="company-bio-container"> 
+                   <h2> Bio </h2>
                    <p> {this.props.user.bio} </p>
-                   <div className="profile-socials">
-                     <a
-                       href={this.props.user.linkedin}
-                       target="_blank"
-                       rel="noopener noreferrer"
-                     >
-                       <LinkedinOutlined
-                         style={{
-                           fontSize: "30px",
-                           color: "#1192d0",
-                           margin: "10px",
-                         }}
-                       />
-                     </a>
+                   </div>
+                   
+                   <div className="profile-socials-company">
+                     <h2>Contact: </h2>
+                     
+                     <p>
+                     <b>LinkedIn:</b> <a href={this.props.user.linkedin}> {this.props.user.linkedin} </a> 
+
+                     </p>
      
-                     <a
-                       href={this.props.user.github}
-                       target="_blank"
-                       rel="noopener noreferrer"
-                     >
-                       <GithubOutlined
-                         style={{ fontSize: "30px", color: "black", margin: "10px" }}
-                       />
-                     </a>
+                     <p>
+                     <b>Website:</b> <a href={this.props.user.website}> {this.props.user.website} </a> 
+                     </p>
+                      
+                      
+                    
                      <p>
                    
                        <b>{this.props.user.email} </b>{" "}
@@ -113,26 +106,7 @@ class EmployerProfile extends Component {
                    </div>
                  </div>
                  <h1 className="event-header-submissions">  </h1>
-               <br/> 
-               <span > hi </span>
-               <br/> 
-               <span > hi </span>
-               <br/> 
-               <span > hi </span>
-               <br/> 
-               <span > hi </span>
-               <br/> 
-               <span > hi </span>
-               <br/> 
-               <span > hi </span>
-               <br/> 
-               <span > hi </span>
-               <br/> 
-               <span > hi </span>
-               <br/> 
-               <span > hi </span>
-               <br/> 
-               <span > hi </span>
+
                </div>
              )}
            </div>

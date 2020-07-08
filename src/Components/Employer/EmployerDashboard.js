@@ -3,8 +3,10 @@ import { Layout, Menu } from 'antd';
 import EmployerProfile from './EmployerProfile'
 import CandidateOverview from './CandidateOverview'
 import firebase from "firebase";
+import { Redirect, Link } from "react-router-dom";
 
-import { Link } from "react-router-dom";
+
+
 import {
   AppstoreOutlined,
   BarChartOutlined,
@@ -70,8 +72,13 @@ class Dashboard extends Component {
 
     
     return (
+        
+        !this.props.loggedin ? <Redirect to="/" /> :
         <div>
-<Layout>
+        
+<Layout style={{
+        overflow: 'auto',
+        height: '100vh'}} >
     <Sider
       style={{
         overflow: 'auto',
@@ -104,8 +111,8 @@ class Dashboard extends Component {
         <Menu.Item key="7" icon={<TeamOutlined />}>
           nav 7
         </Menu.Item>
-        <Menu.Item key="8" icon={<ShopOutlined />}>
-          nav 8
+        <Menu.Item   onClick={this.props.signOutUser} key="8" icon={<ShopOutlined />}>
+          Sign Out
         </Menu.Item>
       </Menu>
     </Sider>
