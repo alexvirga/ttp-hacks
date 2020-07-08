@@ -18,8 +18,14 @@ class Navbar extends Component {
 
         <Layout  className="layout" style={{background: "white"}}>
           <Header style={{background:"white"}}>
-          <div className="logo"> 
-          <img className="logo-navbar" src={exem} alt="" />
+          <div className="logo">
+          <Link
+                  to="/"
+                  style={{ textDecoration: "none", color: "black", fontWeight:"800" }}
+                >
+                  <img className="logo-navbar" src={exem} alt="" /> 
+                </Link>
+         
           
           </div>
           <div className="Nav-links">

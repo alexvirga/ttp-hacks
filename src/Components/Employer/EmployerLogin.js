@@ -15,7 +15,7 @@ class Login extends Component {
         <div className="Auth-container">
           <img className="exempla-logo" src={exem} alt="" />
           <h1 className="exempla-text"> exempla </h1>
-          <p> Candidate Login/Sign up</p>
+          <p> Employer Login/Sign up</p>
 
           <StyledFirebaseAuth
             className="Auth"

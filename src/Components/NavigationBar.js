@@ -10,9 +10,16 @@ class NavigationBar extends Component {
       <div className="Navbar">
         <Layout className="layout" style={{ background: "white" }}>
           <Header style={{ background: "white" }}>
-            <div className="logo">
-              <img className="logo-navbar" src={exem} alt="" />
-            </div>
+           
+            <Link
+                  to="/"
+                  style={{ textDecoration: "none", color: "black", fontWeight:"800" }}
+                >
+                   <div className="logo">
+                  <img className="logo-navbar" src={exem} alt="" /> 
+                  </div>
+                </Link>
+           
             <div className="Nav-links">
               {this.props.loggedin ? (
                 this.props.role === "company" ? (

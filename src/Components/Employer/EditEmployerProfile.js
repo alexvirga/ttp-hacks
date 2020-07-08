@@ -33,13 +33,16 @@ class EditEmployerProfile extends Component {
     visible: false,
     validated: false,
     image: {},
+
   };
+
 
   componentDidUpdate(prevProps) {
     if (prevProps.uploading !== this.props.uploading) {
       this.updateLoading();
     }
   }
+
 
   updateLoading = () => {
     if (!this.props.uploading) {

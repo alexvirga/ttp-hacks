@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Layout, Menu } from 'antd';
 import EmployerProfile from './EmployerProfile'
 import CandidateOverview from './CandidateOverview'
+import PositionOverview from './PositionOverview'
 import firebase from "firebase";
 import { Redirect, Link } from "react-router-dom";
 
@@ -36,6 +37,12 @@ class Dashboard extends Component {
       this.getCompanyData()
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps !== this.props) {
+      this.getCompanyData();
+    }
+  }
+
   getCompanyData= () => {
     let uid = this.props.user.uid;
     this.setState({loading: true });
@@ -49,15 +56,13 @@ class Dashboard extends Component {
             loading: false,
             company: querySnapshot.docs[0].data(),
           });
-        
       });
-  
   }
 
   selectedTab = (tabname) => {
     const tabs = {
-        profile: <EmployerProfile userLoaded={this.props.userLoaded} user={this.state.company}/>,
-        overview: <CandidateOverview />
+        profile: <EmployerProfile getCompanyData={this.getCompanyData} userLoaded={this.props.userLoaded} user={this.state.company}/>,
+        overview: <PositionOverview company={this.state.company} />
         }
       let selectedTab = tabs[tabname]
       this.setState({currentTab: selectedTab})
@@ -119,10 +124,10 @@ class Dashboard extends Component {
     <Layout className="site-layout" style={{ marginLeft: 200 }}>
       <Content style={{ margin: '0px 0px 0px 0px', overflow: 'initial' }}>
         <div className="site-layout-background" style={{ padding: '0px', textAlign: 'center' }}>
-          {this.state.currentTab === null ? <EmployerProfile userLoaded={this.props.userLoaded} user={this.state.company} /> : this.state.currentTab}
+          {this.state.currentTab === null ? <EmployerProfile getCompanyData={this.getCompanyData} userLoaded={this.props.userLoaded} user={this.state.company} /> : this.state.currentTab}
           </div>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>Exempla.io</Footer>
+      
     </Layout>
   </Layout>
   </div>

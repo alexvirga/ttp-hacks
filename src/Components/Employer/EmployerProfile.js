@@ -21,7 +21,15 @@ class EmployerProfile extends Component {
     visible: false,
     validated: false,
     image: {},
+    uploading: false,
+    editing: false
   };
+
+ 
+
+  toggleEdit = (value) => {
+    this.setState({editing: value})
+  }
 
   editCompanyProfile = async (values) => {
     this.setState({ uploading: true });
@@ -52,7 +60,9 @@ class EmployerProfile extends Component {
         photo: this.state.img,
         uid: this.props.user.uid,
       })
-      .then(() => this.setState({ uploading: false }));
+      .then(() => this.props.getCompanyData())
+      .then(() => this.setState({ uploading: false }))
+      
   };
 
 
@@ -73,7 +83,9 @@ class EmployerProfile extends Component {
                      <EditEmployerProfile
                        user={this.props.user}
                        editCompanyProfile={this.editCompanyProfile}
-                       uploading={this.props.uploading}
+                       uploading={this.state.uploading}
+                       visible={this.state.editing}
+                       toggleEdit={this.toggleEdit}
                      />
                    
                  </div>
