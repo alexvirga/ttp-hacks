@@ -29,7 +29,8 @@ const { Header, Content, Footer, Sider } = Layout;
 class Dashboard extends Component {
   state = {
       currentTab: null,
-      company: {}
+      company: [],
+      positions: []
 
   };
 
@@ -43,21 +44,30 @@ class Dashboard extends Component {
     }
   }
 
-  getCompanyData= () => {
-    let uid = this.props.user.uid;
-    this.setState({loading: true });
-    firebase
-      .firestore()
-      .collection("companies")
-      .where("uid", "==", uid)
-      .get()
-      .then((querySnapshot) => {
-          this.setState({
-            loading: false,
-            company: querySnapshot.docs[0].data(),
-          });
-      });
-  }
+  
+
+
+
+
+
+getCompanyData = async () => {
+  let uid = this.props.user.uid;
+
+  const positions = await firebase.firestore().collectionGroup('positions').where("companyID", "==", uid).get();
+ const company  = await firebase.firestore().collection('companies').where("uid", "==", uid).get();
+const positionArr = []
+positions.forEach(position => {
+positionArr.push(position.data())
+})
+
+this.setState({positions: positionArr, company: company.docs[0].data()})
+
+
+ 
+
+
+
+}
 
   selectedTab = (tabname) => {
     const tabs = {
@@ -80,7 +90,6 @@ class Dashboard extends Component {
         
         !this.props.loggedin ? <Redirect to="/" /> :
         <div>
-        
 <Layout style={{
         overflow: 'auto',
         height: '100vh'}} >
