@@ -52,11 +52,9 @@ class PositionOverviewTable extends Component {
      
     return (
       <div>
-   
-             
-   
-   
+         
         
+         <Table columns={columns} dataSource={this.props.submissionTotals} onChange={this.onChange} />
       </div>
     );
   }
