@@ -60,8 +60,8 @@ const columns = [
     key: "action",
     render: (text, record) => (
       <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
+        <a>Approve</a>
+        <a>Reject</a>
       </Space>
     ),
   },
@@ -71,7 +71,16 @@ class CandidateTable extends Component {
   state = {};
 
   render() {
-    return <Table columns={columns} dataSource={this.props.data} />;
+    return (
+    <Table 
+    rowKey={"name"}
+    columns={columns} 
+    dataSource={this.props.data} 
+    expandRowByClick={true}
+    expandable={{
+        expandedRowRender: record => <p style={{ margin: 0 }}>{record.title}</p>,
+      }}/>
+      )
   }
 }
 

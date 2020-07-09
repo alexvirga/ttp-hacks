@@ -58,6 +58,7 @@ class CandidateOverview extends Component {
   };
 
   render() {
+    
     return (
     
 
@@ -66,10 +67,11 @@ class CandidateOverview extends Component {
       : 
       <div>
         {this.state.submissionArr.map((submissions) => {
+         
           return (
             <div>
           <h1> {submissions.title} {console.log(submissions.data)}</h1>
-          <CandidateTable data={submissions.data}/>
+          <CandidateTable data={submissions.data} />
         
       
 
