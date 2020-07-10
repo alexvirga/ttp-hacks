@@ -17,6 +17,8 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 
+
+
 const { Header, Content, Footer, Sider } = Layout;
 
 class Dashboard extends Component {
@@ -25,6 +27,7 @@ class Dashboard extends Component {
     company: [],
     positions: [],
     companyID: "",
+    submissions: []
   };
 
   componentDidMount() {
@@ -49,38 +52,97 @@ class Dashboard extends Component {
       .collection("companies")
       .where("uid", "==", uid)
       .get();
-    const positionArr = [];
-    positions.forEach((position) => {
-      const positionID = position.ref.id;
-      const positionData = position.data();
-      positionArr.push({ id: positionID, data: position.data() });
-    });
+    // const positionArr = [];
+    // let positionSubmissions = [];
+    // console.log(positions.docs)
+    const submissionsData = []
+   const  positionArr = []
+    for (let position of positions.docs){
+      let positionData = position.data()
+      positionArr.push(positionData)
+      let submissionsArr = []
+      const submissions = await firebase
+      .firestore()
+      .collection("candidate-submissions")
+      .where("positionID", "==", position.id)
+      .get()
+      submissions.forEach(sub => {
+       submissionsArr.push(sub.data())
+       
+      })
+      
+      
+      submissionsData.push({position: positionData, submissions: submissionsArr})
+    }
+
+    console.log(submissionsData)
     const companyData = company.docs[0].data();
     const companyID = company.docs[0].ref.id;
     this.setState({
-      positions: positionArr,
+      submissions: submissionsData,
+      
       company: companyData,
       companyID: companyID,
     });
+
+
+
+
+
+
+    // submissions.forEach((submission) => {
+      
+    //   positionSubmissions.push(submission.data());
+    // });
+    // const addSubmission = this.state.submissionArr.concat({
+    //   data: positionSubmissions,
+    //   title: position.data.title,
+    // });
+    // this.setState({ submissionArr: addSubmission });
+
+
+
+    //   console.log("position",position.data())
+    //   const positionID = position.ref.id;
+    //   const positionData = position.data();
+    //   // positionArr.push({ id: positionID, data: position.data() });
+    // });
   };
 
   updateCompanyProfile = async () => {
     let uid = this.props.user.uid;
     const company = await firebase
-    .firestore()
-    .collection("companies")
-    .where("uid", "==", uid)
-    .get();
-  const companyData = company.docs[0].data();
-  const companyID = company.docs[0].ref.id;
-  this.setState({
-    company: companyData,
-    companyID: companyID,
-  });
+      .firestore()
+      .collection("companies")
+      .where("uid", "==", uid)
+      .get();
+    const companyData = company.docs[0].data();
+    const companyID = company.docs[0].ref.id;
+    this.setState({
+      company: companyData,
+      companyID: companyID,
+    });
+  };
 
 
-  }
-  
+  // getsubmissions = async (position) => {
+  //   let positionSubmissions = [];
+  //   console.log(position);
+  //   const submissions = await firebase
+  //     .firestore()
+  //     .collection("candidate-submissions")
+  //     .where("companyID", "==", this.state.companyID)
+  //     .where("positionID", "==", position.id)
+  //     .get();
+  //   submissions.forEach((submission) => {
+  //     positionSubmissions.push(submission.data());
+  //   });
+  //   const addSubmission = this.state.submissionArr.concat({
+  //     data: positionSubmissions,
+  //     title: position.data.title,
+  //   });
+  //   this.setState({ submissionArr: addSubmission });
+  // };
 
   selectedTab = (tabname) => {
     const tabs = {
@@ -93,6 +155,7 @@ class Dashboard extends Component {
       ),
       positionOverview: (
         <PositionOverview
+        submissions={this.state.submissions}
           company={this.state.company}
           positions={this.state.positions}
           companyID={this.state.companyID}
@@ -100,6 +163,7 @@ class Dashboard extends Component {
       ),
       candidateOverview: (
         <CandidateOverview
+        submissions={this.state.submissions}
           company={this.state.company}
           positions={this.state.positions}
           companyID={this.state.companyID}
