@@ -109,6 +109,8 @@ class CandidateTable extends Component {
           <Descriptions.Item label="Project Title">{record.title}</Descriptions.Item>
           <Descriptions.Item label="User Notes">{record.notes}</Descriptions.Item>
           <Descriptions.Item label="Project Repository"><a href={record.github}>Link</a></Descriptions.Item>
+          <Descriptions.Item label="Project Link"><a href={record.link}>Link</a></Descriptions.Item>
+
         </Descriptions>
         </div>
   

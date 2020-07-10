@@ -17,8 +17,6 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 
-
-
 const { Header, Content, Footer, Sider } = Layout;
 
 class Dashboard extends Component {
@@ -27,17 +25,37 @@ class Dashboard extends Component {
     company: [],
     positions: [],
     companyID: "",
-    submissions: []
+    submissions: [],
+    submissionsLoaded: false,
+    challengesLoaded: false,
+    challengeData: []
   };
 
   componentDidMount() {
     this.getCompanyData();
+    this.getChallengeData()
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
       this.getCompanyData();
     }
+  }
+
+
+  getChallengeData = async () => {
+    let uid = this.props.user.uid;
+    const challengeArr = []
+    const challenges = await firebase
+    .firestore()
+    .collection("challenges")
+    .where("companyID", "==", uid)
+    .get();
+    challenges.docs.forEach(challenge => {
+challengeArr.push({id: challenge.id, data: challenge.data()})
+
+    })
+    this.setState({challengesLoaded: true, challengeData: challengeArr})
   }
 
   getCompanyData = async () => {
@@ -52,61 +70,37 @@ class Dashboard extends Component {
       .collection("companies")
       .where("uid", "==", uid)
       .get();
-    // const positionArr = [];
-    // let positionSubmissions = [];
-    // console.log(positions.docs)
-    const submissionsData = []
-   const  positionArr = []
-    for (let position of positions.docs){
-      let positionData = position.data()
-      positionArr.push(positionData)
-      let submissionsArr = []
-      const submissions = await firebase
-      .firestore()
-      .collection("candidate-submissions")
-      .where("positionID", "==", position.id)
-      .get()
-      submissions.forEach(sub => {
-       submissionsArr.push(sub.data())
-       
-      })
-      
-      
-      submissionsData.push({position: positionData, submissions: submissionsArr})
-    }
+    const submissionsData = [];
+    const positionArr = [];
+    for (let position of positions.docs) {
+      let positionData = position.data();
+      let positionID = position.id;
 
-    console.log(submissionsData)
+      positionData = { ...positionData, positionID };
+      positionArr.push(positionData);
+      let submissionsArr = [];
+      const submissions = await firebase
+        .firestore()
+        .collection("candidate-submissions")
+        .where("positionID", "==", position.id)
+        .get();
+      submissions.forEach((sub) => {
+        submissionsArr.push(sub.data());
+      });
+      submissionsData.push({
+        position: positionData,
+        submissions: submissionsArr,
+      });
+    }
     const companyData = company.docs[0].data();
     const companyID = company.docs[0].ref.id;
+
     this.setState({
       submissions: submissionsData,
-      
       company: companyData,
       companyID: companyID,
+      submissionsLoaded: true,
     });
-
-
-
-
-
-
-    // submissions.forEach((submission) => {
-      
-    //   positionSubmissions.push(submission.data());
-    // });
-    // const addSubmission = this.state.submissionArr.concat({
-    //   data: positionSubmissions,
-    //   title: position.data.title,
-    // });
-    // this.setState({ submissionArr: addSubmission });
-
-
-
-    //   console.log("position",position.data())
-    //   const positionID = position.ref.id;
-    //   const positionData = position.data();
-    //   // positionArr.push({ id: positionID, data: position.data() });
-    // });
   };
 
   updateCompanyProfile = async () => {
@@ -124,27 +118,7 @@ class Dashboard extends Component {
     });
   };
 
-
-  // getsubmissions = async (position) => {
-  //   let positionSubmissions = [];
-  //   console.log(position);
-  //   const submissions = await firebase
-  //     .firestore()
-  //     .collection("candidate-submissions")
-  //     .where("companyID", "==", this.state.companyID)
-  //     .where("positionID", "==", position.id)
-  //     .get();
-  //   submissions.forEach((submission) => {
-  //     positionSubmissions.push(submission.data());
-  //   });
-  //   const addSubmission = this.state.submissionArr.concat({
-  //     data: positionSubmissions,
-  //     title: position.data.title,
-  //   });
-  //   this.setState({ submissionArr: addSubmission });
-  // };
-
-  selectedTab = (tabname) => {
+  selectedTab = (tabname, data) => {
     const tabs = {
       profile: (
         <EmployerProfile
@@ -155,7 +129,7 @@ class Dashboard extends Component {
       ),
       positionOverview: (
         <PositionOverview
-        submissions={this.state.submissions}
+          submissions={this.state.submissions}
           company={this.state.company}
           positions={this.state.positions}
           companyID={this.state.companyID}
@@ -163,13 +137,22 @@ class Dashboard extends Component {
       ),
       candidateOverview: (
         <CandidateOverview
-        submissions={this.state.submissions}
+          submissions={this.state.submissions}
+          company={this.state.company}
+          positions={this.state.positions}
+          companyID={this.state.companyID}
+        />
+      ),
+      viewPosition: (
+        <PositionOverview
+          position={data}
           company={this.state.company}
           positions={this.state.positions}
           companyID={this.state.companyID}
         />
       ),
     };
+
     let selectedTab = tabs[tabname];
     this.setState({ currentTab: selectedTab });
   };
@@ -188,13 +171,19 @@ class Dashboard extends Component {
           <Sider
             style={{
               overflow: "auto",
-              height: "100vh",
               position: "fixed",
               left: 0,
+              height: "100vh",
             }}
           >
             <div className="logo" />
+
             <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+              <Menu.Item>
+                {" "}
+                <h1 style={{ color: "white" }}> Overview </h1>{" "}
+              </Menu.Item>
+
               <Menu.Item
                 onClick={() => this.selectedTab("profile")}
                 key="1"
@@ -202,13 +191,15 @@ class Dashboard extends Component {
               >
                 Profile
               </Menu.Item>
+
               <Menu.Item
-                onClick={() => this.selectedTab("positionOverview")}
+                // onClick={() => this.selectedTab("assessmentsOverview")}
                 key="2"
                 icon={<VideoCameraOutlined />}
               >
-                Position Overview
+                Assessment Overview
               </Menu.Item>
+
               <Menu.Item
                 onClick={() => this.selectedTab("candidateOverview")}
                 key="3"
@@ -216,25 +207,47 @@ class Dashboard extends Component {
               >
                 Candidate Overview
               </Menu.Item>
-              <Menu.Item key="4" icon={<BarChartOutlined />}>
-                nav 4
+
+
+
+
+              <Menu.Item>
+                <h1 style={{ color: "white" }}> Positions </h1>{" "}
               </Menu.Item>
-              <Menu.Item key="5" icon={<CloudOutlined />}>
-                nav 5
+
+              {!this.state.submissionsLoaded
+                ? null
+                : this.state.submissions.map((sub) => {
+                    return (
+                      <Menu.Item
+                        onClick={() => this.selectedTab("viewPosition", sub)}
+                        key={sub.position.positionID}
+                        icon={<ShopOutlined />}
+                      >
+                        {sub.position.title}
+                      </Menu.Item>
+                    );
+                  })}
+
+<Menu.Item>
+                <h1 style={{ color: "white" }}> Assessments </h1>{" "}
               </Menu.Item>
-              <Menu.Item key="6" icon={<AppstoreOutlined />}>
-                nav 6
-              </Menu.Item>
-              <Menu.Item key="7" icon={<TeamOutlined />}>
-                nav 7
-              </Menu.Item>
-              <Menu.Item
-                onClick={this.props.signOutUser}
-                key="8"
-                icon={<ShopOutlined />}
-              >
-                Sign Out
-              </Menu.Item>
+{!this.state.challengesLoaded
+                ? null
+                : this.state.challengeData.map((challenge) => {
+                  
+                    return (
+                      <Menu.Item
+                        // onClick={() => this.selectedTab("viewPosition", sub)}
+                        key={challenge.id}
+                        icon={<ShopOutlined />}
+                      >
+                        {challenge.data.title}
+                      </Menu.Item>
+                    );
+                  })}
+
+
             </Menu>
           </Sider>
           <Layout className="site-layout" style={{ marginLeft: 200 }}>

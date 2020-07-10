@@ -1,44 +1,70 @@
 import React, { Component } from "react";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Input} from "antd";
 import { Link } from "react-router-dom";
 import { Table } from "antd";
 import firebase from "firebase";
 import PositionOverviewTable from "./PositionOverviewTable";
 
 class PositionOverview extends Component {
-  state = {
-    positions: [],
-    positionChallenges: [],
-    submissionTotals: null,
-    loaded: false,
-  };
-
-  componentDidMount() {
-    this.handlePositions()
-  }
-
-  handlePositions = () => {
-      const positions = this.props.positions
-      positions.forEach(position => {
-          this.getsubmissions(position)
-      })
-      
-   
-
-
-
-
-  }
-
-  getsubmissions = async (position) => {
-    const submissions = await firebase.firestore().collection('candidate-submissions').where("companyID", "==", this.props.companyID).where("positionID", "==", position.id).get();
-
-
-  }
-
-
   render() {
-    return <div></div>;
+    return (
+      <div>
+        {console.log(this.props.position)}
+        <div className="position-info-container">
+          <span>
+            <p> Position Title </p>
+            <h1> {this.props.position.position.title} </h1>
+          </span>
+<div className="vertical-line"/>
+          <span style={{textAlign:"center"}}>
+            <p> Candidates </p>
+            <h1> {this.props.position.submissions.length} </h1>
+          </span>
+          <div className="vertical-line"/>
+
+          <span>
+            <p> Assessment </p>
+            <h1> {this.props.position.position.challengeName} </h1>
+          </span>
+        </div>
+
+        <div className="position-details-container">
+        <span>
+            <p> Position Status </p>
+            <h1> {this.props.position.position.positionOpen ? "Open" : "Closed"} </h1>
+          </span>
+
+          <span>
+            <p> Invite Only </p>
+            <h1> {this.props.position.position.inviteonly ? "True" : "False"} </h1>
+          </span>
+
+          <span>
+            <p> Days to Close </p>
+            <h1> 0 </h1>
+          </span>
+        
+        </div>
+
+        <div className="position-link-container">
+       
+
+
+          
+            <p> <b>Assessment Link </b> </p>
+            <Input style={{width: "30%", margin: "0px 20px"}}spellcheck="false" type="text" id="country" name="country" value={this.props.position.position.positionID} readonly/>
+        
+
+
+        </div>
+
+        <div className="position-candidate-container">
+        <PositionOverviewTable data={this.props.position.submissions} />
+
+        </div>
+
+      </div>
+    );
   }
 }
 
