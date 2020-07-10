@@ -39,7 +39,6 @@ class Dashboard extends Component {
 
   getCompanyData = async () => {
     let uid = this.props.user.uid;
-
     const positions = await firebase
       .firestore()
       .collectionGroup("positions")
@@ -56,7 +55,6 @@ class Dashboard extends Component {
       const positionData = position.data();
       positionArr.push({ id: positionID, data: position.data() });
     });
-
     const companyData = company.docs[0].data();
     const companyID = company.docs[0].ref.id;
     this.setState({
@@ -66,11 +64,29 @@ class Dashboard extends Component {
     });
   };
 
+  updateCompanyProfile = async () => {
+    let uid = this.props.user.uid;
+    const company = await firebase
+    .firestore()
+    .collection("companies")
+    .where("uid", "==", uid)
+    .get();
+  const companyData = company.docs[0].data();
+  const companyID = company.docs[0].ref.id;
+  this.setState({
+    company: companyData,
+    companyID: companyID,
+  });
+
+
+  }
+  
+
   selectedTab = (tabname) => {
     const tabs = {
       profile: (
         <EmployerProfile
-          getCompanyData={this.getCompanyData}
+          getCompanyData={this.updateCompanyProfile}
           userLoaded={this.props.userLoaded}
           user={this.state.company}
         />
