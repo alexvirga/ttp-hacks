@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Button } from "antd";
 import EmployerProfile from "./EmployerProfile";
 import CandidateOverview from "./CandidateOverview";
 import PositionOverview from "./PositionOverview";
 import firebase from "firebase";
 import { Redirect, Link } from "react-router-dom";
-
+import AssessmentDetail from "./AssessmentDetail";
+import AddAssessment from "./AddAssessment";
+import CreatePosition from "./CreatePosition"
 import {
   AppstoreOutlined,
   BarChartOutlined,
@@ -16,6 +18,7 @@ import {
   UploadOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
+import MenuItem from "antd/lib/menu/MenuItem";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -28,12 +31,12 @@ class Dashboard extends Component {
     submissions: [],
     submissionsLoaded: false,
     challengesLoaded: false,
-    challengeData: []
+    challengeData: [],
   };
 
   componentDidMount() {
     this.getCompanyData();
-    this.getChallengeData()
+    this.getChallengeData();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -42,21 +45,19 @@ class Dashboard extends Component {
     }
   }
 
-
   getChallengeData = async () => {
     let uid = this.props.user.uid;
-    const challengeArr = []
+    const challengeArr = [];
     const challenges = await firebase
-    .firestore()
-    .collection("challenges")
-    .where("companyID", "==", uid)
-    .get();
-    challenges.docs.forEach(challenge => {
-challengeArr.push({id: challenge.id, data: challenge.data()})
-
-    })
-    this.setState({challengesLoaded: true, challengeData: challengeArr})
-  }
+      .firestore()
+      .collection("challenges")
+      .where("companyID", "==", uid)
+      .get();
+    challenges.docs.forEach((challenge) => {
+      challengeArr.push({ id: challenge.id, data: challenge.data() });
+    });
+    this.setState({ challengesLoaded: true, challengeData: challengeArr });
+  };
 
   getCompanyData = async () => {
     let uid = this.props.user.uid;
@@ -101,6 +102,48 @@ challengeArr.push({id: challenge.id, data: challenge.data()})
       companyID: companyID,
       submissionsLoaded: true,
     });
+  };
+
+  createAssessment = (values) => {
+    console.log(values)
+    firebase.firestore().collection("challenges").doc().set({
+      title: values.assessment.title,
+      overview: values.assessment.overview,
+      link: values.assessment.link,
+      instructions: values.assessment.instructions,
+      deliverables: values.assessment.deliverables,
+      additionalInfo: values.assessment.additionalInfo,
+      companyID: this.state.companyID,
+      companyName: this.state.company.name,
+    })
+
+    
+  };
+
+  createPosition = (values) => {
+    firebase
+    .firestore()
+    .collection("companies")
+    .doc(this.state.companyID)
+    .collection("positions").doc().set({
+      companyID: this.state.companyID,
+
+
+    })
+
+    console.log(values)
+    firebase.firestore().collection("challenges").doc().set({
+      title: values.assessment.title,
+      overview: values.assessment.overview,
+      link: values.assessment.link,
+      instructions: values.assessment.instructions,
+      deliverables: values.assessment.deliverables,
+      additionalInfo: values.assessment.additionalInfo,
+      companyID: this.state.companyID,
+      companyName: this.state.company.name,
+    })
+
+    
   };
 
   updateCompanyProfile = async () => {
@@ -151,6 +194,11 @@ challengeArr.push({id: challenge.id, data: challenge.data()})
           companyID={this.state.companyID}
         />
       ),
+      viewAssessment: <AssessmentDetail data={data} />,
+
+      addAssessment: <AddAssessment createAssessment={this.createAssessment} />,
+
+      addPosition: <CreatePosition createPosition={this.createPosition} />,
     };
 
     let selectedTab = tabs[tabname];
@@ -207,11 +255,15 @@ challengeArr.push({id: challenge.id, data: challenge.data()})
               >
                 Candidate Overview
               </Menu.Item>
+              <Menu.Item
+                onClick={this.props.signOutUser}
+                key="8"
+                icon={<ShopOutlined />}
+              >
+                Sign Out
+              </Menu.Item>
 
-
-
-
-              <Menu.Item>
+              <Menu.Item style={{ marginTop: "30px" }}>
                 <h1 style={{ color: "white" }}> Positions </h1>{" "}
               </Menu.Item>
 
@@ -228,26 +280,49 @@ challengeArr.push({id: challenge.id, data: challenge.data()})
                       </Menu.Item>
                     );
                   })}
+              <Button
+                style={{
+                  borderRadius: "20px",
+                  background: "#8837fe00",
+                  color: "white",
+                }}
+                onClick={() => this.selectedTab("addPosition")}
+              >
+                {" "}
+                Add New Position{" "}
+              </Button>
 
-<Menu.Item>
+              <Menu.Item style={{ color: "white", marginTop: "30px" }}>
                 <h1 style={{ color: "white" }}> Assessments </h1>{" "}
               </Menu.Item>
-{!this.state.challengesLoaded
+
+              {!this.state.challengesLoaded
                 ? null
                 : this.state.challengeData.map((challenge) => {
-                  
                     return (
                       <Menu.Item
                         // onClick={() => this.selectedTab("viewPosition", sub)}
                         key={challenge.id}
                         icon={<ShopOutlined />}
+                        onClick={() =>
+                          this.selectedTab("viewAssessment", challenge)
+                        }
                       >
                         {challenge.data.title}
                       </Menu.Item>
                     );
                   })}
-
-
+              <Button
+                style={{
+                  borderRadius: "20px",
+                  background: "#8837fe00",
+                  color: "white",
+                }}
+                onClick={() => this.selectedTab("addAssessment")}
+              >
+                {" "}
+                Add New Assessment{" "}
+              </Button>
             </Menu>
           </Sider>
           <Layout className="site-layout" style={{ marginLeft: 200 }}>
