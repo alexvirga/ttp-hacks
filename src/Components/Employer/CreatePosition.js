@@ -6,11 +6,14 @@ import {
   Input,
   Modal,
   Upload,
-  message
+  message,
+  Select,
+  
 } from "antd";
 
 import { UploadOutlined } from "@ant-design/icons";
 
+const { Option } = Select;
 
 const layout = {
   labelCol: {
@@ -31,7 +34,8 @@ class CreatePosition extends Component {
   state = {
     visible: false,
     validated: false,
-    image: {},
+    challengeID: null,
+    challengeName: ""
   };
 
 //   componentDidUpdate(prevProps) {
@@ -61,9 +65,9 @@ class CreatePosition extends Component {
 
   onFinish = (values) => {
   
- 
+ console.log(values)
     this.setState({ validated: true });
-    this.props.createPosition(values);
+    this.props.createPosition(values, this.state.challengeID, this.state.challengeName);
 
   };
 
@@ -73,9 +77,8 @@ class CreatePosition extends Component {
   };
 
 
-  handleChange(info) {
-    if (info.file) {
-      console.log(info.file);}
+  handleChange = (value) => {
+    this.setState({challengeID: value.key, challengeName: value.label[1]}) // { value: "lucy", key: "lucy", label: "Lucy (101)" }
   }
 
 
@@ -87,7 +90,7 @@ class CreatePosition extends Component {
 
             <Form
               id="submit-form"
-              className="assessment-form"
+              className="position-form"
               {...layout}
               name="nest-messages"
               onFinish={this.onFinish}
@@ -97,21 +100,33 @@ class CreatePosition extends Component {
 
 
               <Form.Item
-                name={["assessment", "title"]}
-                label="Title"
+                name={["position", "title"]}
+                label="Position Title"
                 rules={[
                   {
                     required: true,
                   },
                 ]}
               >
-                <Input placeholder="Assessment Title" />
+                <Input placeholder="Position Title" />
+              </Form.Item>
+
+              <Form.Item
+                name={["position", "reqID"]}
+                label="Req ID"
+                rules={[
+                  {
+                    required: false,
+                  },
+                ]}
+              >
+                <Input placeholder="Requisition ID" />
               </Form.Item>
 
 
               <Form.Item
-                name={["assessment", "overview"]}
-                label="Overview"
+                name={["position", "inviteonly"]}
+                label="Invite Only"
                 rules={[
                   {
                     required: true,
@@ -119,13 +134,13 @@ class CreatePosition extends Component {
                   },
                 ]}
               >
-                 <Input.TextArea placeholder="Brief introduction to the assessment"/>
+                 <Input.TextArea placeholder="By selecting 'false', this coding assessment will be open to Exempla's candidate pool." />
               </Form.Item>
 
 
               <Form.Item
-                name={["assessment", "instructions"]}
-                label="Instructions"
+                name={["position", "positionOpen"]}
+                label="Position Open?"
                 rules={[
                   {
                     required: true,
@@ -133,39 +148,44 @@ class CreatePosition extends Component {
                   },
                 ]}
               >
-                <Input.TextArea placeholder="Detailed instructions on setup, context, and requirements" /> 
+                <Input.TextArea placeholder="Has the position been opened yet?" /> 
               </Form.Item>
 
               <Form.Item
-                name={["assessment", "deliverables"]}
-                label="Deliverables"
+                name={["position", "challenge"]}
+                label="Assign Assessment"
                 rules={[
                   {
                     required: true,
-                 
+                   
                   },
                 ]}
               >
-                <Input.TextArea placeholder="Required deliverables" /> 
+                <Select placeholder="Assessment Name"
+                labelInValue={true}
+                onChange={this.handleChange}
+                > 
+                {this.props.challengeData.map(challenge => {
+                    console.log(challenge)
+                    return(
+                    <Option key={challenge.id} value={challenge.id}> {challenge.data.title} </Option>)
+                })}
+                </Select>
               </Form.Item>
 
-
-              <Form.Item name={["assessment", "additionalInfo"]} label="Additional Info">
-                <Input.TextArea placeholder="Additional info" />
-              </Form.Item>
 
              
               <Form.Item
-                name={["assessment", "link"]}
-                label="Links"
+                name={["position", "link"]}
+                label="Position URL"
                 rules={[
                   {
-                    required: true,
+                    required: false,
                     type: "url",
                   },
                 ]}
               >
-                <Input placeholder="Additional links"/>
+                <Input placeholder="https://company/job"/>
               </Form.Item>
 
              

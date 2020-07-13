@@ -8,7 +8,7 @@ import PositionOverviewTable from "./PositionOverviewTable";
 class PositionOverview extends Component {
   render() {
     return (
-      <div>
+      <div className="position-overview-container">
         {console.log(this.props.position)}
         <div className="position-info-container">
           <span>
@@ -33,12 +33,12 @@ class PositionOverview extends Component {
             <p> Position Status </p>
             <h1> {this.props.position.position.positionOpen ? "Open" : "Closed"} </h1>
           </span>
-
+          <div className="vertical-line"/>
           <span>
             <p> Invite Only </p>
             <h1> {this.props.position.position.inviteonly ? "True" : "False"} </h1>
           </span>
-
+<div className="vertical-line"/>
           <span>
             <p> Days to Close </p>
             <h1> 0 </h1>
@@ -52,7 +52,7 @@ class PositionOverview extends Component {
 
           
             <p> <b>Assessment Link </b> </p>
-            <Input style={{width: "30%", margin: "0px 20px"}}spellcheck="false" type="text" id="country" name="country" value={this.props.position.position.positionID} readonly/>
+            <Input style={{width: "200px", margin: "0px 20px"}}spellcheck="false" type="text" id="country" name="country" value={this.props.position.position.positionID} readonly/>
         
 
 

@@ -10,21 +10,55 @@ const columns = [
       dataIndex: "name",
       key: "name",
       render: (text) => <a>{text}</a>,
+      ellipsis: false,
     },
     {
       title: "Title",
       dataIndex: "title",
       key: "title",
+      ellipsis: true,
+      
     },
     {
       title: "Github",
       dataIndex: "github",
       key: "github",
+      ellipsis: true,
+      render: (github) => {
+        if (github) {
+          return (
+            <a href={github}> Github Link </a>
+           
+         
+          );
+        } else  {
+          return (
+            <p> No Github Submitted </p>
+          );
+        }
+      }
+
+      
     },
     {
       title: "Project Link",
       dataIndex: "link",
       key: "link",
+      ellipsis: true,
+      render: (link) => {
+        if (link) {
+          return (
+            <a href={link}> Project Link </a>
+           
+         
+          );
+        } else  {
+          return (
+            <p> No Link Submitted </p>
+          );
+        }
+      }
+
     },
     {
       title: "Status",
@@ -76,7 +110,8 @@ const columns = [
       title: "Action",
       key: "action",
       render: (text, record) => (
-        <Space size="middle">
+        <Space size="small"
+        direction="vertical">
           <a>Approve</a>
           <a>Reject</a>
         </Space>
@@ -92,7 +127,7 @@ class PositionOverviewTable extends Component {
   render() {
      
     return (
-      <div>
+      <div className="position-overview-table">
          {console.log(this.props.data)}
          <Table 
     rowKey={"name"}

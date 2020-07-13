@@ -11,15 +11,23 @@ import {
 
 import { UploadOutlined } from "@ant-design/icons";
 
-
 const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
+    labelCol: {
+        offset: 0,
+      span: 8,
+    },
+    wrapperCol: {
+      span: 16,
+      offset: 0
+    },
+  };
+  const tailLayout = {
+    wrapperCol: {
+      offset: 0,
+      span: 0,
+    },
+  };
+
 const validateMessages = {
   required: '${label} is required!',
   types: {
@@ -85,11 +93,13 @@ class AddAssessment extends Component {
   render() {
     
     return (
-      <div>
-        <div>
+      <div className="create-assessment-container">
+        <div className="company-create-assessment-form">
+            <h1> Add New Assessment </h1>
 
           
             <Form
+        style={{width: "100%", maxWidth:"700px"}}
               id="submit-form"
               className="assessment-form"
               {...layout}
@@ -109,7 +119,7 @@ class AddAssessment extends Component {
                   },
                 ]}
               >
-                <Input placeholder="Assessment Title" />
+                <Input placeholder="Assessment Title" style={{borderRadius: "7px"}}/>
               </Form.Item>
 
 
@@ -123,7 +133,7 @@ class AddAssessment extends Component {
                   },
                 ]}
               >
-                 <Input.TextArea placeholder="Brief introduction to the assessment"/>
+                 <Input.TextArea placeholder="Brief introduction to the assessment" style={{borderRadius: "7px"}}/>
               </Form.Item>
 
 
@@ -137,7 +147,9 @@ class AddAssessment extends Component {
                   },
                 ]}
               >
-                <Input.TextArea placeholder="Detailed instructions on setup, context, and requirements" /> 
+                <Input.TextArea 
+                  style={{height: "100px", borderRadius: "7px"}}
+                placeholder="Detailed instructions on setup, context, and requirements" /> 
               </Form.Item>
 
               <Form.Item
@@ -150,12 +162,12 @@ class AddAssessment extends Component {
                   },
                 ]}
               >
-                <Input.TextArea placeholder="Required deliverables" /> 
+                <Input.TextArea placeholder="Required deliverables"  style={{height: "100px",borderRadius: "7px"}}/> 
               </Form.Item>
 
 
               <Form.Item name={["assessment", "additionalInfo"]} label="Additional Info">
-                <Input.TextArea placeholder="Additional info" />
+                <Input.TextArea placeholder="Additional info" style={{borderRadius: "7pxx"}} />
               </Form.Item>
 
              
@@ -169,11 +181,11 @@ class AddAssessment extends Component {
                   },
                 ]}
               >
-                <Input placeholder="Additional links"/>
+                <Input placeholder="Additional links" style={{borderRadius: "10px"}}/>
               </Form.Item>
 
              
-              <Form.Item >
+              <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
@@ -182,9 +194,7 @@ class AddAssessment extends Component {
               
 
 
-              {/* <Form.Item
-                wrapperCol={{ ...layout.wrapperCol, offset: 8 }}
-              ></Form.Item> */}
+
 
             </Form>
 

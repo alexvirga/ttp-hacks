@@ -489,6 +489,20 @@ border: 1px solid #f3f3f3;
 
 /* -------- Employer Dashboard ------ */
 
+
+.ant-menu-item > span{
+  color: #454343
+
+}
+
+
+
+.horizontal-line {
+  border-bottom: 1px solid lightgray;
+  width: 80%;
+  margin: 20px auto 20px auto;;
+}
+
 .ant-layout-sider-children {
   height: fit-content
 }
@@ -497,6 +511,93 @@ border: 1px solid #f3f3f3;
   height: 100vh
 }
 
+#components-layout-demo-responsive .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+.site-layout-sub-header-background {
+  background: #fff;
+}
+
+.site-layout-background {
+  background: none;
+}
+
+
+
+
+/* ----- Create Assessment Form ------- */
+
+
+.create-assessment-container{
+  display: flex;
+  justify-content: center;
+
+}
+.company-create-assessment-form{
+margin: 20px;
+width: 70%
+}
+
+.create-assessment-container .ant-form-item-label > label {
+  font-weight: 700;
+}
+
+.create-assessment-container > input {
+  border-radius: 10px;
+}
+
+.company-create-assessment-form > h1 {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+
+/* ------ Candidate Overview Table -----  */
+.candidate-table-container{
+max-width: 1200px;
+justify-content: center;
+display: inline-grid;
+}
+
+/* ------ Company Assessment View -----  */
+.company-assessment-details{
+
+}
+
+.company-assessment-info-container{
+  width: 75%;
+  background-color: white;
+border: 1px solid #f3f3f3;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(154,160,185,.05), 0 5px 10px rgba(166,173,201,.2);
+  text-align: left;
+  padding: 10px 50px 0px 50px;
+  display: inline-flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  flex-direction: column;
+}
+
+.company-assessment-info{
+  display: inline-flex;
+  flex-direction: column;
+  text-align: left;
+  align-items: center;
+}
+
+.company-assessment-details > h1 {
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.company-assessment-details .company-assessment-info-container > h2 {
+  font-size: 25px;
+  font-weight: 500;
+}
 
 
 
@@ -507,6 +608,18 @@ border: 1px solid #f3f3f3;
   align-self: center;
   
   border-left: 2px solid #cac8c8
+}
+.position-overview-table{
+max-width: 1200px;
+justify-content: center;
+display: inline-grid;
+}
+
+.position-overview-container{
+  background: none;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .position-info-container{
@@ -535,10 +648,19 @@ border: 1px solid #f3f3f3;
   
 }
 
+
+
 .position-info-container > span {
   margin: 0px 15px 0px 15px;
-  text-align: left;
+  text-align: center;
 }
+
+.position-details-container > span {
+  margin: 0px 15px 0px 15px;
+  text-align: center;
+  
+}
+
 
 .position-candidate-container{
  
@@ -546,7 +668,7 @@ border: 1px solid #f3f3f3;
 }
 
 .position-details-container{
-  width: 100%;
+  width: 70%;
   background-color: white;
 border: 1px solid #f3f3f3;
   border-radius: 10px;
@@ -556,6 +678,7 @@ border: 1px solid #f3f3f3;
   display: inline-flex;
   justify-content: space-around;
   margin-top: 20px;
+  text-align: center;
 }
  
 
@@ -569,7 +692,7 @@ border: 1px solid #f3f3f3;
   display: inline-flex;
   justify-content: center;
   margin-top: 20px;
-  padding: 10px 0px;
+  padding: 10px 10px;
   align-items: center
 }
 
@@ -595,3 +718,4 @@ margin-bottom: 0px;
     display: none;
   }
 }
+

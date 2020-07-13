@@ -104,8 +104,7 @@ class Dashboard extends Component {
     });
   };
 
-  createAssessment = (values) => {
-    console.log(values)
+  createAssessment = (values ) => {
     firebase.firestore().collection("challenges").doc().set({
       title: values.assessment.title,
       overview: values.assessment.overview,
@@ -120,27 +119,21 @@ class Dashboard extends Component {
     
   };
 
-  createPosition = (values) => {
+  createPosition = (values, challengeID, challengeName) => {
+    console.log(values)
     firebase
     .firestore()
     .collection("companies")
     .doc(this.state.companyID)
     .collection("positions").doc().set({
-      companyID: this.state.companyID,
-
-
-    })
-
-    console.log(values)
-    firebase.firestore().collection("challenges").doc().set({
-      title: values.assessment.title,
-      overview: values.assessment.overview,
-      link: values.assessment.link,
-      instructions: values.assessment.instructions,
-      deliverables: values.assessment.deliverables,
-      additionalInfo: values.assessment.additionalInfo,
-      companyID: this.state.companyID,
-      companyName: this.state.company.name,
+      title: values.position.title,
+      challengeID: challengeID,
+      challengeName: challengeName,
+      inviteonly: values.position.inviteonly,
+      positionOpen: values.position.positionOpen,
+      reqID: values.position.reqID,
+      link: values.position.link,
+      companyID: this.state.companyID
     })
 
     
@@ -198,7 +191,7 @@ class Dashboard extends Component {
 
       addAssessment: <AddAssessment createAssessment={this.createAssessment} />,
 
-      addPosition: <CreatePosition createPosition={this.createPosition} />,
+      addPosition: <CreatePosition createPosition={this.createPosition} challengeData={this.state.challengeData} />,
     };
 
     let selectedTab = tabs[tabname];
@@ -212,46 +205,46 @@ class Dashboard extends Component {
       <div>
         <Layout
           style={{
-            overflow: "auto",
+            overflow: "scroll",
             height: "100vh",
           }}
         >
           <Sider
             style={{
-              overflow: "auto",
+            borderRight: "1px solid lightgrey",
+              backgroundColor: "white",
               position: "fixed",
               left: 0,
               height: "100vh",
             }}
+  
           >
             <div className="logo" />
 
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+            <Menu 
+           
+            theme="dark" mode="inline" defaultSelectedKeys={["1"]} style={{backgroundColor: "white"}}>
               <Menu.Item>
                 {" "}
-                <h1 style={{ color: "white" }}> Overview </h1>{" "}
+                <h1 style={{ color: "black" }}> Overview </h1>{" "}
               </Menu.Item>
 
               <Menu.Item
                 onClick={() => this.selectedTab("profile")}
                 key="1"
                 icon={<UserOutlined />}
+            
               >
                 Profile
               </Menu.Item>
 
-              <Menu.Item
-                // onClick={() => this.selectedTab("assessmentsOverview")}
-                key="2"
-                icon={<VideoCameraOutlined />}
-              >
-                Assessment Overview
-              </Menu.Item>
+    
 
               <Menu.Item
                 onClick={() => this.selectedTab("candidateOverview")}
                 key="3"
                 icon={<VideoCameraOutlined />}
+
               >
                 Candidate Overview
               </Menu.Item>
@@ -259,19 +252,22 @@ class Dashboard extends Component {
                 onClick={this.props.signOutUser}
                 key="8"
                 icon={<ShopOutlined />}
+                style={{ color: "black" }}
               >
                 Sign Out
               </Menu.Item>
-
-              <Menu.Item style={{ marginTop: "30px" }}>
-                <h1 style={{ color: "white" }}> Positions </h1>{" "}
+              <div className="horizontal-line"> </div>
+              <Menu.Item style={{ }}>
+                <h1 style={{ color: "black" }}> Positions </h1>{" "}
               </Menu.Item>
+              
 
               {!this.state.submissionsLoaded
                 ? null
                 : this.state.submissions.map((sub) => {
                     return (
                       <Menu.Item
+                    
                         onClick={() => this.selectedTab("viewPosition", sub)}
                         key={sub.position.positionID}
                         icon={<ShopOutlined />}
@@ -284,16 +280,18 @@ class Dashboard extends Component {
                 style={{
                   borderRadius: "20px",
                   background: "#8837fe00",
-                  color: "white",
+                  color: "black",
+                  margin: "5px",
+                
                 }}
                 onClick={() => this.selectedTab("addPosition")}
               >
-                {" "}
                 Add New Position{" "}
               </Button>
+              <div className="horizontal-line"> </div>
 
-              <Menu.Item style={{ color: "white", marginTop: "30px" }}>
-                <h1 style={{ color: "white" }}> Assessments </h1>{" "}
+              <Menu.Item >
+                <h1 style={{ color: "black" }}> Assessments </h1>{" "}
               </Menu.Item>
 
               {!this.state.challengesLoaded
@@ -307,6 +305,7 @@ class Dashboard extends Component {
                         onClick={() =>
                           this.selectedTab("viewAssessment", challenge)
                         }
+                      
                       >
                         {challenge.data.title}
                       </Menu.Item>
@@ -316,12 +315,12 @@ class Dashboard extends Component {
                 style={{
                   borderRadius: "20px",
                   background: "#8837fe00",
-                  color: "white",
+                  color: "black",
+                  margin: "5px"
                 }}
                 onClick={() => this.selectedTab("addAssessment")}
               >
-                {" "}
-                Add New Assessment{" "}
+                Add New Assessment
               </Button>
             </Menu>
           </Sider>

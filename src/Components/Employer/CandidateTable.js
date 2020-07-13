@@ -12,22 +12,54 @@ const columns = [
     title: "Name",
     dataIndex: "name",
     key: "name",
+    ellipsis: false,
     render: (text) => <a>{text}</a>,
   },
   {
-    title: "Title",
+    title: "Submission Title",
     dataIndex: "title",
     key: "title",
+    ellipsis: true,
   },
   {
     title: "Github",
     dataIndex: "github",
     key: "github",
+    ellipsis: true,
+    render: (github) => {
+      if (github) {
+        return (
+          <a href={github}> Github Link </a>
+         
+       
+        );
+      } else  {
+        return (
+          <p> No Github Submitted </p>
+        );
+      }
+    }
+
   },
   {
     title: "Project Link",
     dataIndex: "link",
     key: "link",
+    ellipsis: true,
+    render: (link) => {
+      if (link) {
+        return (
+          <a href={link}> Project Link </a>
+         
+       
+        );
+      } else  {
+        return (
+          <p> No Link Submitted </p>
+        );
+      }
+    }
+
   },
   {
     title: "Status",
@@ -79,7 +111,8 @@ const columns = [
     title: "Action",
     key: "action",
     render: (text, record) => (
-      <Space size="middle">
+      <Space size="middle"
+      direction="vertical">
         <a>Approve</a>
         <a>Reject</a>
       </Space>
@@ -92,7 +125,9 @@ class CandidateTable extends Component {
 
   render() {
     return (
+      <div className="candidate-table-container">
     <Table 
+    
     rowKey={"name"}
     columns={columns} 
     dataSource={this.props.data} 
@@ -116,6 +151,7 @@ class CandidateTable extends Component {
   
   ,
       }}/>
+      </div>
       )
   }
 }
