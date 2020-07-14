@@ -9,7 +9,8 @@ const columns = [
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text) => <a>{text}</a>,
+      render: (text) => 
+      <a>{text}</a>,
       ellipsis: false,
     },
     {
@@ -27,6 +28,7 @@ const columns = [
       render: (github) => {
         if (github) {
           return (
+            
             <a href={github}> Github Link </a>
            
          
@@ -130,7 +132,7 @@ class PositionOverviewTable extends Component {
       <div className="position-overview-table">
          {console.log(this.props.data)}
          <Table 
-    rowKey={"name"}
+    rowKey={"title"}
     columns={columns} 
     dataSource={this.props.data} 
     expandRowByClick={true}

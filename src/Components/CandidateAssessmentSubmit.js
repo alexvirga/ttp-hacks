@@ -35,18 +35,18 @@ class CandidateAssessmentSubmit extends Component {
     image: {},
   };
 
-//   componentDidUpdate(prevProps) {
-//     if (prevProps.uploading !== this.props.uploading) {
-//       this.updateLoading();
-//     }
-//   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.uploading !== this.props.uploading) {
+      this.updateLoading();
+    }
+  }
 
-//   updateLoading = () => {
-//     if (!this.props.uploading) {
-//       this.setState({
-//         visible: false})
-//     }
-//   }
+  updateLoading = () => {
+    if (!this.props.uploading) {
+      this.setState({
+        visible: false})
+    }
+  }
 
   normFile = (e) => {
     this.setState({ image: e.file.originFileObj });
@@ -121,7 +121,7 @@ class CandidateAssessmentSubmit extends Component {
                 key="submit"
                 type="primary"
                 htmlType="submit"
-                // loading={this.props.uploading}
+                loading={this.props.uploading}
                 onClick={this.handleOk}
                 style={{ marginTop: "20px", background: "black", color: "white",
                 borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}}

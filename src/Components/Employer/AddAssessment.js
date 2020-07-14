@@ -11,16 +11,8 @@ import {
 
 import { UploadOutlined } from "@ant-design/icons";
 
-const layout = {
-    labelCol: {
-        offset: 0,
-      span: 8,
-    },
-    wrapperCol: {
-      span: 16,
-      offset: 0
-    },
-  };
+
+
   const tailLayout = {
     wrapperCol: {
       offset: 0,
@@ -94,15 +86,16 @@ class AddAssessment extends Component {
     
     return (
       <div className="create-assessment-container">
+           <h1> Add New Assessment </h1>
         <div className="company-create-assessment-form">
-            <h1> Add New Assessment </h1>
+         
 
           
             <Form
         style={{width: "100%", maxWidth:"700px"}}
               id="submit-form"
               className="assessment-form"
-              {...layout}
+              layout={"vertical"}
               name="nest-messages"
               onFinish={this.onFinish}
               validateMessages={validateMessages}
@@ -167,7 +160,7 @@ class AddAssessment extends Component {
 
 
               <Form.Item name={["assessment", "additionalInfo"]} label="Additional Info">
-                <Input.TextArea placeholder="Additional info" style={{borderRadius: "7pxx"}} />
+                <Input.TextArea placeholder="Additional info" style={{borderRadius: "7px"}} />
               </Form.Item>
 
              

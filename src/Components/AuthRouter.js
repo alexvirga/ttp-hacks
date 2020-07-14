@@ -250,7 +250,7 @@ return <UserViewAssessment user={this.state.user} positionID={positionID} challe
                   />
                 ) : (
                   <Redirect
-                    to="/homepage"
+                  to={`/user/${this.state.user.uid}`}
                     loading={this.state.loading}
                     loggedin={this.state.loggedin}
                   />

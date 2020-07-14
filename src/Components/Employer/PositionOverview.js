@@ -52,7 +52,8 @@ class PositionOverview extends Component {
 
           
             <p> <b>Assessment Link </b> </p>
-            <Input style={{width: "200px", margin: "0px 20px"}}spellcheck="false" type="text" id="country" name="country" value={this.props.position.position.positionID} readonly/>
+            <Input style={{width: "200px", margin: "0px 20px"}}spellcheck="false" type="text" id="country" name="country" value={`http://localhost:3000/${this.props.position.position.positionID}/${this.props.position.position.challengeID}`}readonly/>
+           
         
 
 

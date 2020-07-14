@@ -14,39 +14,14 @@ const { Header, Content, Footer, Sider } = Layout;
 class UserViewAssessment extends Component {
 
     state = {
-        challenge: []
+        challenge: [],
+        uploading: false
     }
     componentDidMount() {
         this.getData()
         console.log(this.props.user)
-    }
-
-    postCandidateSubmission = (values) => {
-        console.log(values)
-       
-
-        firebase.firestore().collection("candidate-submissions").doc().set({
-            challengeID: this.props.challenge,
-            challengeName: this.state.challenge.title,
-            companyID: this.state.challenge.companyID,
-            github: values.candidate.github,
-            link: values.candidate.link,
-            linkedIn: this.props.user.linkedin,
-            name: this.props.user.name,
-            notes: values.candidate.notes,
-            positionID: this.props.positionID,
-            status: "submitted",
-            title: values.candidate.title,
-            uid: this.props.user.uid
-
         
-          })
-          .then(() => this.setState({uploading: false}))
-         
-          
-        };
-    
- 
+    }
 
     getData = async ()  => {
         // console.log(this.props.company)
@@ -67,6 +42,37 @@ class UserViewAssessment extends Component {
         this.setState({challenge: challenge.data()})
         console.log(challenge.data())
     }
+
+
+    postCandidateSubmission = (values) => {
+        console.log(values)
+        this.setState({uploading: true})
+       
+
+        firebase.firestore().collection("candidate-submissions").doc().set({
+            challengeID: this.props.challenge,
+            challengeName: this.state.challenge.title,
+            companyID: this.state.challenge.companyID,
+            github: values.candidate.github,
+            link: values.candidate.link,
+            linkedIn: this.props.user.linkedin,
+            name: this.props.user.name,
+            notes: values.candidate.notes,
+            positionID: this.props.positionID,
+            status: "submitted",
+            title: values.candidate.title,
+            uid: this.props.user.uid,
+            email: values.candidate.email
+
+        
+          })
+          .then(() => this.setState({uploading: false}))
+         
+          
+        };
+    
+ 
+
 
   render() {
     return (
@@ -101,7 +107,7 @@ class UserViewAssessment extends Component {
  
         </div>
         </div>
-        {this.props.loggedin ? <CandidateAssessmentSubmit postCandidateSubmission={this.postCandidateSubmission} /> : 
+        {this.props.loggedin ? <CandidateAssessmentSubmit postCandidateSubmission={this.postCandidateSubmission} uploading={this.state.uploading} /> : 
                     <Button type="primary" style={{marginBottom: "20px",background: "black", color: "white",
                     borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}}>
                       <Link to={`/login`}>Log in/Sign up to Submit</Link>

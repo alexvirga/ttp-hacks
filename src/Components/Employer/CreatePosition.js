@@ -8,21 +8,14 @@ import {
   Upload,
   message,
   Select,
-  
+  Tooltip,
 } from "antd";
 
-import { UploadOutlined } from "@ant-design/icons";
 
+import { QuestionCircleOutlined } from '@ant-design/icons';
 const { Option } = Select;
 
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
+
 const validateMessages = {
   required: '${label} is required!',
   types: {
@@ -64,10 +57,10 @@ class CreatePosition extends Component {
  
 
   onFinish = (values) => {
-  
+  console.log(values)
 
-    this.setState({ validated: true });
-    this.props.createPosition(values, this.state.challengeID, this.state.challengeName);
+    // this.setState({ validated: true });
+    // this.props.createPosition(values, this.state.challengeID, this.state.challengeName);
 
   };
 
@@ -85,13 +78,17 @@ class CreatePosition extends Component {
   render() {
     
     return (
-      <div>
-        <div>
+      <div className="create-position-container">
+                   <h1> Create Position </h1>
+
+        <div className="company-create-position-form">
 
             <Form
+            layout={"vertical"}
+             style={{width: "100%", maxWidth:"700px"}}
               id="submit-form"
               className="position-form"
-              {...layout}
+            
               name="nest-messages"
               onFinish={this.onFinish}
               validateMessages={validateMessages}
@@ -108,7 +105,7 @@ class CreatePosition extends Component {
                   },
                 ]}
               >
-                <Input placeholder="Position Title" />
+                <Input placeholder="Position Title"  style={{borderRadius: "7px"}} />
               </Form.Item>
 
               <Form.Item
@@ -120,13 +117,20 @@ class CreatePosition extends Component {
                   },
                 ]}
               >
-                <Input placeholder="Requisition ID" />
+                <Input placeholder="Requisition ID"  style={{borderRadius: "7px"}} />
               </Form.Item>
 
 
               <Form.Item
-                name={["position", "inviteonly"]}
-                label="Invite Only"
+              style={{borderRadius: "7px"}}
+                name={["position", "outsideSubmissions"]}
+                label={
+                  <span>
+                    Allow outside submissions? &nbsp;
+                    <Tooltip title={<span><p>Do you want to open this position/assessment to Exempla's existing candidate pool?</p> <p>By selecting yes, your listing will be displayed and open to submissions by our candidate pool.   </p></span>}>
+                      <QuestionCircleOutlined />
+                    </Tooltip>
+                  </span>}
                 rules={[
                   {
                     required: true,
@@ -134,22 +138,15 @@ class CreatePosition extends Component {
                   },
                 ]}
               >
-                 <Input.TextArea placeholder="By selecting 'false', this coding assessment will be open to Exempla's candidate pool." />
-              </Form.Item>
+                          <Select placeholder="No, this position/assessment is invite only" style={{borderRadius: "7px"}}>
+                          <Select.Option value="false">No, this position/assessment is invite only. </Select.Option>
+                          <Select.Option value="true">Yes, allow other user's to view and submit assessments. </Select.Option>
+        
 
-
-              <Form.Item
-                name={["position", "positionOpen"]}
-                label="Position Open?"
-                rules={[
-                  {
-                    required: true,
+          </Select>
                    
-                  },
-                ]}
-              >
-                <Input.TextArea placeholder="Has the position been opened yet?" /> 
               </Form.Item>
+
 
               <Form.Item
                 name={["position", "challenge"]}
@@ -164,6 +161,7 @@ class CreatePosition extends Component {
                 <Select placeholder="Assessment Name"
                 labelInValue={true}
                 onChange={this.handleChange}
+                style={{borderRadius: "7px"}}
                 > 
                 {this.props.challengeData.map(challenge => {
                   
@@ -185,7 +183,8 @@ class CreatePosition extends Component {
                   },
                 ]}
               >
-                <Input placeholder="https://company/job"/>
+                <Input placeholder="https://company/job"
+                 style={{borderRadius: "7px"}}/>
               </Form.Item>
 
              

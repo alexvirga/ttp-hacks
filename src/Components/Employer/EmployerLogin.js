@@ -8,7 +8,7 @@ import exem from "../../exempla-logo-3.png";
 class Login extends Component {
   render() {
     return this.props.loading ? null : this.props.loggedin ? (
-      <Redirect to="/employer/dashboard" />
+      <Redirect to="/dashboard" />
     ) : (
       <div className="login-container">
         <div className="login-background-employer" />
