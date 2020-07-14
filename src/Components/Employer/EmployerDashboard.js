@@ -119,13 +119,17 @@ class Dashboard extends Component {
     
   };
 
+  addId = (id) => {
+    
+  }
+
+
   createPosition = (values, challengeID, challengeName) => {
-    console.log(values)
     firebase
     .firestore()
     .collection("companies")
     .doc(this.state.companyID)
-    .collection("positions").doc().set({
+    .collection("positions").add({
       title: values.position.title,
       challengeID: challengeID,
       challengeName: challengeName,
@@ -133,11 +137,12 @@ class Dashboard extends Component {
       positionOpen: values.position.positionOpen,
       reqID: values.position.reqID,
       link: values.position.link,
-      companyID: this.state.companyID
+      companyID: this.state.companyID,
     })
-
-    
+     
+      
   };
+
 
   updateCompanyProfile = async () => {
     let uid = this.props.user.uid;
@@ -216,6 +221,7 @@ class Dashboard extends Component {
               position: "fixed",
               left: 0,
               height: "100vh",
+              overflow: "scroll"
             }}
   
           >

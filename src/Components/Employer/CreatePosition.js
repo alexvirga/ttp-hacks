@@ -65,7 +65,7 @@ class CreatePosition extends Component {
 
   onFinish = (values) => {
   
- console.log(values)
+
     this.setState({ validated: true });
     this.props.createPosition(values, this.state.challengeID, this.state.challengeName);
 
@@ -166,7 +166,7 @@ class CreatePosition extends Component {
                 onChange={this.handleChange}
                 > 
                 {this.props.challengeData.map(challenge => {
-                    console.log(challenge)
+                  
                     return(
                     <Option key={challenge.id} value={challenge.id}> {challenge.data.title} </Option>)
                 })}

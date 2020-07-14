@@ -4,7 +4,7 @@ import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import Login from "./Login";
 import EmployerLogin from "./Employer/EmployerLogin";
 import EmployerDashboard from "./Employer/EmployerDashboard";
-
+import UserViewAssessment from "./UserViewAssessment"
 
 import LandingTwo from "./LandingTwo";
 
@@ -115,6 +115,18 @@ class AuthRouter extends Component {
     return <UserProfile uid={uid} user={user} loggedin={this.state.loggedin} />;
   };
 
+
+  renderPosition =  (routerProps) => {
+    let positionID = routerProps.match.params.position;
+
+    let challenge = routerProps.match.params.challenge
+   
+  
+   
+return <UserViewAssessment user={this.state.user} positionID={positionID} challenge={challenge} loggedin={this.state.loggedin} />
+   
+  };
+
   render() {
     return (
       this.state.userLoaded ?  
@@ -208,6 +220,17 @@ class AuthRouter extends Component {
             path="/user/:id"
             exact
             render={(routerProps) => this.renderUser(routerProps)}
+          />
+
+<Route
+
+            path="/:position/:challenge"
+            exact
+            render={(routerProps) => 
+              this.renderPosition(routerProps)
+             
+
+            }
           />
 
           <Route
