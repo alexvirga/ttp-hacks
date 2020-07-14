@@ -8,12 +8,11 @@ import SubmissionCard from "./SubmissionCard";
 class Event extends Component {
   state = {
     submissions: [],
-    uploading: false
-  
+    uploading: false,
   };
 
   postUserSubmission = async (values) => {
-    this.setState({uploading: true})
+    this.setState({ uploading: true });
     const files = values.user.image;
 
     const data = new FormData();
@@ -24,25 +23,28 @@ class Event extends Component {
       { method: "POST", body: data }
     );
     const file = await res.json();
-    this.setState({img: file.secure_url });
+    this.setState({ img: file.secure_url });
 
     this.postSubmissionFirebase(values, file);
   };
 
   postSubmissionFirebase = (values, file) => {
-    firebase.firestore().collection("submissions").doc().set({
-      name: this.props.user.displayName,
-      uid: this.props.user.uid,
-      event: this.props.event.title,
-      url: values.user.link,
-      github: values.user.github,
-      title: values.user.title,
-      comment: values.user.comment,
-      img: file.secure_url,
-    })
-    .then(() => this.setState({uploading: false}))
-    .then(() => this.getAllSubmissions())
-    
+    firebase
+      .firestore()
+      .collection("submissions")
+      .doc()
+      .set({
+        name: this.props.user.displayName,
+        uid: this.props.user.uid,
+        event: this.props.event.title,
+        url: values.user.link,
+        github: values.user.github,
+        title: values.user.title,
+        comment: values.user.comment,
+        img: file.secure_url,
+      })
+      .then(() => this.setState({ uploading: false }))
+      .then(() => this.getAllSubmissions());
   };
 
   componentDidMount() {
@@ -95,7 +97,11 @@ class Event extends Component {
             marginTop: "20px",
           }}
         />
-        <a href={this.props.event.link} target="_blank" rel="noopener noreferrer" >
+        <a
+          href={this.props.event.link}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <h2 style={{ fontSize: "30px", color: "#1192d0", margin: "10px" }}>
             {" "}
             VIEW CHALLENGE{" "}
@@ -116,10 +122,22 @@ class Event extends Component {
           <h1 className="event-header-submissions"> Submissions </h1>
 
           {this.props.loggedin ? (
-            <SubmitForm postUserSubmission={this.postUserSubmission} uploading={this.state.uploading} />
+            <SubmitForm
+              postUserSubmission={this.postUserSubmission}
+              uploading={this.state.uploading}
+            />
           ) : (
-            <Button type="primary" style={{marginBottom: "20px",background: "black", color: "white",
-            borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}}>
+            <Button
+              type="primary"
+              style={{
+                marginBottom: "20px",
+                background: "black",
+                color: "white",
+                borderColor: "#413f3f",
+                borderRadius: "20px",
+                fontWeight: "500",
+              }}
+            >
               <Link to={`/`}>Log in to Submit</Link>
             </Button>
           )}

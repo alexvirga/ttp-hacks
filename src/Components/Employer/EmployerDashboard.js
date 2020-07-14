@@ -4,23 +4,18 @@ import EmployerProfile from "./EmployerProfile";
 import CandidateOverview from "./CandidateOverview";
 import PositionOverview from "./PositionOverview";
 import firebase from "firebase";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import AssessmentDetail from "./AssessmentDetail";
 import AddAssessment from "./AddAssessment";
 import CreatePosition from "./CreatePosition"
 import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
   ShopOutlined,
-  TeamOutlined,
   UserOutlined,
-  UploadOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
-import MenuItem from "antd/lib/menu/MenuItem";
 
-const { Header, Content, Footer, Sider } = Layout;
+
+const { Content, Sider } = Layout;
 
 class Dashboard extends Component {
   state = {

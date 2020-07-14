@@ -23,46 +23,16 @@ class NavigationBar extends Component {
             <div className="Nav-links">
               {this.props.loggedin ? (
                 this.props.role === "company" ? (
-
-
-
-                    // ------- Company Navbar ------//
-
-                  <Menu mode="horizontal" defaultSelectedKeys={["1"]}>
-                    <Menu.Item>
-                      <Link
-                        to="/employer/dashboard"
-                        style={{
-                          textDecoration: "none",
-                          color: "black",
-                          fontWeight: "800",
-                        }}
-                      >
-                        Dashboard
-                      </Link>
-                    </Menu.Item>
-                    <Menu.Item>
-                      <span
-                        style={{
-                          textDecoration: "none",
-                          color: "black",
-                          fontWeight: "800",
-                        }}
-                        onClick={this.props.signOutUser}
-                      >
-                        Sign Out
-                      </span>
-                    </Menu.Item>
-                  </Menu>
-
+                  null
 
                 ) : (
 
                     //-------Candidate Navbar ------//
 
                   <Menu mode="horizontal" defaultSelectedKeys={["1"]}>
-                    <Menu.Item>
+                    <Menu.Item  key={"0"}>
                       <Link
+                     
                         to="/homepage"
                         style={{
                           textDecoration: "none",
@@ -73,8 +43,9 @@ class NavigationBar extends Component {
                         Events
                       </Link>
                     </Menu.Item>
-                    <Menu.Item>
+                    <Menu.Item key={"1"}>
                       <Link
+                      
                         to={`/user/${this.props.user.uid}`}
                         style={{
                           textDecoration: "none",
@@ -85,7 +56,21 @@ class NavigationBar extends Component {
                         Profile
                       </Link>
                     </Menu.Item>
-                    <Menu.Item>
+                    <Menu.Item  key={"2"}>
+                      <Link
+                     
+                        to="/dashboard"
+                        style={{
+                          textDecoration: "none",
+                          color: "black",
+                          fontWeight: "800",
+                        }}
+                      >
+                        Dashboard
+                      </Link>
+                    </Menu.Item>
+
+                    <Menu.Item  key={"3"}>
                       <span
                         style={{
                           textDecoration: "none",

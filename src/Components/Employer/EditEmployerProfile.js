@@ -1,17 +1,8 @@
 import React, { Component } from "react";
 
-import {
-  Button,
-  Form,
-  Input,
-  Modal,
-  Upload,
-  message
-} from "antd";
+import { Button, Form, Input, Modal, Upload } from "antd";
 
-import { PoweroffOutlined } from '@ant-design/icons';
 import { UploadOutlined } from "@ant-design/icons";
-
 
 const layout = {
   labelCol: {
@@ -22,9 +13,9 @@ const layout = {
   },
 };
 const validateMessages = {
-  required: '${label} is required!',
+  required: "${label} is required!",
   types: {
-    url: 'Please enter a valid url',
+    url: "Please enter a valid url",
   },
 };
 
@@ -33,9 +24,7 @@ class EditEmployerProfile extends Component {
     visible: false,
     validated: false,
     image: {},
-
   };
-
 
   componentDidUpdate(prevProps) {
     if (prevProps.uploading !== this.props.uploading) {
@@ -43,14 +32,13 @@ class EditEmployerProfile extends Component {
     }
   }
 
-
   updateLoading = () => {
     if (!this.props.uploading) {
       this.setState({
-        visible: false})
+        visible: false,
+      });
     }
-  }
-
+  };
 
   normFile = (e) => {
     this.setState({ image: e.file.originFileObj });
@@ -67,23 +55,20 @@ class EditEmployerProfile extends Component {
     if (this.state.validated) {
       this.setState({
         validated: false,
-        visible: false
+        visible: false,
       });
     }
   };
 
   handleCancel = (e) => {
- 
     this.setState({
       visible: false,
     });
   };
 
   onFinish = (values) => {
- 
     this.setState({ validated: true });
     this.props.editCompanyProfile(values);
-
   };
 
   onFinishFailed = (errorInfo) => {
@@ -92,19 +77,24 @@ class EditEmployerProfile extends Component {
   };
 
   uploadImg = async (e) => {
-    
     this.setState({ image: e });
   };
 
-
-
   render() {
-    
     return (
       <div>
         <div>
-          <Button style={{ marginTop: "20px", background: "black", color: "white",
-                borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}} onClick={this.showModal}>
+          <Button
+            style={{
+              marginTop: "20px",
+              background: "black",
+              color: "white",
+              borderColor: "#413f3f",
+              borderRadius: "20px",
+              fontWeight: "500",
+            }}
+            onClick={this.showModal}
+          >
             EDIT PROFILE
           </Button>
           <Modal
@@ -122,8 +112,11 @@ class EditEmployerProfile extends Component {
                 htmlType="submit"
                 loading={this.props.uploading}
                 onClick={this.handleOk}
-                style={{background: "black", color: "white",
-                borderColor: "#413f3f"}}
+                style={{
+                  background: "black",
+                  color: "white",
+                  borderColor: "#413f3f",
+                }}
               >
                 Submit
               </Button>,
@@ -178,7 +171,6 @@ class EditEmployerProfile extends Component {
                 <Input />
               </Form.Item>
 
-
               <Form.Item
                 name={["user", "website"]}
                 label="Website"
@@ -193,12 +185,15 @@ class EditEmployerProfile extends Component {
                 <Input />
               </Form.Item>
 
-              <Form.Item name={["user", "bio"]} label="Bio" 
-              initialValue={this.props.user.bio}
-              rules={[
-                {
-                  required: true,
-                }]}
+              <Form.Item
+                name={["user", "bio"]}
+                label="Bio"
+                initialValue={this.props.user.bio}
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
               >
                 <Input.TextArea />
               </Form.Item>
@@ -219,7 +214,12 @@ class EditEmployerProfile extends Component {
                   },
                 ]}
               >
-                <Upload  accept=".jpg, .png"name="logo" onChange={this.handleChange} action={this.uploadImg}>
+                <Upload
+                  accept=".jpg, .png"
+                  name="logo"
+                  onChange={this.handleChange}
+                  action={this.uploadImg}
+                >
                   <Button>
                     <UploadOutlined /> Click to upload
                   </Button>

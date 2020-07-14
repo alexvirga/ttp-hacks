@@ -10,7 +10,7 @@ class Login extends Component {
     return this.props.loading ? (
       null
     ) : this.props.loggedin ? (
-      <Redirect to="homepage" />
+      <Redirect to="/" />
     ) : (
 
       <div className="login-container">

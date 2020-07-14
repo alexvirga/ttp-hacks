@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Form,
-  Input,
-  Modal,
-  Upload,
-} from "antd";
+import { Button, Form, Input, Modal, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 
 const layout = {
@@ -17,49 +11,44 @@ const layout = {
   },
 };
 const validateMessages = {
-  required: '${label} is required!',
+  required: "${label} is required!",
   types: {
-    url: 'Please enter a valid url',
+    url: "Please enter a valid url",
   },
-
 };
 
 class EditSubmissionForm extends Component {
   state = {
     visible: false,
-   
+
     validated: false,
     image: {},
   };
 
   normFile = (e) => {
- 
-   
     this.setState({ image: e.file.originFileObj });
     return e.file.originFileObj;
   };
 
-//   showModal = () => {
-//     this.setState({
-//       visible: true,
-//     });
-//   };
+  //   showModal = () => {
+  //     this.setState({
+  //       visible: true,
+  //     });
+  //   };
 
   handleOk = (e) => {
     if (this.state.validated) {
       this.setState({
         validated: false,
       });
-      
     }
   };
 
   updateLoading = () => {
     if (!this.props.loading) {
-      this.props.toggleEdit(
-        false)
+      this.props.toggleEdit(false);
     }
-  }
+  };
 
   componentDidUpdate(prevProps) {
     if (prevProps.loading !== this.props.loading) {
@@ -69,11 +58,10 @@ class EditSubmissionForm extends Component {
 
   handleCancel = (e) => {
     console.log(e);
-    this.props.toggleEdit(false)
+    this.props.toggleEdit(false);
   };
 
   onFinish = (values) => {
-   
     this.setState({ validated: true });
     this.props.editUserSubmission(values, this.props.submission.id);
     this.handleOk();
@@ -85,16 +73,14 @@ class EditSubmissionForm extends Component {
   };
 
   uploadImg = async (e) => {
-   
     this.setState({ image: e });
   };
 
   render() {
-      
     return (
       <div>
         <div>
-          <Button type="primary" onClick={this.showModal} >
+          <Button type="primary" onClick={this.showModal}>
             Submit
           </Button>
           <Modal
@@ -102,9 +88,17 @@ class EditSubmissionForm extends Component {
             visible={this.props.visible}
             onCancel={this.handleCancel}
             footer={[
-              <Button key="back" onClick={this.handleCancel}
-              style={{ background: "white", color: "black",
-              borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}}>
+              <Button
+                key="back"
+                onClick={this.handleCancel}
+                style={{
+                  background: "white",
+                  color: "black",
+                  borderColor: "#413f3f",
+                  borderRadius: "20px",
+                  fontWeight: "500",
+                }}
+              >
                 Return
               </Button>,
               <Button
@@ -114,15 +108,19 @@ class EditSubmissionForm extends Component {
                 htmlType="submit"
                 loading={this.props.loading}
                 onClick={this.handleOk}
-                style={{ background: "black", color: "white",
-                borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}}
+                style={{
+                  background: "black",
+                  color: "white",
+                  borderColor: "#413f3f",
+                  borderRadius: "20px",
+                  fontWeight: "500",
+                }}
               >
                 Submit
               </Button>,
             ]}
           >
             <Form
-            
               id="submit-form"
               className="event-form"
               {...layout}
@@ -132,7 +130,7 @@ class EditSubmissionForm extends Component {
               onFinishFailed={this.onFinishFailed}
             >
               <Form.Item
-              initialValue={this.props.submission.data.title}
+                initialValue={this.props.submission.data.title}
                 name={["user", "title"]}
                 label="Title"
                 rules={[
@@ -144,8 +142,7 @@ class EditSubmissionForm extends Component {
                 <Input />
               </Form.Item>
               <Form.Item
-                            initialValue={this.props.submission.data.url}
-
+                initialValue={this.props.submission.data.url}
                 name={["user", "link"]}
                 label="Project URL"
                 rules={[
@@ -158,8 +155,7 @@ class EditSubmissionForm extends Component {
                 <Input />
               </Form.Item>
               <Form.Item
-                            initialValue={this.props.submission.data.github}
-
+                initialValue={this.props.submission.data.github}
                 name={["user", "github"]}
                 label="Github"
                 rules={[
@@ -172,8 +168,11 @@ class EditSubmissionForm extends Component {
                 <Input />
               </Form.Item>
 
-              <Form.Item name={["user", "comment"]} label="Comment"               initialValues={this.props.submission.data.title}
-              initialValue={this.props.submission.data.comment}
+              <Form.Item
+                name={["user", "comment"]}
+                label="Comment"
+                initialValues={this.props.submission.data.title}
+                initialValue={this.props.submission.data.comment}
               >
                 <Input.TextArea />
               </Form.Item>
@@ -182,8 +181,7 @@ class EditSubmissionForm extends Component {
               ></Form.Item>
 
               <Form.Item
-                            initialValue={this.props.submission.data.img}
-
+                initialValue={this.props.submission.data.img}
                 name={["user", "image"]}
                 valuePropName="picture"
                 label="Image"

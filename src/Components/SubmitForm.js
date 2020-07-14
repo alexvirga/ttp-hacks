@@ -1,17 +1,8 @@
 import React, { Component } from "react";
 
-import {
-  Button,
-  Form,
-  Input,
-  Modal,
-  Upload,
-  message
-} from "antd";
+import { Button, Form, Input, Modal, Upload } from "antd";
 
-import { PoweroffOutlined } from '@ant-design/icons';
 import { UploadOutlined } from "@ant-design/icons";
-
 
 const layout = {
   labelCol: {
@@ -22,9 +13,9 @@ const layout = {
   },
 };
 const validateMessages = {
-  required: '${label} is required!',
+  required: "${label} is required!",
   types: {
-    url: 'Please enter a valid url',
+    url: "Please enter a valid url",
   },
 };
 
@@ -44,9 +35,10 @@ class SubmitForm extends Component {
   updateLoading = () => {
     if (!this.props.uploading) {
       this.setState({
-        visible: false})
+        visible: false,
+      });
     }
-  }
+  };
 
   normFile = (e) => {
     this.setState({ image: e.file.originFileObj });
@@ -63,23 +55,20 @@ class SubmitForm extends Component {
     if (this.state.validated) {
       this.setState({
         validated: false,
-        visible: false
+        visible: false,
       });
     }
   };
 
   handleCancel = (e) => {
- 
     this.setState({
       visible: false,
     });
   };
 
   onFinish = (values) => {
- 
     this.setState({ validated: true });
     this.props.postUserSubmission(values);
-
   };
 
   onFinishFailed = (errorInfo) => {
@@ -88,23 +77,30 @@ class SubmitForm extends Component {
   };
 
   uploadImg = async (e) => {
-    
     this.setState({ image: e });
   };
 
   handleChange(info) {
     if (info.file) {
-      console.log(info.file);}
+      console.log(info.file);
+    }
   }
 
-
   render() {
-    
     return (
       <div>
         <div>
-          <Button type="primary" onClick={this.showModal} style={{ background: "black", color: "white",
-                borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}}>
+          <Button
+            type="primary"
+            onClick={this.showModal}
+            style={{
+              background: "black",
+              color: "white",
+              borderColor: "#413f3f",
+              borderRadius: "20px",
+              fontWeight: "500",
+            }}
+          >
             Submit
           </Button>
           <Modal
@@ -112,8 +108,18 @@ class SubmitForm extends Component {
             visible={this.state.visible}
             onCancel={this.handleCancel}
             footer={[
-              <Button key="back" onClick={this.handleCancel} style={{ marginTop: "20px", background: "white", color: "black",
-              borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}}>
+              <Button
+                key="back"
+                onClick={this.handleCancel}
+                style={{
+                  marginTop: "20px",
+                  background: "white",
+                  color: "black",
+                  borderColor: "#413f3f",
+                  borderRadius: "20px",
+                  fontWeight: "500",
+                }}
+              >
                 Return
               </Button>,
               <Button
@@ -123,8 +129,14 @@ class SubmitForm extends Component {
                 htmlType="submit"
                 loading={this.props.uploading}
                 onClick={this.handleOk}
-                style={{ marginTop: "20px", background: "black", color: "white",
-                borderColor: "#413f3f", borderRadius: "20px", fontWeight: "500"}}
+                style={{
+                  marginTop: "20px",
+                  background: "black",
+                  color: "white",
+                  borderColor: "#413f3f",
+                  borderRadius: "20px",
+                  fontWeight: "500",
+                }}
               >
                 Submit
               </Button>,
@@ -194,7 +206,12 @@ class SubmitForm extends Component {
                   },
                 ]}
               >
-                <Upload  accept=".jpg, .png"name="logo" onChange={this.handleChange} action={this.uploadImg}>
+                <Upload
+                  accept=".jpg, .png"
+                  name="logo"
+                  onChange={this.handleChange}
+                  action={this.uploadImg}
+                >
                   <Button>
                     <UploadOutlined /> Click to upload
                   </Button>

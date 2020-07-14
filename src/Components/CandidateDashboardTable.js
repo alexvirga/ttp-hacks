@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-import { Table, Tag, Space, Descriptions } from "antd";
+import { Table, Tag, Descriptions } from "antd";
 
 const columns = [
   {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
+    title: "Company",
+    dataIndex: "companyName",
+    key: "companyName",
     ellipsis: false,
     render: (text) => <a>{text}</a>,
   },
@@ -16,32 +16,7 @@ const columns = [
     key: "title",
     ellipsis: true,
   },
-  {
-    title: "Github",
-    dataIndex: "github",
-    key: "github",
-    ellipsis: true,
-    render: (github) => {
-      if (github) {
-        return <a href={github}> Github Link </a>;
-      } else {
-        return <p> No Github Submitted </p>;
-      }
-    },
-  },
-  {
-    title: "Project Link",
-    dataIndex: "link",
-    key: "link",
-    ellipsis: true,
-    render: (link) => {
-      if (link) {
-        return <a href={link}> Project Link </a>;
-      } else {
-        return <p> No Link Submitted </p>;
-      }
-    },
-  },
+
   {
     title: "Status",
     dataIndex: "status",
@@ -84,33 +59,23 @@ const columns = [
     filterMultiple: true,
     onFilter: (value, record) => record.status.indexOf(value) === 0,
   },
-
-  {
-    title: "Action",
-    key: "action",
-    render: (text, record) => (
-      <Space size="middle" direction="vertical">
-        <a>Approve</a>
-        <a>Reject</a>
-      </Space>
-    ),
-  },
 ];
 
-class CandidateTable extends Component {
+class CandidateDashboardTable extends Component {
   state = {};
 
   render() {
     return (
       <div className="candidate-table-container">
         <Table
-          rowKey={"name"}
+          rowKey={(record) => record.positionID}
           columns={columns}
-          dataSource={this.props.data}
+          dataSource={this.props.submissionArr}
           expandRowByClick={true}
           expandable={{
             expandedRowRender: (record) => (
               <div style={{ display: "flex" }}>
+                {console.log(record)}
                 <Descriptions title="User Info" layout="horizontal" column={1}>
                   <Descriptions.Item label="Name">
                     {record.name}
@@ -149,4 +114,4 @@ class CandidateTable extends Component {
   }
 }
 
-export default CandidateTable;
+export default CandidateDashboardTable;
