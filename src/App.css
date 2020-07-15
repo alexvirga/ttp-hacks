@@ -445,6 +445,105 @@ border-top: none;
   margin: auto;
 }
 
+.event-page-shadow {
+  display: inline-block;
+flex-direction: column;
+width: 100vw;
+background: white;
+border: 1px solid #f3f3f3;
+border-top: none;
+box-shadow: 0 2px 5px rgba(154,160,185,.05), 0 5px 10px rgba(166,173,201,.2);
+text-align: center; }
+
+
+.event-page-shadow-submissions {
+  margin-top: 30px;
+  display: inline-block;
+  flex-direction: column;
+  width: 100vw;
+  background: white;
+  border: 1px solid #f3f3f3;
+  border-top: none;
+  box-shadow: 0 2px 5px rgba(154,160,185,.05), 0 5px 10px rgba(166,173,201,.2);
+  text-align: center; 
+}
+
+
+
+/* ---- expand event details ----- */
+
+
+
+
+
+.panel-wrapper {
+  position: relative;
+}
+
+.btn {
+  color: #fff;
+  background: #000;
+  border-radius: 1.5em;
+  left: 30%;
+  padding: 1em;
+  text-decoration: none;
+  width: 40%;
+}
+.show, .hide {
+  position: absolute;
+  bottom: -1em;
+  z-index: 100;
+  text-align: center;
+}
+
+.hide {display: none;}
+.show:target {display: none;}
+.show:target ~ .hide {display: block;}
+.show:target ~ .panel {
+   max-height: 2000px; 
+}
+.show:target ~ .fade {
+  margin-top: 0;
+}
+
+.panel {
+  position: relative;
+  margin: 2em auto;
+  width: 60%;
+  max-height: 130px;
+  overflow: hidden;
+  transition: max-height .6s ease;
+  text-align: left;
+  max-width: 775px;
+}
+.fade {
+  background: linear-gradient(to bottom, transparent 0%, rgb(255, 255, 255) 50%);  height: 100px;
+  margin-top: -100px;
+  position: relative;
+}
+
+.panel > h1 {
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.panel > div > span> a {
+  font-size: 16px;
+  
+}
+
+.panel > div > ul > li> a {
+  font-size: 16px;
+  
+}
+
+.panel > div > h1 {
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+
 /* submission card */
 
 .submission-card-body {

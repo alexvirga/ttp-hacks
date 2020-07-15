@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import firebase from "firebase";
 import { Link } from "react-router-dom";
-import { Button } from "antd";
+import { Button, Collapse } from "antd";
 import SubmitForm from "./SubmitForm";
 import SubmissionCard from "./SubmissionCard";
+import { CaretDownOutlined } from "@ant-design/icons";
 
+const { Panel } = Collapse;
 class Event extends Component {
   state = {
     submissions: [],
@@ -70,57 +72,18 @@ class Event extends Component {
 
   render() {
     return (
-      <div>
-        <div
-          style={{
-            height: "300px",
-            backgroundImage: `url(${this.props.event.img})`,
-            backgroundSize: "cover",
-          }}
-        >
-          {" "}
-        </div>
-        <h1 className="homepage-header"> {this.props.event.title}</h1>
-        <h3>
-          {" "}
-          <b>Description: </b>
-          {this.props.event.description}{" "}
-        </h3>
-
-        <hr
-          style={{
-            height: "2px",
-            borderWidth: "0",
-            color: "#c1c1c1",
-            backgroundColor: "#cdcdcd",
-            width: "20%",
-            marginTop: "20px",
-          }}
-        />
-        <a
-          href={this.props.event.link}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 style={{ fontSize: "30px", color: "#1192d0", margin: "10px" }}>
+      <div style={{ backgroundColor: "#f4f4f4" }}>
+        <div className="event-page-shadow">
+          <div
+            style={{
+              height: "300px",
+              backgroundImage: `url(${this.props.event.img})`,
+              backgroundSize: "cover",
+            }}
+          >
             {" "}
-            VIEW CHALLENGE{" "}
-          </h2>
-        </a>
-        <hr
-          style={{
-            height: "2px",
-            borderWidth: "0",
-            color: "#c1c1c1",
-            backgroundColor: "#cdcdcd",
-            width: "20%",
-            marginBottom: "20px",
-          }}
-        />
-
-        <div>
-          <h1 className="event-header-submissions"> Submissions </h1>
-
+          </div>
+          <h1 className="homepage-header"> {this.props.event.title}</h1>
           {this.props.loggedin ? (
             <SubmitForm
               postUserSubmission={this.postUserSubmission}
@@ -141,6 +104,77 @@ class Event extends Component {
               <Link to={`/`}>Log in to Submit</Link>
             </Button>
           )}
+
+          <div class="panel-wrapper">
+            <a href="#show" class="show btn" id="show">
+              Show Full Challenge
+            </a>
+            <a href="#hide" class="hide btn" id="hide">
+              Hide Full Challenge
+            </a>
+
+
+
+            <div class="panel">
+              <div style={{marginBottom: "35px"}}>
+              <h1> INTRO </h1>
+            
+              {this.props.event.overview.split("&&").map((p) => (
+                <p> {p} </p>
+              ))}
+             
+              </div>
+
+              <div style={{marginBottom: "35px"}}>
+              <h1> EXAMPLES </h1>
+              <span style={{display: "inline-grid"}}> 
+              
+ {this.props.event.examples.map(example => (
+
+   <a href={example.link} target="_blank"> {example.name} </a>
+  
+   
+ ))}
+        </span>  
+              </div>
+
+              <div style={{marginBottom: "35px"}}>
+
+              <h1> MISSION </h1>
+              {this.props.event.mission.split("&&").map((p) => (
+                <p> {p} </p>
+              ))}
+           
+              </div>
+
+              <div style={{marginBottom: "35px"}}>
+              <h1> ONE MORE THING... </h1>
+            <p> <b>BE CREATIVE AND HAVE FUN!</b> Explore unique designs & fun subjects. Just don’t make a cheese quiz.  </p>
+              </div>
+              <div style={{marginBottom: "35px"}}>
+              <h1> HOW TO SUBMIT </h1>
+            <p> Once completed, deploy your project so you can share it with others. Be sure to include a description of your build, as well as a screenshot to be used as a preview. </p>
+            <p> <b> Deployment Resources </b></p>
+            <ul> 
+              <li> <a href="https://pages.github.com/"> Github Pages </a> </li>
+              <li> <a href="https://www.heroku.com/"> Heroku </a> </li>
+              <li> <a href="https://codepen.io/"> Codepen </a> </li>
+              <li> <a href="https://www.netlify.com/"> Codepen </a> </li>
+              <li> <a href="https://firebase.google.com/docs/hosting"> Firebase </a> </li>
+
+
+              </ul>
+              </div>
+              
+
+            </div>
+            <div class="fade"></div>
+          </div>
+        </div>
+
+        <div className="event-page-shadow-submissions">
+          <h1 className="event-header-submissions"> Submissions </h1>
+
 
           <SubmissionCard
             data={this.state.submissions}

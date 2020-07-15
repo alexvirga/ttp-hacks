@@ -90,17 +90,18 @@ class AuthRouter extends Component {
     firebase
       .firestore()
       .collectionGroup("positions")
-      .where("positionOpen", "==", "true")
+      .where("outsideSubmissions", "==", "true")
       .get()
       .then((querySnapshot) => {
      
         const data = [];
         querySnapshot.docs.forEach((doc) => {
+          const positionID = doc.id
           const eventData = doc.data();
-          data.push(eventData);
+          data.push({data: eventData, id: positionID});
         });
         
-
+console.log(data)
         this.setState({ openPositionsArr: data, companyEventsLoading: false });
       })
 
@@ -125,6 +126,7 @@ class AuthRouter extends Component {
   };
 
   renderEvent = (routerProps) => {
+
     let eventId = routerProps.match.params.id.replace("_", " ");
     let foundEvent = this.state.events.find(
       (eventObj) => eventObj.title === eventId
@@ -152,6 +154,7 @@ class AuthRouter extends Component {
 
 
   renderPosition = (routerProps) => {
+  
     let positionID = routerProps.match.params.position;
     let challenge = routerProps.match.params.challenge;
 
@@ -295,6 +298,7 @@ class AuthRouter extends Component {
                 loggedin={this.state.loggedin}
                 events={this.state.events}
                 openPositionsArr={this.state.openPositionsArr}
+                
               />
             )}
           />
@@ -310,6 +314,11 @@ class AuthRouter extends Component {
             exact
             render={(routerProps) => this.renderCompany(routerProps)}
           />
+                    <Route
+            path="/event/:id"
+            exact
+            render={(routerProps) => this.renderEvent(routerProps)}
+          />
 
           <Route
             path="/:position/:challenge"
@@ -317,10 +326,7 @@ class AuthRouter extends Component {
             render={(routerProps) => this.renderPosition(routerProps)}
           />
 
-          <Route
-            path="/event/:id"
-            render={(routerProps) => this.renderEvent(routerProps)}
-          />
+
 
           <Route
             path="*"

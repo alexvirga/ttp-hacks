@@ -120,6 +120,7 @@ class Dashboard extends Component {
 
 
   createPosition = (values, challengeID, challengeName) => {
+    console.log(values)
     firebase
     .firestore()
     .collection("companies")
@@ -128,11 +129,14 @@ class Dashboard extends Component {
       title: values.position.title,
       challengeID: challengeID,
       challengeName: challengeName,
-      inviteonly: !values.position.inviteonly,
+      outsideSubmissions: values.position.outsideSubmissions,
       positionOpen: true,
       reqID: values.position.reqID,
       link: values.position.link,
       companyID: this.state.companyID,
+      companyName: this.state.company.name,
+      photo: this.state.company.photo
+
     })
      
       

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {List, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import EventCard from "./EventCard";
+import EventCardCompany from "./EventCardCompany";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 50 }} spin />;
 class Homepage extends Component {
@@ -20,7 +21,7 @@ class Homepage extends Component {
           <Spin indicator={antIcon} />
         ) : (
           <div>
-            <h1 className="homepage-header"> For Fun. </h1>
+            <h1 className="homepage-header"> For Show. </h1>
             <div style={{ display: "inline-block" }}>
               <List
                 className="event-list"
@@ -51,7 +52,7 @@ class Homepage extends Component {
                 renderItem={(event) =>
                     <div>
                       {console.log(event)}
-                      <EventCard event={event} />
+                      <EventCardCompany event={event} />
                     </div>
                   
                 }
