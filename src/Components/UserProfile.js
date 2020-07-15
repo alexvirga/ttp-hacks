@@ -103,13 +103,14 @@ class UserProfile extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{backgroundColor: "#fcfcfc"}}>
         {this.state.loading ? (
           <Spin indicator={antIcon} />
         ) : this.state.invalidProfile ? (
           <Redirect to="/" />
         ) : (
           <div>
+            <div className="profile-user-info-shadow-box"> 
             <div className="profile-header">
               <Avatar size={190} src={this.state.user.photo} alt="google.com" />
             </div>
@@ -156,6 +157,8 @@ class UserProfile extends Component {
                 </p>
               </div>
             </div>
+            </div>
+            <div className="profile-user-projects-shadow-box"> 
             <h1 className="event-header-submissions"> Projects </h1>
             {this.state.submissions.length > 0 ? (
               <SubmissionCard
@@ -165,6 +168,7 @@ class UserProfile extends Component {
             ) : (
               <h3> No Submissions :(</h3>
             )}
+            </div>
           </div>
         )}
       </div>

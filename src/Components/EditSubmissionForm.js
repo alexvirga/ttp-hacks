@@ -57,7 +57,6 @@ class EditSubmissionForm extends Component {
   }
 
   handleCancel = (e) => {
-    console.log(e);
     this.props.toggleEdit(false);
   };
 

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import {Tag, Descriptions, Space } from "antd";
 import { Table } from "antd";
+import { Link } from "react-router-dom";
+
 
 
 const columns = [
@@ -8,7 +10,10 @@ const columns = [
     title: "Name",
     dataIndex: "name",
     key: "name",
-    render: (text) => <a>{text}</a>,
+    render: (text, record) => (
+      <Link target="_blank" to={`/user/${record.uid}`}>
+        {text}
+      </Link>),
     ellipsis: false,
   },
   {

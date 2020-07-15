@@ -10,8 +10,11 @@ class CandidateDashboard extends Component {
 
   render() {
     return (
-      <div>
+      <div className="candidate-dashboard">
+        <div className="candidate-dashboard-table-title-container">
+        <h1> Submitted Company Assessments </h1>
         <CandidateDashboardTable submissionArr={this.props.submissionArr} />
+        </div>
       </div>
     );
   }

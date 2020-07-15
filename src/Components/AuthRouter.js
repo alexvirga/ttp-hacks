@@ -19,6 +19,7 @@ import UserProfile from "./UserProfile";
 
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import EmployerProfilePublic from "./EmployerProfilePublic";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 50 }} spin />;
 
@@ -34,10 +35,13 @@ class AuthRouter extends Component {
     role: "",
     userLoaded: false,
     submissionArr: [],
+    openPositionsArr: [],
+    companyEventsLoading: false
   };
 
   componentDidMount() {
-    // this.getEvents();
+    this.getCompanyData()
+    this.getEvents();
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // this.setState({loggedin: true})
@@ -62,23 +66,50 @@ class AuthRouter extends Component {
     });
   }
 
-  // getEvents = () => {
+  getEvents = () => {
+    this.setState({ eventsLoading: true });
+    firebase
+      .firestore()
+      .collection("events")
+      .get()
+      .then((querySnapshot) => {
+        const data = [];
+        querySnapshot.docs.forEach((doc) => {
+          const eventData = doc.data();
+          data.push(eventData);
+        });
+        
 
-  //   this.setState({ eventsLoading: true });
-  //   firebase
-  //     .firestore()
-  //     .collection("events")
-  //     .get()
-  //     .then((querySnapshot) => {
-  //       const data = [];
-  //       querySnapshot.docs.forEach((doc) => {
-  //         const eventData = doc.data();
-  //         data.push(eventData);
-  //       });
+        this.setState({ events: data, eventsLoading: false });
+      })
+  };
 
-  //       this.setState({ events: data, eventsLoading: false });
-  //     })
-  // };
+  getCompanyData =  () => {
+    this.setState({ companyEventsLoading: true });
+
+    firebase
+      .firestore()
+      .collectionGroup("positions")
+      .where("positionOpen", "==", "true")
+      .get()
+      .then((querySnapshot) => {
+     
+        const data = [];
+        querySnapshot.docs.forEach((doc) => {
+          const eventData = doc.data();
+          data.push(eventData);
+        });
+        
+
+        this.setState({ openPositionsArr: data, companyEventsLoading: false });
+      })
+
+
+
+
+
+  }
+
 
   signOutUser = () => {
     this.setState({ role: null, user: {}, loggedin: false, role: null });
@@ -90,7 +121,6 @@ class AuthRouter extends Component {
         this.props.history.push("/");
       })
       .catch(function (error) {
-        console.log("beef", error);
       });
   };
 
@@ -114,9 +144,15 @@ class AuthRouter extends Component {
     return <UserProfile uid={uid} user={user} loggedin={this.state.loggedin} />;
   };
 
+  renderCompany = (routerProps) => {
+    let companyID = routerProps.match.params.id;
+    let user = this.state.user;
+    return <EmployerProfilePublic companyID={companyID} />
+  };
+
+
   renderPosition = (routerProps) => {
     let positionID = routerProps.match.params.position;
-
     let challenge = routerProps.match.params.challenge;
 
     return (
@@ -255,8 +291,10 @@ class AuthRouter extends Component {
             render={() => (
               <Homepage
                 loading={this.state.loading}
+                companyEventsLoading={this.state.companyEventsLoading}
                 loggedin={this.state.loggedin}
                 events={this.state.events}
+                openPositionsArr={this.state.openPositionsArr}
               />
             )}
           />
@@ -265,6 +303,12 @@ class AuthRouter extends Component {
             path="/user/:id"
             exact
             render={(routerProps) => this.renderUser(routerProps)}
+          />
+
+<Route
+            path="/company/:id"
+            exact
+            render={(routerProps) => this.renderCompany(routerProps)}
           />
 
           <Route

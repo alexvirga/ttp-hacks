@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 import { Table, Tag, Space, Descriptions } from "antd";
 
 const columns = [
@@ -8,7 +8,11 @@ const columns = [
     dataIndex: "name",
     key: "name",
     ellipsis: false,
-    render: (text) => <a>{text}</a>,
+    render: (text, record) => (
+      <Link target="_blank" to={`/user/${record.uid}`}>
+        {text}
+      </Link>
+    ),
   },
   {
     title: "Submission Title",

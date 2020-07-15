@@ -43,10 +43,9 @@ class CreatePosition extends Component {
   };
 
   onFinish = (values) => {
-    console.log(values);
 
-    // this.setState({ validated: true });
-    // this.props.createPosition(values, this.state.challengeID, this.state.challengeName);
+    this.setState({ validated: true });
+    this.props.createPosition(values, this.state.challengeID, this.state.challengeName);
   };
 
   onFinishFailed = (errorInfo) => {

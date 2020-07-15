@@ -335,6 +335,30 @@ font-size: 20px;
   margin: 20px;
 }
 
+.profile-user-info-shadow-box{
+  display: inline-block;
+  flex-direction: column;
+width: 100vw;
+  background: white;
+  border: 1px solid #f3f3f3;
+border-top: none;
+  box-shadow: 0 2px 5px rgba(154,160,185,.05), 0 5px 10px rgba(166,173,201,.2);
+  text-align: center;
+}
+
+.profile-user-projects-shadow-box{
+  margin-top: 40px;
+  margin-bottom: 40px;
+  display: inline-block;
+  flex-direction: column;
+width: 100vw;
+  background: white;
+  border: 1px solid #f3f3f3;
+border-top: none;
+  box-shadow: 0 2px 5px rgba(154,160,185,.05), 0 5px 10px rgba(166,173,201,.2);
+  text-align: center;
+}
+
 .edit-profile-button {
   margin-top: 20px;
 }
@@ -356,6 +380,27 @@ font-size: 20px;
 
 
 }
+
+
+
+/* ---- Candidate Dashboard ------*/
+
+.candidate-dashboard-table-container{
+  max-width: 1200px;
+  justify-content: center;
+  display: inline-grid;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(154,160,185,.05), 0 5px 10px rgba(166,173,201,.2);
+
+  }
+
+  .candidate-dashboard {
+    margin-top: 20px;
+  }
+
+  .candidate-dashboard-table-title-container > h1 {
+    font-weight: 800;
+  }
 /* Homepage */
 
 .homepage-header {
@@ -404,6 +449,10 @@ font-size: 20px;
 
 .submission-card-body {
   display: inline-grid;
+}
+
+.submission-card-body > a {
+  line-height: 1em;
 }
 
 .submit-img {
@@ -594,6 +643,9 @@ max-width: 1200px;
 justify-content: center;
 display: inline-grid;
 }
+
+
+
 
 /* ------ Company Assessment View -----  */
 .company-assessment-details{

@@ -57,7 +57,6 @@ class AddAssessment extends Component {
 
   handleChange(info) {
     if (info.file) {
-      console.log(info.file);
     }
   }
 

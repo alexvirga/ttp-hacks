@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 import { Table, Tag, Descriptions } from "antd";
 
 const columns = [
@@ -8,7 +8,17 @@ const columns = [
     dataIndex: "companyName",
     key: "companyName",
     ellipsis: false,
-    render: (text) => <a>{text}</a>,
+    render: (text, record) => (
+      <Link target="_blank" to={`/company/${record.companyID}`}>
+        {text}
+      </Link>
+    ),
+  },
+  {
+    title: "Position Title",
+    dataIndex: "positionTitle",
+    key: "positionTitle",
+    ellipsis: true,
   },
   {
     title: "Submission Title",
@@ -16,6 +26,7 @@ const columns = [
     key: "title",
     ellipsis: true,
   },
+
 
   {
     title: "Status",
@@ -66,7 +77,7 @@ class CandidateDashboardTable extends Component {
 
   render() {
     return (
-      <div className="candidate-table-container">
+      <div className="candidate-dashboard-table-container">
         <Table
           rowKey={(record) => record.positionID}
           columns={columns}
@@ -74,19 +85,12 @@ class CandidateDashboardTable extends Component {
           expandRowByClick={true}
           expandable={{
             expandedRowRender: (record) => (
+             
               <div style={{ display: "flex" }}>
-                {console.log(record)}
-                <Descriptions title="User Info" layout="horizontal" column={1}>
-                  <Descriptions.Item label="Name">
-                    {record.name}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Email">
-                    {record.email}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="LinkedIn">
-                    <a href={record.linkedin}>Link</a>
-                  </Descriptions.Item>
-                </Descriptions>
+
+
+
+
                 <Descriptions
                   title="Project Info"
                   layout="horizontal"
@@ -95,14 +99,22 @@ class CandidateDashboardTable extends Component {
                   <Descriptions.Item label="Project Title">
                     {record.title}
                   </Descriptions.Item>
-                  <Descriptions.Item label="User Notes">
-                    {record.notes}
+                  <Descriptions.Item label="Assessment Link">
+                  <Link target="_blank" to={`/${record.positionID}/${record.challengeID}`}>
+        Link
+      </Link>
                   </Descriptions.Item>
-                  <Descriptions.Item label="Project Repository">
+                  <Descriptions.Item label="Github Repository">
                     <a href={record.github}>Link</a>
                   </Descriptions.Item>
                   <Descriptions.Item label="Project Link">
                     <a href={record.link}>Link</a>
+                  </Descriptions.Item>
+                </Descriptions>
+
+                <Descriptions title="User Notes" layout="horizontal" column={1}>
+                  <Descriptions.Item label="Notes">
+                    {record.notes}
                   </Descriptions.Item>
                 </Descriptions>
               </div>
