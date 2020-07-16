@@ -1,6 +1,6 @@
 const firebaseConfig = {
   apiKey: "AIzaSyADD99cZidok92t7n91mPIMUNEXoZhkR_A",
-  authDomain: "ttp-hack.firebaseapp.com",
+  authDomain: "exempla.io",
   databaseURL: "https://ttp-hack.firebaseio.com",
   projectId: "ttp-hack",
   storageBucket: "ttp-hack.appspot.com",
