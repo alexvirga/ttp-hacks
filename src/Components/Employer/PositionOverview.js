@@ -62,7 +62,7 @@ class PositionOverview extends Component {
             type="text"
             id="country"
             name="country"
-            value={`http://localhost:3000/${this.props.position.position.positionID}/${this.props.position.position.challengeID}`}
+            value={`https://exempla.io/${this.props.position.position.positionID}/${this.props.position.position.challengeID}`}
             readonly
           />
         </div>

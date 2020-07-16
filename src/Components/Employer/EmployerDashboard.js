@@ -100,13 +100,17 @@ class Dashboard extends Component {
   };
 
   createAssessment = (values ) => {
+    const obj = JSON.parse(JSON.stringify(values, function(k, v) {
+      if (v === undefined) { return null; } return v; 
+   }));
+   
     firebase.firestore().collection("challenges").doc().set({
-      title: values.assessment.title,
-      overview: values.assessment.overview,
-      link: values.assessment.link,
-      instructions: values.assessment.instructions,
-      deliverables: values.assessment.deliverables,
-      additionalInfo: values.assessment.additionalInfo,
+      title: obj.assessment.title,
+      overview: obj.assessment.overview,
+      link: obj.assessment.link,
+      instructions: obj.assessment.instructions,
+      deliverables: obj.assessment.deliverables,
+      additionalInfo: obj.assessment.additionalInfo,
       companyID: this.state.companyID,
       companyName: this.state.company.name,
     })
@@ -120,7 +124,7 @@ class Dashboard extends Component {
 
 
   createPosition = (values, challengeID, challengeName) => {
-    console.log(values)
+    
     firebase
     .firestore()
     .collection("companies")

@@ -787,8 +787,15 @@ border: 1px solid #f3f3f3;
 }
 
 
+/* ----- Exempla suggestion form ---- */
+
+
 
 /* ------- Position View ---- */
+
+.suggestion-form .ant-form-item .ant-mentions, .ant-form-item textarea.ant-input {
+  max-width: 320px;
+}
 
 .vertical-line {
   height: 50px;

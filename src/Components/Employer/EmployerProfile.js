@@ -13,6 +13,7 @@ class EmployerProfile extends Component {
     image: {},
     uploading: false,
     editing: false,
+    img: ""
   };
 
   toggleEdit = (value) => {
@@ -64,6 +65,7 @@ class EmployerProfile extends Component {
                 <div className="company-profile-header">
                   <Avatar
                     size={190}
+                    
                     src={this.props.user.photo}
                     alt="google.com"
                   />

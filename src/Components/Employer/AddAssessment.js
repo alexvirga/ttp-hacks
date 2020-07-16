@@ -95,7 +95,7 @@ class AddAssessment extends Component {
               label="Overview"
               rules={[
                 {
-                  required: true,
+                 
                 },
               ]}
             >
@@ -110,7 +110,7 @@ class AddAssessment extends Component {
               label="Instructions"
               rules={[
                 {
-                  required: true,
+                  
                 },
               ]}
             >
@@ -125,7 +125,7 @@ class AddAssessment extends Component {
               label="Deliverables"
               rules={[
                 {
-                  required: true,
+                  
                 },
               ]}
             >
@@ -150,7 +150,7 @@ class AddAssessment extends Component {
               label="Links"
               rules={[
                 {
-                  required: true,
+                 
                   type: "url",
                 },
               ]}
