@@ -29,7 +29,7 @@ class NavigationBar extends Component {
 
                     //-------Candidate Navbar ------//
 
-                  <Menu mode="horizontal" defaultSelectedKeys={["1"]}>
+                  <Menu mode="horizontal" defaultSelectedKeys={[]}>
                     <Menu.Item  key={"0"}>
                       <Link
                      

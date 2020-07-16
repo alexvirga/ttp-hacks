@@ -99,7 +99,8 @@ class SubmitForm extends Component {
               borderColor: "#413f3f",
               borderRadius: "20px",
               fontWeight: "500",
-              margin: "20px"
+              height: "auto",
+              padding: "5px 30px"
             }}
           >
             Submit

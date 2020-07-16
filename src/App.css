@@ -469,6 +469,9 @@ text-align: center; }
 }
 
 
+.ant-modal-content > .ant-modal-close {
+  top: 15
+}
 
 /* ---- expand event details ----- */
 

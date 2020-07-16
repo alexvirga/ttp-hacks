@@ -162,6 +162,7 @@ class UserProfile extends Component {
             <h1 className="event-header-submissions"> Projects </h1>
             {this.state.submissions.length > 0 ? (
               <SubmissionCard
+              getAllSubmissions={this.getProjects}
                 data={this.state.submissions}
                 currentUID={this.props.user.uid}
               />

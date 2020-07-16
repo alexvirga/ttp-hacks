@@ -181,7 +181,7 @@ class EditSubmissionForm extends Component {
 
               <Form.Item
                 initialValue={this.props.submission.data.img}
-                name={["user", "image"]}
+                name={["user", "photo"]}
                 valuePropName="picture"
                 label="Image"
                 getValueFromEvent={this.normFile}
@@ -191,7 +191,7 @@ class EditSubmissionForm extends Component {
                   },
                 ]}
               >
-                <Upload name="logo" action={this.uploadImg}>
+                <Upload name="logo" accept=".jpg, .png" action={this.uploadImg}>
                   <Button>
                     <UploadOutlined /> Click to upload
                   </Button>

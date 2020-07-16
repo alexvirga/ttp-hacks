@@ -18,7 +18,8 @@ class SubmissionCard extends Component {
     submission: [],
     deleting: false,
     delete: "",
-    loading: false
+    loading: false,
+    img: {}
   };
 
   toggleEdit = (value) => {
@@ -29,8 +30,22 @@ class SubmissionCard extends Component {
     this.setState({deleting: value})
     
   }
+  editUserSubmission = async (values) => {
+    this.setState({ uploading: true });
+    const files = values.user.photo;
+    const data = new FormData();
+    data.append("file", files);
+    data.append("upload_preset", "project_img");
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/alexvirga/image/upload",
+      { method: "POST", body: data }
+    );
+    const file = await res.json();
+    this.setState({ img: file.secure_url });
+    this.updateUserSubmissionFirebase(values, file);
+  };
 
-  editUserSubmission = (values, file) => {
+  updateUserSubmissionFirebase = (values, file) => {
     this.setState({loading: true})
     let submission = this.state.submission
     firebase.firestore().collection("submissions").doc(submission.id).update({
@@ -38,6 +53,7 @@ class SubmissionCard extends Component {
       github: values.user.github,
       title: values.user.title,
       comment: values.user.comment,
+      img: this.state.img
 
     })
     .then(() => this.setState({loading: false}))

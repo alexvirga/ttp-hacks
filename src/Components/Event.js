@@ -36,7 +36,7 @@ class Event extends Component {
       .collection("submissions")
       .doc()
       .set({
-        name: this.props.user.displayName,
+        name: this.props.user.name,
         uid: this.props.user.uid,
         event: this.props.event.title,
         url: values.user.link,
@@ -156,11 +156,11 @@ class Event extends Component {
             <p> Once completed, deploy your project so you can share it with others. Be sure to include a description of your build, as well as a screenshot to be used as a preview. </p>
             <p> <b> Deployment Resources </b></p>
             <ul> 
-              <li> <a href="https://pages.github.com/"> Github Pages </a> </li>
-              <li> <a href="https://www.heroku.com/"> Heroku </a> </li>
-              <li> <a href="https://codepen.io/"> Codepen </a> </li>
-              <li> <a href="https://www.netlify.com/"> Codepen </a> </li>
-              <li> <a href="https://firebase.google.com/docs/hosting"> Firebase </a> </li>
+              <li> <a target="_blank" href="https://pages.github.com/"> Github Pages </a> </li>
+              <li> <a target="_blank" href="https://www.heroku.com/"> Heroku </a> </li>
+              <li> <a target="_blank" href="https://codepen.io/"> Codepen </a> </li>
+              <li> <a target="_blank" href="https://www.netlify.com/"> Codepen </a> </li>
+              <li> <a target="_blank" href="https://firebase.google.com/docs/hosting"> Firebase </a> </li>
 
 
               </ul>
