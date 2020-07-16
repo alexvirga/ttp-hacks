@@ -98,7 +98,10 @@ class UserProfile extends Component {
         photo: this.state.img,
         uid: this.props.user.uid,
       })
-      .then(() => this.setState({ uploading: false }));
+      .then(() => this.setState({ uploading: false }))
+      .then(() => this.getUser())
+      
+      
   };
 
   render() {
