@@ -189,7 +189,13 @@ class SubmitForm extends Component {
                 <Input />
               </Form.Item>
 
-              <Form.Item name={["user", "comment"]} label="Comment">
+              <Form.Item name={["user", "comment"]} label="Comment"
+                              rules={[
+                                {
+                                  required: true,
+                                },
+                              ]}
+                              >
                 <Input.TextArea />
               </Form.Item>
               <Form.Item
