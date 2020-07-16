@@ -23,7 +23,7 @@ class Homepage extends Component {
         ) : (
           <div>
             <h1 className="homepage-header"> For Show. </h1>
-            <p style={{fontWeight: "200"}}>Flex your coding skills with our weekly portfolio-building challenges</p>
+            <p style={{fontWeight: "200", margin: "0px 20px"}}>Flex your coding skills with our weekly portfolio-building challenges</p>
             <div style={{ display: "inline-block" }}>
               <List
                 className="event-list"
@@ -49,7 +49,7 @@ class Homepage extends Component {
          <div>
            
          <h1 className="homepage-header"> For Hire.  </h1>
-         <p style={{fontWeight: "200"}}>Assessments hosted by actively-hiring companies</p>
+         <p style={{fontWeight: "200", margin: "0px 20px"}}>Assessments hosted by actively-hiring companies</p>
 
            
            
