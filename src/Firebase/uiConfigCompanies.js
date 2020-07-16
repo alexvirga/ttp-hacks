@@ -41,7 +41,7 @@ const uiConfigCompanies = {
     },
     queryParameterForSignInSuccessUrl: 'signInSuccessUrl',
     signInFlow:'popup',
-    signInSuccessUrl: 'https://exempla.io/',
+    signInSuccessUrl: '',
     signInOptions: [
     firebase.auth.EmailAuthProvider.PROVIDER_ID,
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
