@@ -101,7 +101,7 @@ class AuthRouter extends Component {
           data.push({data: eventData, id: positionID});
         });
         
-console.log(data)
+
         this.setState({ openPositionsArr: data, companyEventsLoading: false });
       })
 

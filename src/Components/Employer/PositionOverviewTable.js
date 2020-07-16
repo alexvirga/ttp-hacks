@@ -107,7 +107,7 @@ class PositionOverviewTable extends Component {
   render() {
     return (
       <div className="position-overview-table">
-        {console.log(this.props.data)}
+      
         <Table
           rowKey={"title"}
           columns={columns}

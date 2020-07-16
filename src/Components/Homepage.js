@@ -51,7 +51,7 @@ class Homepage extends Component {
                 dataSource={this.props.openPositionsArr}
                 renderItem={(event) =>
                     <div>
-                      {console.log(event)}
+                     
                       <EventCardCompany event={event} />
                     </div>
                   

@@ -7,7 +7,7 @@ class PositionOverview extends Component {
   render() {
     return (
       <div className="position-overview-container">
-        {console.log(this.props.position)}
+       
         <div className="position-info-container">
           <span>
             <p> Position Title </p>
