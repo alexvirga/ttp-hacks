@@ -108,7 +108,18 @@ class NavigationBar extends Component {
                       Home
                     </Link>
                   </Menu.Item>
-
+                  <Menu.Item>
+                    <Link
+                      to="/login"
+                      style={{
+                        textDecoration: "none",
+                        color: "black",
+                        fontWeight: "800",
+                      }}
+                    >
+                      Candidates
+                    </Link>
+                  </Menu.Item>
                   <Menu.Item>
                     <Link
                       to="/employer/login"
@@ -122,18 +133,7 @@ class NavigationBar extends Component {
                     </Link>
                   </Menu.Item>
 
-                  <Menu.Item>
-                    <Link
-                      to="/login"
-                      style={{
-                        textDecoration: "none",
-                        color: "black",
-                        fontWeight: "800",
-                      }}
-                    >
-                      Candidates
-                    </Link>
-                  </Menu.Item>
+
                 </Menu>
               ) : null }
             </div>
