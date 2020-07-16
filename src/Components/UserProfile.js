@@ -115,6 +115,8 @@ class UserProfile extends Component {
           <div>
             <div className="profile-user-info-shadow-box"> 
             <div className="profile-header">
+
+              
               <Avatar size={190} src={this.state.user.photo} alt="google.com" />
             </div>
             <div>

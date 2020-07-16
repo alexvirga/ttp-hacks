@@ -389,6 +389,7 @@ p {
 .homepage-header {
   font-size: 50px;
   font-weight: 800;
+  margin-bottom: 0px;
 }
 
 .event-header-submissions {
@@ -425,6 +426,12 @@ p {
   width: 70%;
   margin: auto;
 }
+
+.ant-card  {
+  box-shadow: 0 2px 5px rgba(154, 160, 185, 0.05),
+  0 5px 10px rgba(166, 173, 201, 0.2);
+}
+
 
 .event-page-shadow {
   display: inline-block;

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import {List, Spin } from "antd";
+import {List, Spin, Tooltip} from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import EventCard from "./EventCard";
 import EventCardCompany from "./EventCardCompany";
 
+import { QuestionCircleOutlined } from "@ant-design/icons";
 const antIcon = <LoadingOutlined style={{ fontSize: 50 }} spin />;
 class Homepage extends Component {
   state = {};
@@ -22,6 +23,7 @@ class Homepage extends Component {
         ) : (
           <div>
             <h1 className="homepage-header"> For Show. </h1>
+            <p style={{fontWeight: "200"}}>Flex your coding skills with our weekly portfolio-building challenges</p>
             <div style={{ display: "inline-block" }}>
               <List
                 className="event-list"
@@ -43,7 +45,15 @@ class Homepage extends Component {
           <Spin indicator={antIcon} />
         ) : (
           <div>
-            <h1 className="homepage-header"> For Hire. </h1>
+          
+         <div>
+           
+         <h1 className="homepage-header"> For Hire.  </h1>
+         <p style={{fontWeight: "200"}}>Assessments hosted by actively-hiring companies</p>
+
+           
+           
+            </div> 
             <div style={{ display: "inline-block" }}>
               <List
                 className="event-list"

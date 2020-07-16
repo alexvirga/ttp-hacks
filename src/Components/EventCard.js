@@ -8,10 +8,10 @@ class EventCard extends Component {
 
   render() {
     return (
-      <div>
-        <List.Item>
+      <div className="event-card">
+        <List.Item >
           <Card
-            style={{ width: "320px", margin: "20px" }}
+            style={{ width: "320px", margin: "20px"}}
             cover={
               <img src={this.props.event.img} alt="No img" style={{ height: "150px" }} />
             }
