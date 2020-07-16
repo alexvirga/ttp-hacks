@@ -109,7 +109,7 @@ class PositionOverviewTable extends Component {
       <div className="position-overview-table">
       
         <Table
-          rowKey={"title"}
+          rowKey={"name"}
           columns={columns}
           dataSource={this.props.data}
           expandRowByClick={true}

@@ -27,6 +27,7 @@ class Dashboard extends Component {
     submissionsLoaded: false,
     challengesLoaded: false,
     challengeData: [],
+
   };
 
   componentDidMount() {
@@ -55,6 +56,10 @@ class Dashboard extends Component {
   };
 
   getCompanyData = async () => {
+    this.setState({
+      submissionsLoaded: false,
+    })
+  
     let uid = this.props.user.uid;
     const positions = await firebase
       .firestore()
@@ -113,14 +118,14 @@ class Dashboard extends Component {
       additionalInfo: obj.assessment.additionalInfo,
       companyID: this.state.companyID,
       companyName: this.state.company.name,
-    })
+    }).then(() => this.getChallengeData())
+    .then(() => this.selectedTab("candidateOverview"))
+
 
     
   };
 
-  addId = (id) => {
-    
-  }
+
 
 
   createPosition = (values, challengeID, challengeName) => {
@@ -141,7 +146,9 @@ class Dashboard extends Component {
       companyName: this.state.company.name,
       photo: this.state.company.photo
 
-    })
+    }).then(() => this.getCompanyData())
+    .then(() => this.selectedTab("candidateOverview"))
+   
      
       
   };
@@ -166,21 +173,16 @@ class Dashboard extends Component {
     const tabs = {
       profile: (
         <EmployerProfile
+       
           getCompanyData={this.updateCompanyProfile}
           userLoaded={this.props.userLoaded}
           user={this.state.company}
         />
       ),
-      positionOverview: (
-        <PositionOverview
-          submissions={this.state.submissions}
-          company={this.state.company}
-          positions={this.state.positions}
-          companyID={this.state.companyID}
-        />
-      ),
+
       candidateOverview: (
         <CandidateOverview
+       
           submissions={this.state.submissions}
           company={this.state.company}
           positions={this.state.positions}
@@ -189,6 +191,7 @@ class Dashboard extends Component {
       ),
       viewPosition: (
         <PositionOverview
+    
           position={data}
           company={this.state.company}
           positions={this.state.positions}
@@ -203,6 +206,7 @@ class Dashboard extends Component {
     };
 
     let selectedTab = tabs[tabname];
+  
     this.setState({ currentTab: selectedTab });
   };
 
@@ -232,7 +236,7 @@ class Dashboard extends Component {
 
             <Menu 
            
-            theme="dark" mode="inline" defaultSelectedKeys={["1"]} style={{backgroundColor: "white"}}>
+            theme="dark" mode="inline" defaultSelectedKeys={["1"]} style={{backgroundColor: "white"}} >
               <Menu.Item>
                 {" "}
                 <h1 style={{ color: "black" }}> Overview </h1>{" "}
@@ -274,7 +278,9 @@ class Dashboard extends Component {
               {!this.state.submissionsLoaded
                 ? null
                 : this.state.submissions.map((sub) => {
+               
                     return (
+                      
                       <Menu.Item
                     
                         onClick={() => this.selectedTab("viewPosition", sub)}
@@ -306,9 +312,9 @@ class Dashboard extends Component {
               {!this.state.challengesLoaded
                 ? null
                 : this.state.challengeData.map((challenge) => {
+                
                     return (
                       <Menu.Item
-                        // onClick={() => this.selectedTab("viewPosition", sub)}
                         key={challenge.id}
                         icon={<ShopOutlined />}
                         onClick={() =>

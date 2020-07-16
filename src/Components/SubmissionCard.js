@@ -31,7 +31,7 @@ class SubmissionCard extends Component {
     
   }
   editUserSubmission = async (values) => {
-    this.setState({ uploading: true });
+    this.setState({ loading: true });
     const files = values.user.photo;
     const data = new FormData();
     data.append("file", files);
@@ -56,8 +56,9 @@ class SubmissionCard extends Component {
       img: this.state.img
 
     })
-    .then(() => this.setState({loading: false}))
     .then(() => this.props.getAllSubmissions())
+    .then(() => this.setState({loading: false}))
+    
   };
   
 
