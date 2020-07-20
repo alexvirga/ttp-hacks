@@ -105,7 +105,7 @@ class Event extends Component {
             </Button>
           )}
 
-          <div class="panel-wrapper">
+          <div className="panel-wrapper">
             <a href="#show" class="show btn" id="show">
               Show Full Challenge
             </a>
@@ -115,7 +115,7 @@ class Event extends Component {
 
 
 
-            <div class="panel">
+            <div className="panel">
               <div style={{marginBottom: "35px"}}>
               <h1> INTRO </h1>
             

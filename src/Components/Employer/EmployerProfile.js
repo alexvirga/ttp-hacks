@@ -8,9 +8,6 @@ const antIcon = <LoadingOutlined style={{ fontSize: 50 }} spin />;
 
 class EmployerProfile extends Component {
   state = {
-    visible: false,
-    validated: false,
-    image: {},
     uploading: false,
     editing: false,
     img: ""

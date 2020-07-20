@@ -94,8 +94,8 @@ const columns = [
     key: "action",
     render: (text, record) => (
       <Space size="middle" direction="vertical">
-        <a>Approve</a>
-        <a>Reject</a>
+        <a onlick={() => console.log("approved")}>Approve</a>
+        <a onlick={() => console.log("approved")}> Reject</a>
       </Space>
     ),
   },

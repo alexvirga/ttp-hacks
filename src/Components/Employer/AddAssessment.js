@@ -101,7 +101,7 @@ class AddAssessment extends Component {
             >
               <Input.TextArea
                 placeholder="Brief introduction to the assessment"
-                style={{ borderRadius: "7px" }}
+                style={{ borderRadius: "7px", maxWidth: "100%" }}
               />
             </Form.Item>
 
@@ -115,7 +115,7 @@ class AddAssessment extends Component {
               ]}
             >
               <Input.TextArea
-                style={{ height: "100px", borderRadius: "7px" }}
+                style={{height: "100px", borderRadius: "7px" , maxWidth: "100%"}}
                 placeholder="Detailed instructions on setup, context, and requirements"
               />
             </Form.Item>
@@ -131,7 +131,7 @@ class AddAssessment extends Component {
             >
               <Input.TextArea
                 placeholder="Required deliverables"
-                style={{ height: "100px", borderRadius: "7px" }}
+                style={{ height: "100px", borderRadius: "7px" , maxWidth: "100%"}}
               />
             </Form.Item>
 
@@ -141,7 +141,7 @@ class AddAssessment extends Component {
             >
               <Input.TextArea
                 placeholder="Additional info"
-                style={{ borderRadius: "7px" }}
+                style={{ borderRadius: "7px", maxWidth: "100%" }}
               />
             </Form.Item>
 

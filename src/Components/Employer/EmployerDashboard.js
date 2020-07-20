@@ -42,6 +42,7 @@ class Dashboard extends Component {
   }
 
   getChallengeData = async () => {
+    console.log("in get challenge")
     let uid = this.props.user.uid;
     const challengeArr = [];
     const challenges = await firebase
@@ -90,6 +91,7 @@ class Dashboard extends Component {
       });
       submissionsData.push({
         position: positionData,
+        positionID: position.id,
         submissions: submissionsArr,
       });
     }
@@ -148,9 +150,6 @@ class Dashboard extends Component {
 
     }).then(() => this.getCompanyData())
     .then(() => this.selectedTab("candidateOverview"))
-   
-     
-      
   };
 
 
@@ -169,6 +168,12 @@ class Dashboard extends Component {
     });
   };
 
+  handlePositionDelete = () => {
+    this.getCompanyData()
+    this.selectedTab("candidateOverview")
+
+  }
+
   selectedTab = (tabname, data) => {
     const tabs = {
       profile: (
@@ -185,16 +190,15 @@ class Dashboard extends Component {
        
           submissions={this.state.submissions}
           company={this.state.company}
-          positions={this.state.positions}
           companyID={this.state.companyID}
         />
       ),
       viewPosition: (
         <PositionOverview
-    
+        handlePositionDelete={this.handlePositionDelete}
+          getCompanyData={this.getCompanyData}
           position={data}
           company={this.state.company}
-          positions={this.state.positions}
           companyID={this.state.companyID}
         />
       ),
@@ -278,12 +282,14 @@ class Dashboard extends Component {
               {!this.state.submissionsLoaded
                 ? null
                 : this.state.submissions.map((sub) => {
+                  
                
                     return (
                       
                       <Menu.Item
                     
-                        onClick={() => this.selectedTab("viewPosition", sub)}
+                        onClick={() => 
+                          this.selectedTab("viewPosition", sub)}
                         key={sub.position.positionID}
                         icon={<ShopOutlined />}
                       >

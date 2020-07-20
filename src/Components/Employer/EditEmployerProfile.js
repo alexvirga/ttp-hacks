@@ -125,7 +125,8 @@ class EditEmployerProfile extends Component {
             <Form
               id="submit-form"
               className="event-form"
-              {...layout}
+              style={{width: "100%"}}
+              layout={"vertical"}
               name="nest-messages"
               onFinish={this.onFinish}
               validateMessages={validateMessages}
@@ -141,7 +142,8 @@ class EditEmployerProfile extends Component {
                   },
                 ]}
               >
-                <Input />
+                <Input style={{ borderRadius: "7px" , maxWidth: "100%" }}
+ />
               </Form.Item>
               <Form.Item
                 name={["user", "email"]}
@@ -154,7 +156,7 @@ class EditEmployerProfile extends Component {
                   },
                 ]}
               >
-                <Input />
+                <Input style={{ borderRadius: "7px" , maxWidth: "100%" }} />
               </Form.Item>
 
               <Form.Item
@@ -168,7 +170,7 @@ class EditEmployerProfile extends Component {
                   },
                 ]}
               >
-                <Input />
+                <Input style={{ borderRadius: "7px" , maxWidth: "100%" }} />
               </Form.Item>
 
               <Form.Item
@@ -182,7 +184,7 @@ class EditEmployerProfile extends Component {
                   },
                 ]}
               >
-                <Input />
+                <Input  style={{ borderRadius: "7px" , maxWidth: "100%" }}/>
               </Form.Item>
 
               <Form.Item
@@ -195,11 +197,8 @@ class EditEmployerProfile extends Component {
                   },
                 ]}
               >
-                <Input.TextArea />
+                <Input.TextArea  style={{ borderRadius: "7px" , maxWidth: "100%" }}/>
               </Form.Item>
-              <Form.Item
-                wrapperCol={{ ...layout.wrapperCol, offset: 8 }}
-              ></Form.Item>
 
               <Form.Item
                 name={["user", "photo"]}
