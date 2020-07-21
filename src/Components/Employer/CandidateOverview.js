@@ -14,7 +14,7 @@ class CandidateOverview extends Component {
       <div>
         {this.props.submissions.map((submission) => {
           return (
-            <div key={submission.position.title}>
+            <div key={submission.position.title} className="candidate-overview-table">
               <h1>{submission.position.title}</h1>
               <CandidateTable data={submission.submissions} />
             </div>

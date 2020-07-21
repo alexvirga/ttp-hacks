@@ -66,7 +66,8 @@ class PositionOverview extends Component {
     return (
       
       <div className="position-overview-container">
-{        console.log(this.props.position)
+        <div className="position-overview-info-background">
+{       
 }        <div className="position-info-container">
           <span>
             <p> Position Title </p>
@@ -83,6 +84,7 @@ class PositionOverview extends Component {
             <p> Assessment </p>
             <h1> {this.props.position.position.challengeName} </h1>
           </span>
+        </div>
         </div>
         <EditPosition
           uploading={this.state.uploading}
@@ -134,8 +136,8 @@ class PositionOverview extends Component {
         <div className="position-candidate-container">
           <PositionOverviewTable data={this.props.position.submissions} />
         </div>
-        <span style={{ cursor: "pointer" }} onClick={this.showModal}>
-          Delete Position?
+        <span style={{ cursor: "pointer", color: "red", marginTop: "20px"}} onClick={this.showModal}>
+          Delete Position
         </span>
         <Modal
           title="Delete Position?"

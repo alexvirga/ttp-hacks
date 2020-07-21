@@ -108,7 +108,7 @@ function CandidateTable(props) {
       title: "Action",
       key: "action",
       render: (text, record) => (
-        <Space size="middle" direction="vertical">
+        <Space size="small" direction="vertical">
           <a onClick={(e) => updateSubmissionStatus(e, "approved", record)}>
             Approve
           </a>

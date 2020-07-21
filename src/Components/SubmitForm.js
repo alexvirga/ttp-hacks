@@ -106,6 +106,7 @@ class SubmitForm extends Component {
             Submit
           </Button>
           <Modal
+          destroyOnClose={true}
             title="Submit Project"
             visible={this.state.visible}
             onCancel={this.handleCancel}

@@ -90,7 +90,7 @@ class AuthRouter extends Component {
     firebase
       .firestore()
       .collectionGroup("positions")
-      .where("outsideSubmissions", "==", "true")
+      .where("outsideSubmissions", "==", true)
       .get()
       .then((querySnapshot) => {
      

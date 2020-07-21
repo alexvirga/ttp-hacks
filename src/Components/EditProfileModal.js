@@ -98,6 +98,7 @@ class EditProfileModal extends Component {
             EDIT PROFILE
           </Button>
           <Modal
+          destroyOnClose={true}
             title="Edit Profile"
             visible={this.state.visible}
             onCancel={this.handleCancel}

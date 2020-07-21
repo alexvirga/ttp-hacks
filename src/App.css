@@ -368,6 +368,8 @@ p {
 
 /* ---- Candidate Dashboard ------*/
 
+
+
 .candidate-dashboard-table-container {
   max-width: 1200px;
   justify-content: center;
@@ -722,6 +724,10 @@ p {
   display: inline-grid;
 }
 
+.candidate-overview-table{
+  margin: 25px 5px
+}
+
 /* ------ Company Assessment View -----  */
 
 
@@ -763,6 +769,12 @@ p {
 /* ----- Exempla suggestion form ---- */
 
 /* ------- Position View ---- */
+
+.position-overview-info-background{
+  background: linear-gradient(to bottom, #dd6def 60%, rgba(255, 255, 255, 0) 0%);
+  width: 100%
+
+}
 
 .suggestion-form .ant-form-item .ant-mentions,
 .ant-form-item textarea.ant-input {

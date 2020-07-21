@@ -1,11 +1,42 @@
 import React, { Component } from "react";
+import EditAssessment from "./EditAssessment"
+import firebase from "firebase";
 
 class AssessmentDetail extends Component {
+  state = {
+    uploading: false
+  }
+
+  updateAssessment = async (values) => {
+    const obj = JSON.parse(JSON.stringify(values, function(k, v) {
+      if (v === undefined) { return null; } return v; 
+   }));
+    
+    this.setState({ uploading: true });
+    firebase
+    .firestore()
+    .collection("challenges")
+    .doc(this.props.data.id)
+    .update({
+      title: obj.assessment.title,
+      overview: obj.assessment.overview,
+      link: obj.assessment.link,
+      instructions: obj.assessment.instructions,
+      deliverables: obj.assessment.deliverables,
+      additionalInfo: obj.assessment.additionalInfo,
+    })
+    // .then(() => this.props.getCompanyData())
+    .then(() => this.setState({ uploading: false }));
+  };
+
+
   render() {
+    console.log(this.props.data)
     return (
       <div className="company-assessment-details">
         <h1> {this.props.data.data.companyName} </h1>
         <h2> {this.props.data.data.title} </h2>
+        <EditAssessment updateAssessment={this.updateAssessment} data={this.props.data.data} uploading={this.state.uploading} />
         <div className="company-assessment-info">
           <div className="company-assessment-info-container">
             <h2> Overview </h2>

@@ -197,6 +197,7 @@ class Dashboard extends Component {
       viewPosition: (
         <PositionOverview
         handlePositionDelete={this.handlePositionDelete}
+        getCompanyData={this.getCompanyData}
           position={data}
           company={this.state.company}
           companyID={this.state.companyID}

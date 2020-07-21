@@ -180,10 +180,10 @@ class EditPosition extends Component {
                  
                   style={{ borderRadius: "7px", maxWidth: "100%" }}
                 >
-                  <Select.Option value="false">
+                  <Select.Option value={false}>
                     No, this position/assessment is invite only.{" "}
                   </Select.Option>
-                  <Select.Option value="true">
+                  <Select.Option value={true}>
                     Yes, allow other user's to view and submit assessments.{" "}
                   </Select.Option>
                 </Select>
@@ -204,10 +204,10 @@ class EditPosition extends Component {
                   placeholder="Yes, this position is open and accepting candidate submissions"
                   style={{ borderRadius: "7px", maxWidth: "100%" }}
                 >
-                  <Select.Option value="false">
+                  <Select.Option value={false}>
                     No, this position is closed and not accepting submissions.{" "}
                   </Select.Option>
-                  <Select.Option value="true">
+                  <Select.Option value={true}>
                     Yes, this position is open and accepting candidate
                     submissions.{" "}
                   </Select.Option>

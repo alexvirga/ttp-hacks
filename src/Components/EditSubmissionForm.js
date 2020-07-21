@@ -83,6 +83,7 @@ class EditSubmissionForm extends Component {
             Submit
           </Button>
           <Modal
+          destroyOnClose={true}
             title="Submit Project"
             visible={this.props.visible}
             onCancel={this.handleCancel}
