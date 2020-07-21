@@ -87,7 +87,10 @@ class Dashboard extends Component {
         .where("positionID", "==", position.id)
         .get();
       submissions.forEach((sub) => {
-        submissionsArr.push(sub.data());
+        let submission = sub.data()
+        submission["id"] = sub.id
+        
+        submissionsArr.push(submission);
       });
       submissionsData.push({
         position: positionData,

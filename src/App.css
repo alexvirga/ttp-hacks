@@ -746,6 +746,8 @@ p {
   flex-direction: column;
   text-align: left;
   align-items: center;
+  width: 80%;
+  max-width: 1000px;
 }
 
 .company-assessment-details > h1 {
