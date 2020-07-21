@@ -1,17 +1,12 @@
 import React, { Component } from "react";
-import {Tag, Descriptions, Space } from "antd";
+import { Tag, Descriptions, Space } from "antd";
 import { Table } from "antd";
 import { Link } from "react-router-dom";
 import firebase from "firebase";
 
-
-
 function PositionOverviewTable(props) {
-
-
   const updateSubmissionStatus = (e, status, record) => {
     record.status = status;
-    console.log(record);
     firebase
       .firestore()
       .collection("candidate-submissions")
@@ -29,7 +24,8 @@ function PositionOverviewTable(props) {
       render: (text, record) => (
         <Link target="_blank" to={`/user/${record.uid}`}>
           {text}
-        </Link>),
+        </Link>
+      ),
       ellipsis: false,
     },
     {
@@ -102,78 +98,69 @@ function PositionOverviewTable(props) {
             </Tag>
           );
       },
-  
+
       filterMultiple: true,
       onFilter: (value, record) => record.status.indexOf(value) === 0,
     },
-  
+
     {
       title: "Action",
       key: "action",
       render: (text, record) => (
         <Space size="middle" direction="vertical">
-        <a onClick={(e) => updateSubmissionStatus(e, "approved", record)}>
-          Approve
-        </a>
-        <a onClick={(e) => updateSubmissionStatus(e, "rejected", record)}>
-          {" "}
-          Reject{" "}
-        </a>
-      </Space>
+          <a onClick={(e) => updateSubmissionStatus(e, "approved", record)}>
+            Approve
+          </a>
+          <a onClick={(e) => updateSubmissionStatus(e, "rejected", record)}>
+            {" "}
+            Reject{" "}
+          </a>
+        </Space>
       ),
     },
   ];
-  
 
-
-  
-    return (
-      <div className="position-overview-table">
-      
-        <Table
-          rowKey={props.data.id}
-          columns={columns}
-          dataSource={props.data}
-          expandRowByClick={true}
-          expandable={{
-            expandedRowRender: (record) => (
-              <div style={{ display: "flex" }}>
-                <Descriptions title="User Info" layout="horizontal" column={1}>
-                  <Descriptions.Item label="Name">
-                    {record.name}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Email">
-                    {record.email}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="LinkedIn">
-                    <a href={record.linkedin}>Link</a>
-                  </Descriptions.Item>
-                </Descriptions>
-                <Descriptions
-                  title="Project Info"
-                  layout="horizontal"
-                  column={1}
-                >
-                  <Descriptions.Item label="Project Title">
-                    {record.title}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="User Notes">
-                    {record.notes}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Project Repository">
-                    <a href={record.github}>Link</a>
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Project Link">
-                    <a href={record.link}>Link</a>
-                  </Descriptions.Item>
-                </Descriptions>
-              </div>
-            ),
-          }}
-        />
-      </div>
-    );
-  
+  return (
+    <div className="position-overview-table">
+      <Table
+        rowKey={props.data.id}
+        columns={columns}
+        dataSource={props.data}
+        expandRowByClick={true}
+        expandable={{
+          expandedRowRender: (record) => (
+            <div style={{ display: "flex" }}>
+              <Descriptions title="User Info" layout="horizontal" column={1}>
+                <Descriptions.Item label="Name">
+                  {record.name}
+                </Descriptions.Item>
+                <Descriptions.Item label="Email">
+                  {record.email}
+                </Descriptions.Item>
+                <Descriptions.Item label="LinkedIn">
+                  <a href={record.linkedin}>Link</a>
+                </Descriptions.Item>
+              </Descriptions>
+              <Descriptions title="Project Info" layout="horizontal" column={1}>
+                <Descriptions.Item label="Project Title">
+                  {record.title}
+                </Descriptions.Item>
+                <Descriptions.Item label="User Notes">
+                  {record.notes}
+                </Descriptions.Item>
+                <Descriptions.Item label="Project Repository">
+                  <a href={record.github}>Link</a>
+                </Descriptions.Item>
+                <Descriptions.Item label="Project Link">
+                  <a href={record.link}>Link</a>
+                </Descriptions.Item>
+              </Descriptions>
+            </div>
+          ),
+        }}
+      />
+    </div>
+  );
 }
 
 export default PositionOverviewTable;

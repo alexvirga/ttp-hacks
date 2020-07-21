@@ -125,8 +125,6 @@ class Dashboard extends Component {
       companyName: this.state.company.name,
     }).then(() => this.getChallengeData())
     .then(() => this.selectedTab("candidateOverview"))
-
-
     
   };
 
@@ -181,7 +179,7 @@ class Dashboard extends Component {
     const tabs = {
       profile: (
         <EmployerProfile
-       
+      
           getCompanyData={this.updateCompanyProfile}
           userLoaded={this.props.userLoaded}
           user={this.state.company}
@@ -199,7 +197,6 @@ class Dashboard extends Component {
       viewPosition: (
         <PositionOverview
         handlePositionDelete={this.handlePositionDelete}
-          getCompanyData={this.getCompanyData}
           position={data}
           company={this.state.company}
           companyID={this.state.companyID}

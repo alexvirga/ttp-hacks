@@ -64,8 +64,10 @@ class PositionOverview extends Component {
 
   render() {
     return (
+      
       <div className="position-overview-container">
-        <div className="position-info-container">
+{        console.log(this.props.position)
+}        <div className="position-info-container">
           <span>
             <p> Position Title </p>
             <h1> {this.props.position.position.title} </h1>
@@ -93,9 +95,9 @@ class PositionOverview extends Component {
             <p> Position Status </p>
             <h1>
               {" "}
-              {this.props.position.position.positionOpen
+              {this.props.position.position.positionOpen === true
                 ? "Open"
-                : "Closed"}{" "}
+                : "Closed"}
             </h1>
           </span>
           <div className="vertical-line" />
@@ -103,7 +105,7 @@ class PositionOverview extends Component {
             <p> Invite Only </p>
             <h1>
               {" "}
-              {this.props.position.position.inviteonly ? "True" : "False"}{" "}
+              {this.props.position.position.outsideSubmissions === true ? "False" : "True"}{" "}
             </h1>
           </span>
           <div className="vertical-line" />

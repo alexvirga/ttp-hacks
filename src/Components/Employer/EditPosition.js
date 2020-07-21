@@ -2,11 +2,8 @@ import React, { Component } from "react";
 
 import firebase from "firebase";
 import { Button, Form, Input, Select, Tooltip, Modal } from "antd";
-
 import { QuestionCircleOutlined } from "@ant-design/icons";
 const { Option } = Select;
-
-
 
 const validateMessages = {
   required: "${label} is required!",
@@ -15,7 +12,13 @@ const validateMessages = {
   },
 };
 
+
+
 class EditPosition extends Component {
+
+
+
+
   state = {
     visible: false,
     validated: false,
@@ -36,15 +39,13 @@ class EditPosition extends Component {
     }
   };
 
-  normFile = (e) => {
-    this.setState({ image: e.file.originFileObj });
-    return e.file.originFileObj;
-  };
+
 
   showModal = () => {
     this.setState({
       visible: true,
     });
+  
   };
 
   handleOk = (e) => {
@@ -72,9 +73,7 @@ class EditPosition extends Component {
     console.log("Failed:", errorInfo);
   };
 
-  uploadImg = async (e) => {
-    this.setState({ image: e });
-  };
+
 
   render() {
     return (
@@ -94,6 +93,7 @@ class EditPosition extends Component {
             EDIT POSITION
           </Button>
           <Modal
+          destroyOnClose={true}
             title="Edit Profile"
             visible={this.state.visible}
             onCancel={this.handleCancel}
@@ -121,95 +121,115 @@ class EditPosition extends Component {
             <Form
               id="submit-form"
               className="event-form"
-             
-      
               name="nest-messages"
               onFinish={this.onFinish}
               validateMessages={validateMessages}
               onFinishFailed={this.onFinishFailed}
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               layout={"vertical"}
             >
-            <Form.Item
-              name={["position", "title"]}
-              label="Position Title"
-              initialValue={this.props.position.title}
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Input
-                placeholder="Position Title"
-                style={{ borderRadius: "7px", maxWidth: "100%" }}
-              />
-            </Form.Item>
-
-
-
-            <Form.Item
-              style={{ borderRadius: "7px" }}
-              name={["position", "outsideSubmissions"]}
-              initialValue={this.props.position.outsideSubmissions}
-
-              label={
-                <span>
-                  Allow outside submissions? &nbsp;
-                  <Tooltip
-                    title={
-                      <span>
-                        <p>
-                          Do you want to open this position/assessment to
-                          Exempla's existing candidate pool?
-                        </p>{" "}
-                        <p>
-                          By selecting yes, your listing will be displayed and
-                          open to submissions by our candidate pool.{" "}
-                        </p>
-                      </span>
-                    }
-                  >
-                    <QuestionCircleOutlined />
-                  </Tooltip>
-                </span>
-              }
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Select
-                placeholder="No, this position/assessment is invite only"
-                style={{ borderRadius: "7px" , maxWidth: "100%" }}
+              <Form.Item
+                name={["position", "title"]}
+                label="Position Title"
+                initialValue={this.props.position.title}
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
               >
-                <Select.Option value="false">
-                  No, this position/assessment is invite only.{" "}
-                </Select.Option>
-                <Select.Option value="true">
-                  Yes, allow other user's to view and submit assessments.{" "}
-                </Select.Option>
-              </Select>
-            </Form.Item>
+                <Input
+                  placeholder="Position Title"
+                  style={{ borderRadius: "7px", maxWidth: "100%" }}
+                />
+              </Form.Item>
 
-            <Form.Item
-              name={["position", "link"]}
-              label="Position URL"
-              initialValue={this.props.position.link}
-              rules={[
-                {
-                  required: false,
-                  type: "url",
-                },
-              ]}
-            >
-              <Input
-                placeholder="https://company/job"
+              <Form.Item
                 style={{ borderRadius: "7px" }}
-              />
-            </Form.Item>
+                name={["position", "outsideSubmissions"]}
+                initialValue={this.props.position.outsideSubmissions}
+                label={
+                  <span>
+                    Allow outside submissions? &nbsp;
+                    <Tooltip
+                      title={
+                        <span>
+                          <p>
+                            Do you want to open this position/assessment to
+                            Exempla's existing candidate pool?
+                          </p>{" "}
+                          <p>
+                            By selecting yes, your listing will be displayed and
+                            open to submissions by our candidate pool.{" "}
+                          </p>
+                          
+                        </span>
+                      }
+                    >
+                      <QuestionCircleOutlined />
+                    </Tooltip>
+                  </span>
+                }
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Select
+                 
+                  style={{ borderRadius: "7px", maxWidth: "100%" }}
+                >
+                  <Select.Option value="false">
+                    No, this position/assessment is invite only.{" "}
+                  </Select.Option>
+                  <Select.Option value="true">
+                    Yes, allow other user's to view and submit assessments.{" "}
+                  </Select.Option>
+                </Select>
+              </Form.Item>
 
+              <Form.Item
+                style={{ borderRadius: "7px" }}
+                name={["position", "positionOpen"]}
+                initialValue={this.props.position.positionOpen}
+                label={<span>Position Open? &nbsp;</span>}
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Select
+                  placeholder="Yes, this position is open and accepting candidate submissions"
+                  style={{ borderRadius: "7px", maxWidth: "100%" }}
+                >
+                  <Select.Option value="false">
+                    No, this position is closed and not accepting submissions.{" "}
+                  </Select.Option>
+                  <Select.Option value="true">
+                    Yes, this position is open and accepting candidate
+                    submissions.{" "}
+                  </Select.Option>
+                </Select>
+              </Form.Item>
+
+              <Form.Item
+                name={["position", "link"]}
+                label="Position URL"
+                initialValue={this.props.position.link}
+                rules={[
+                  {
+                    required: false,
+                    type: "url",
+                  },
+                ]}
+              >
+                <Input
+                  placeholder="https://company/job"
+                  style={{ borderRadius: "7px" }}
+                />
+              </Form.Item>
             </Form>
           </Modal>
         </div>
