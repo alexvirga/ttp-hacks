@@ -36,7 +36,11 @@ class UserViewAssessment extends Component {
 
   postCandidateSubmission = (values) => {
     this.setState({ uploading: true });
-
+    const obj = JSON.parse(JSON.stringify(values, function(k, v) {
+      if (v === undefined) { return null; } return v; 
+      
+   }));
+   let linkedIn = this.props.user.linkedin !== undefined ? this.props.user.linkedin : null
     firebase
       .firestore()
       .collection("candidate-submissions")
@@ -46,17 +50,17 @@ class UserViewAssessment extends Component {
         challengeName: this.state.challenge.title,
         companyID: this.state.challenge.companyID,
         companyName: this.state.challenge.companyName,
-        github: values.candidate.github,
-        link: values.candidate.link,
-        linkedIn: this.props.user.linkedin,
+        github: obj.candidate.github,
+        link: obj.candidate.link,
+        linkedin: linkedIn,
         name: this.props.user.name,
-        notes: values.candidate.notes,
+        notes: obj.candidate.notes,
         positionID: this.props.positionID,
         positionTitle: this.state.position.title,
         status: "submitted",
-        title: values.candidate.title,
+        title: obj.candidate.title,
         uid: this.props.user.uid,
-        email: values.candidate.email,
+        email: this.props.user.email,
       })
       .then(() => this.setState({ uploading: false }));
   };
