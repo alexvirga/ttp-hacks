@@ -42,7 +42,6 @@ class Dashboard extends Component {
   }
 
   getChallengeData = async () => {
-    console.log("in get challenge")
     let uid = this.props.user.uid;
     const challengeArr = [];
     const challenges = await firebase

@@ -9,7 +9,6 @@ class CandidateOverview extends Component {
   };
 
   render() {
-    console.log(this.props.submissions)
     return (
       <div>
         {this.props.submissions.map((submission) => {

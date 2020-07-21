@@ -31,7 +31,6 @@ class AssessmentDetail extends Component {
 
 
   render() {
-    console.log(this.props.data)
     return (
       <div className="company-assessment-details">
         <h1> {this.props.data.data.companyName} </h1>

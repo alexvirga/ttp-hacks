@@ -122,8 +122,9 @@ function PositionOverviewTable(props) {
 
   return (
     <div className="position-overview-table">
+
       <Table
-        rowKey={props.data.id}
+        rowKey={record => record.id}
         columns={columns}
         dataSource={props.data}
         expandRowByClick={true}

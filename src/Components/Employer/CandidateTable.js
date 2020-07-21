@@ -6,7 +6,6 @@ import firebase from "firebase";
 function CandidateTable(props) {
   const updateSubmissionStatus = (e, status, record) => {
     record.status = status;
-    console.log(record);
     firebase
       .firestore()
       .collection("candidate-submissions")
@@ -124,7 +123,7 @@ function CandidateTable(props) {
   return (
     <div className="candidate-table-container">
       <Table
-        rowKey={props.data.id}
+        rowKey={record => record.id}
         columns={columns}
         dataSource={props.data}
         expandRowByClick={true}

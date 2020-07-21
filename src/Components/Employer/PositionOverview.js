@@ -56,7 +56,7 @@ class PositionOverview extends Component {
   };
 
   handleCancel = (e) => {
-    console.log(e);
+  
     this.setState({
       deleteModalVisible: false,
     });
@@ -64,9 +64,9 @@ class PositionOverview extends Component {
 
   render() {
     return (
-      
+      <div className="position-overview-info-background">
       <div className="position-overview-container">
-        <div className="position-overview-info-background">
+        
 {       
 }        <div className="position-info-container">
           <span>
@@ -136,7 +136,7 @@ class PositionOverview extends Component {
         <div className="position-candidate-container">
           <PositionOverviewTable data={this.props.position.submissions} />
         </div>
-        <span style={{ cursor: "pointer", color: "red", marginTop: "20px"}} onClick={this.showModal}>
+        <span style={{ cursor: "pointer", color: "red", margin: "20px 0px"}} onClick={this.showModal}>
           Delete Position
         </span>
         <Modal
