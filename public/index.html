@@ -2,13 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-   
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
+    <meta 
+  property=”og:title”
+  content=”exempla.io 
+/>
     <meta
-      name="description"
+      name="image"
+      property="og:image"
+      content="%PUBLIC_URL%/exemplaScreen.jpg"
+    />
+    <meta
+      name="og:description"
       content="Demonstrate your technical skills. Get noticed by employers."
     />
+    <meta 
+  property=”og:url” 
+  content="https://exempla.io/" 
+/>
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -26,36 +39,40 @@
     <title>Exempla</title>
 
     <style>
-.full-page-loader {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-}
+      .full-page-loader {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+      }
 
-.full-page-loader > img {
-  animation: .9s infinite heartbeat;
-}
+      .full-page-loader > img {
+        animation: 0.9s infinite heartbeat;
+      }
 
-@keyframes heartbeat {
-  0% { transform: scale(.1); }
+      @keyframes heartbeat {
+        0% {
+          transform: scale(0.1);
+        }
 
-  50% { transform: scale(1.5); }
+        50% {
+          transform: scale(1.5);
+        }
 
-  100% { transform: scale(0); }
-}
+        100% {
+          transform: scale(0);
+        }
+      }
     </style>
-
   </head>
   <body>
     <div id="root">
       <div class="full-page-loader">
-      
         <img width="100" src="/loading-dot.png" alt="" />
       </div>
     </div>
